@@ -13,7 +13,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <script src="https://unpkg.com/@hotwired/turbo@7.1.0/dist/turbo.es2017-umd.js"></script>
+        
+    
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -30,11 +31,12 @@
 
             <!-- Page Content -->
             <main>
-               @if(isset($slot))
+            @if(isset($slot))
                     {{ $slot }}  {{-- Blade component content --}}
                 @else
                     @yield('content')  {{-- Normal Blade views --}}
                 @endif
+
             </main>
         </div>
     </body>
