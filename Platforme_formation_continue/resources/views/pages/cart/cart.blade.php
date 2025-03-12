@@ -1,7 +1,7 @@
 @extends('layouts.app');
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Accueil') }}
+        {{ __('Cart') }}
     </h2>
 @endsection
 @section('content')
@@ -13,7 +13,7 @@
                         <x-application-logo class="block h-12 w-auto fill-current text-gray-600" />
                     </div>
                     <div class="mt-8 text-2xl">
-                        {{ __('Accueil Page') }}
+                        {{ __('Cart Page') }}
                     </div>
                     <div class="mt-6 text-gray-500">
                         {{ __('Cette plateforme a été créée dans le cadre du projet de fin d\'études de la formation de développeur web et web mobile de l\'école O\'clock.') }}

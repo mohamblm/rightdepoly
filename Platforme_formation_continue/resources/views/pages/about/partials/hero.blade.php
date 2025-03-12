@@ -1,31 +1,38 @@
-{{-- Hero Section for About Page - Based on provided design --}}
-<section class="relative bg-gradient-to-r from-indigo-600 to-purple-600 overflow-hidden">
-    <div class="absolute inset-0">
-        {{-- Optional: Add a background pattern or image here --}}
-        <div class="absolute inset-0 bg-black opacity-30"></div>
-    </div>
-    
-    <div class="container mx-auto px-4 py-24 md:py-32 relative z-10">
-        <div class="max-w-3xl">
-            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
-                À Propos de Nous
+{{-- 
+    Hero Section Partial - About Page
+    This component displays a visually appealing hero section with text on the left and an image on the right
+    With increased padding, 90vh height, and reduced font size
+--}}
+
+<section class="relative w-full bg-white overflow-hidden" style="height: 90vh;">
+    <div class="container mx-auto px-8 md:px-16 flex flex-col md:flex-row items-center h-full py-20 md:py-24">
+        {{-- Left content column with heading and text (with reduced font size) --}}
+        <div class="w-full md:w-1/2 md:pr-12 mb-10 md:mb-0 z-10">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+               Élevez Votre Expérience avec un Accompagnement Sur-Mesure
             </h1>
             
-            <p class="text-xl text-white/90 mb-8 leading-relaxed">
-                Nous sommes une entreprise innovante dédiée à créer des solutions technologiques qui transforment votre façon de travailler et de vivre. Notre mission est de vous aider à atteindre vos objectifs grâce à des technologies de pointe.
+            <p class="text-lg text-gray-600 mb-8 max-w-lg"> 
+                Nous aidons les professionnels et les entreprises à accéder à des ressources de qualité, adaptées à leurs besoins.
+                Avec une approche innovante et personnalisée, nous garantissons une expérience enrichissante et efficace.
             </p>
-            
-            <div class="flex flex-wrap gap-4">
-                <a href="#notre-histoire" class="bg-white text-indigo-700 hover:bg-indigo-50 font-medium rounded-lg px-6 py-3 transition duration-300 shadow-lg">
-                    Notre Histoire
-                </a>
-                <a href="#contactez-nous" class="bg-transparent hover:bg-white/10 text-white border-2 border-white font-medium rounded-lg px-6 py-3 transition duration-300">
-                    Contactez-Nous
-                </a>
+        </div>
+        
+        {{-- Right image column - The image is placed in a container with a subtle shadow and tilt effect --}}
+        <div class="w-full md:w-1/2 relative">
+            {{-- Error handling for image loading --}}
+            <div class="relative overflow-hidden rounded-lg shadow-xl transform md:-rotate-2">
+                    <img 
+                        src="{{ asset('images/about-hero.jpeg') }}" 
+                        alt="Instructeur souriant avec des étudiants en arrière-plan" 
+                        class="w-full h-auto object-cover"
+                        loading="eager"
+                        onerror="this.onerror=null; this.src='{{ asset('images/fallback-image.jpg') }}';"
+                    >
             </div>
         </div>
     </div>
     
-    {{-- Decorative element - can be customized based on your design --}}
-    <div class="absolute bottom-0 right-0 w-1/3 h-64 bg-indigo-500 opacity-30 rounded-tl-full"></div>
+    {{-- Optional decorative element to enhance visual appeal --}}
+    <div class="hidden md:block absolute bottom-0 right-0 w-1/3 h-32 bg-orange-100 rounded-tl-full opacity-50 transform translate-y-10"></div>
 </section>
