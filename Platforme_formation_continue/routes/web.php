@@ -11,18 +11,22 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/formations', function () {
     return view('pages.formations.formations');
-})->middleware(['auth', 'verified'])->name('formations');
+})->name('formations');
+
 Route::get('/plans', function () {
     return view('pages.plans.plans');
-})->middleware(['auth', 'verified'])->name('plans');
+})->name('plans');
+
 Route::get('/about', function () {
     return view('pages.about.about');
-})->middleware(['auth', 'verified'])->name('about');
+})->name('about');
+
 Route::get('/cart', function () {
     return view('pages.cart.cart');
-})->middleware(['auth', 'verified'])->name('cart');
+})->name('cart');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
