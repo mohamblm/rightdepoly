@@ -29,7 +29,11 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                @if(isset($slot))
+                    {{ $slot }}  {{-- Blade component content --}}
+                @else
+                    @yield('content')  {{-- Normal Blade views --}}
+                @endif
             </main>
         </div>
     </body>
