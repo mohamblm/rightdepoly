@@ -7,6 +7,6 @@
     @include('pages.about.partials.valeurs')
     @include('pages.about.partials.contact')
     
-    {{-- Rest of your about page content goes here --}
+    {{-- Rest of your about page content goes here --}}
 @endsection
 
