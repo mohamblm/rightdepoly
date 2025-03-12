@@ -5,11 +5,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');    
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/formations', function () {
+    return view('pages.formations.formations');
+})->middleware(['auth', 'verified'])->name('formations');
+Route::get('/plans', function () {
+    return view('pages.plans.plans');
+})->middleware(['auth', 'verified'])->name('plans');
+Route::get('/about', function () {
+    return view('pages.about.about');
+})->middleware(['auth', 'verified'])->name('about');
+Route::get('/cart', function () {
+    return view('pages.cart.cart');
+})->middleware(['auth', 'verified'])->name('cart');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
