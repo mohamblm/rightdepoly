@@ -32,12 +32,7 @@
                 class="font-medium hover:text-cyan-600 transition-colors">
                 {{ __('À propos') }}
             </x-nav-link>
-            @auth
-                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
-                    class="font-medium hover:text-cyan-600 transition-colors">
-                    {{ __('Dashboard') }}
-                </x-nav-link>
-            @endauth
+
         </div>
 
         {{-- Right side: Cart and Auth --}}
@@ -123,12 +118,7 @@
                 class="text-lg font-medium p-2 rounded-md">
                 {{ __('À propos') }}
             </x-responsive-nav-link>
-            @auth
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
-                    class="text-lg font-medium p-2 rounded-md">
-                    {{ __('Dashboard') }}
-                </x-responsive-nav-link>
-            @endauth
+
 
             <div class="border-t border-gray-200 pt-6 flex flex-col space-y-3">
                 @auth
