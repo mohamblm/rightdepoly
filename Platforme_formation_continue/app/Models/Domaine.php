@@ -13,6 +13,7 @@ class Domaine extends Model
         'nom',
         'description',
         'image',
+        'trend'
     ];
     
     public function etablissements()
