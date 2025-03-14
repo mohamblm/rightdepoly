@@ -66,7 +66,7 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('profile.index')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
                             <form method="POST" action="{{ route('logout') }}">
@@ -137,7 +137,7 @@
                         <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                     </div>
                     <div class="mt-3 space-y-3">
-                        <x-responsive-nav-link :href="route('profile.edit')"
+                        <x-responsive-nav-link :href="route('profile.index')"
                             class="w-full py-2 px-4 text-cyan-600 border border-cyan-600 rounded-md hover:bg-cyan-50 transition-colors">
                             {{ __('Profile') }}
                         </x-responsive-nav-link>
