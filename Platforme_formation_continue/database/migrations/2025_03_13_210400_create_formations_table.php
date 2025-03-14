@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->text('description')->nullable();
-            // $table->foreignId('filiere_id')->constrained('filieres')->onDelete('cascade');
+            $table->foreignId('domaine_id')->constrained('domaines')->onDelete('cascade');
+            $table->string('image');
             $table->foreignId('etablissement_id')->constrained('etablissements')->onDelete('cascade');
             $table->timestamps();
         });
