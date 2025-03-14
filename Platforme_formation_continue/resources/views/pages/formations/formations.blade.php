@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -194,12 +193,12 @@
         Object.keys(activeFilters).forEach(category => {
             activeFilters[category].forEach((label, value) => {
                 const newTag = tagTemplate.cloneNode(true);
-                newTag.id = `tag-${category}-${value}`;
+                newTag.id = tag-${category}-${value};
                 newTag.querySelector('.tag-label').textContent = label; // Show the filter name
                 newTag.classList.remove('hidden');
 
                 newTag.addEventListener('click', function() {
-                    document.querySelector(`input[type="checkbox"][value="${value}"]`).checked = false;
+                    document.querySelector(input[type="checkbox"][value="${value}"]).checked = false;
                     activeFilters[category].delete(value);
                     if (activeFilters[category].size === 0) {
                         delete activeFilters[category];
@@ -265,4 +264,3 @@
 
 </script>
 @endsection
-
