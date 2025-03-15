@@ -81,9 +81,9 @@ class FormationController extends Controller
         // dd($request);
         $formations = $query->get();
         
-        // if ($request->ajax()) {
-        //     return view('formations._formations_list', compact('formations'));
-        // }
+        if ($request->ajax()) {
+            return view('pages.formations.test', compact('formations'));
+        }
         
         return view('pages.formations.formations', compact('formations' ,'domaines','etablissements'));
     }
