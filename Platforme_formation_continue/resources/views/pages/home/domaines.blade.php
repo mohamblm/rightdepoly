@@ -94,8 +94,7 @@
             <div class="swiper-button-prev mySwiper-domaines-prev text-blue-600 after:text-2xl absolute left-0 top-1/2 transform -translate-y-1/2"></div>
         </div>
 
-        <!-- Pagination -->
-        <div class="swiper-pagination mySwiper-domaines-pagination mt-8"></div>
+        
     </div>
 </section>
 
@@ -106,10 +105,7 @@
         slidesPerView: 1,
         spaceBetween: 20,
         loop: true,
-        pagination: {
-            el: ".mySwiper-domaines-pagination",
-            clickable: true,
-        },
+        
         navigation: {
             nextEl: ".mySwiper-domaines-next",
             prevEl: ".mySwiper-domaines-prev",

@@ -4,52 +4,45 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Etablissement;
-use Carbon\Carbon;
 
 class EtablissementSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        Etablissement::insert([
-            [
-                'nom' => 'OFPPT Béni Mellal',
-                'adresse' => 'Morroc - Béni Mellal',
-                'telephone' => '+2126000000',
-                'localisation'=>null,
-                'image'=>null,
-                'created_at' => Carbon::parse('2024-01-02'),
-                'updated_at' => Carbon::parse('2024-01-03'),
-            ],
-            [
-                'nom' => 'CMC Béni Mellal',
-                'adresse' => 'Morroc - Béni Mellal',
-                'telephone' => '+212601234567',
-                'localisation'=>null,
-                'image'=>null,
-                'created_at' => Carbon::parse('2024-02-10'),
-                'updated_at' => Carbon::parse('2024-02-11'),
-            ],
-            [
-                'nom' => 'IFMSAS Béni Mellal',
-                'adresse' => 'Morroc - Béni Mellal',
-                'telephone' => '+212602345678',
-                'localisation'=>null,
-                'image'=>null,
-                'created_at' => Carbon::parse('2024-03-15'),
-                'updated_at' => Carbon::parse('2024-03-16'),
-            ],
-            [
-                'nom' => 'OFPPT NTIC Béni Mellal',
-                'adresse' => 'Morroc - Béni Mellal',
-                'telephone' => '+212603456789',
-                'localisation'=>null,
-                'image'=>null,
-                'created_at' => Carbon::parse('2024-04-20'),
-                'updated_at' => Carbon::parse('2024-04-21'),
-            ],
+        Etablissement::create([
+            'nom'          => 'ISTA NTIC',
+            'adresse'      => '123 Rue Exemple, Béni Mellal',
+            'telephone'    => '+212 123456789',
+            'localisation' => 'Béni Mellal, Maroc',
+            'logo'         => 'OFPPT.png',
+            'image'        => 'ista ntic.jpg',
+            'description'  => 'Member of the SABIS Network, providing high-quality education through a rigorous academic program and digital learning platform.',
+            'created_at'   => now(),
+            'updated_at'   => now(),
         ]);
+
+        Etablissement::create([
+            'nom'          => 'IFMSAS',
+            'adresse'      => '456 Rue Exemple, Béni Mellal',
+            'telephone'    => '+212 987654321',
+            'localisation' => 'Béni Mellal, Maroc',
+            'logo'         => 'OFPPT.png',
+            'image'        => 'ifmsas.jpg',
+            'description'  => 'Member of the SABIS Network, providing high-quality education through a rigorous academic program and digital learning platform.',
+            'created_at'   => now(),    
+            'updated_at'   => now(),
+        ]);
+        Etablissement::create([
+            'nom'          => 'CMC',
+            'adresse'      => '1290 Rue 12, Béni Mellal',
+            'telephone'    => '+212 987654321',
+            'localisation' => 'Béni Mellal, Maroc',
+            'logo'         => 'OFPPT.png',
+            'image'        => 'cmc.jpg',
+            'description'  => 'Member of the SABIS Network, providing high-quality education through a rigorous academic program and digital learning platform.',
+            'created_at'   => now(),    
+            'updated_at'   => now(),
+        ]);
+
     }
 }

@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <!-- Image positioning adjusted for better mobile display -->
-                <div class="absolute left-1/2 transform -translate-x-1/2 md:left-auto md:-translate-x-0 md:-left-12 -bottom-16 md:bottom-0">
+                <div class="absolute left-1/2 transform -translate-x-1/2 md:left-auto md:-translate-x-0 -bottom-16 md:bottom-0">
                     <img src="{{ asset('images/home-whyUs.png') }}" alt="Professional smiling"
                         class="rounded-full border-4 border-white shadow-lg w-32 h-32 object-cover"/>
                 </div>
