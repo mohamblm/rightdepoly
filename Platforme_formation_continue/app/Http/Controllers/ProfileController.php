@@ -21,17 +21,17 @@ class ProfileController extends Controller
 
     public function section(Request $request,$section)
     {
-        $validSections = ['settings', 'courses', 'messages'];
+        $validSections = ['historique', 'edite', 'messages'];
 
         if (!in_array($section, $validSections)) {
             abort(404);
         }
 
         
-    return view('profile.profile', [
-        'section' => $section,
-        'user' => $request->user(),
-    ]);
+        return view('profile.profile', [
+            'section' => $section,
+            'user' => $request->user(),
+        ]);
     }
     /**
      * Display the user's profile form.
