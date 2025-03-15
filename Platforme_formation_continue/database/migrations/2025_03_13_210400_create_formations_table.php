@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('formations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('etablissement_id')->constrained('etablissements')->onDelete('cascade');
+            $table->foreignId('domaine_id')->constrained('domaines')->onDelete('cascade');
             $table->string('nom');
             $table->text('description')->nullable();
-            $table->foreignId('domaine_id')->constrained('domaines')->onDelete('cascade');
             $table->string('image');
-            $table->foreignId('etablissement_id')->constrained('etablissements')->onDelete('cascade');
+            $table->boolean('trend')->default(false);
             $table->timestamps();
         });
     }

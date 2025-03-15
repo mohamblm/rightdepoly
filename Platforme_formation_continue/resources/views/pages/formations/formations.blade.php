@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -23,7 +24,7 @@
 </div>
 
 <!-- Main content area -->
-<div class="container mx-auto px-4 py-8 mb-20">
+<div class="container mx-auto  py-8 mb-20">
     <div class="flex flex-col md:flex-row gap-6">
         <!-- Left sidebar filters -->
         <div class="w-full md:w-64 shrink-0">
@@ -70,7 +71,7 @@
                             @foreach($etablissements ?? [] as $etablissement)
                             <div class="space-y-2">
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="etablissement_id[]" value="{{$etablissement->id}}" class="mr-2 filter-checkbox" data-category="{{$etablissement->nom}}" data-label="Universities">
+                                    <input type="checkbox" name="etablissement_id[]" value="{{$etablissement->id}}" class="mr-2 filter-checkbox" data-category="etablissement" data-label="Universities">
                                     <span>{{$etablissement->nom}}</span>
                                 </label>
                             </div>
@@ -159,6 +160,7 @@
         if (event.key === 'Enter') {
             searchTerm.value = searchInput.value;
             submitFilters();
+            searchInput.value='';
             
         }
     });
@@ -193,12 +195,12 @@
         Object.keys(activeFilters).forEach(category => {
             activeFilters[category].forEach((label, value) => {
                 const newTag = tagTemplate.cloneNode(true);
-                newTag.id = tag-${category}-${value};
+                newTag.id = `tag-${category}-${value}`;
                 newTag.querySelector('.tag-label').textContent = label; // Show the filter name
                 newTag.classList.remove('hidden');
 
                 newTag.addEventListener('click', function() {
-                    document.querySelector(input[type="checkbox"][value="${value}"]).checked = false;
+                    document.querySelector(`input[name="${category}_id[]"][value="${value}"]`).checked= false;
                     activeFilters[category].delete(value);
                     if (activeFilters[category].size === 0) {
                         delete activeFilters[category];
@@ -214,53 +216,76 @@
 
     
     function submitFilters() {
-        searchTerm.value = searchInput.value;
-        fetch(filterForm.action + '?' + new URLSearchParams(new FormData(filterForm)))
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const newFormations = doc.getElementById('formations-container');
-                
-                if (newFormations) {
-                    document.getElementById('formations-container').innerHTML = newFormations.innerHTML;
+    // Cache the search value to avoid repeated DOM access
+    const searchValue = searchInput.value;
+    searchTerm.value = searchValue;
+    
+    // Use FormData object once instead of creating it multiple times
+    const formData = new FormData(filterForm);
+    const queryParams = new URLSearchParams(formData);
+    
+    // Update URL first (non-blocking)
+    const url = new URL(window.location);
+    url.search = queryParams.toString();
+    window.history.pushState({}, '', url);
+    
+    // Fetch with proper error handling and optimization
+    fetch(filterForm.action + '?' + queryParams)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(html => {
+            // Use a more efficient approach to update the DOM
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            
+            const newFormations = tempDiv.querySelector('#formations-container');
+            
+            if (newFormations) {
+                // Direct HTML replacement is faster than innerHTML
+                const currentFormations = document.getElementById('formations-container');
+                currentFormations.replaceWith(newFormations);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching formations:', error);
+            // Consider adding user-friendly error handling here
+        });
+}
+    
+    function initializeFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        
+        if (params.get('search')) {
+            searchInput.value = params.get('search');
+            searchTerm.value = params.get('search');
+        }
+        
+        filterCheckboxes.forEach(checkbox => {
+            if (params.has(checkbox.name)) {
+                const values = params.getAll(checkbox.name);
+                if (values.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                    const value=checkbox.value;
+                    const label=checkbox.nextElementSibling.textContent;
+                    const category = checkbox.dataset.category;
+                    if (!activeFilters[category]) {
+                        activeFilters[category] = new Map();
+                    }
+                    activeFilters[category].set(value, label);
                 }
-                
-                const url = new URL(window.location);
-                url.search = new URLSearchParams(new FormData(filterForm)).toString();
-                window.history.pushState({}, '', url);
-                console.log('URL:', url.toString());
-            })
-            .catch(error => console.error('Error fetching formations:', error));
+            }
+        });
+        
+        updateSelectedFilters();
     }
     
-    // function initializeFromURL() {
-    //     const params = new URLSearchParams(window.location.search);
-        
-    //     if (params.get('search')) {
-    //         searchInput.value = params.get('search');
-    //         searchTerm.value = params.get('search');
-    //     }
-        
-    //     filterCheckboxes.forEach(checkbox => {
-    //         if (params.has(checkbox.name)) {
-    //             const values = params.getAll(checkbox.name);
-    //             if (values.includes(checkbox.value)) {
-    //                 checkbox.checked = true;
-    //                 const category = checkbox.dataset.category;
-    //                 if (!activeFilters[category]) {
-    //                     activeFilters[category] = new Set();
-    //                 }
-    //                 activeFilters[category].add(checkbox.value);
-    //             }
-    //         }
-    //     });
-        
-    //     updateSelectedFilters();
-    // }
-    
-    // initializeFromURL();
+    initializeFromURL();
 });
 
 </script>
 @endsection
+
