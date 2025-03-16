@@ -128,8 +128,9 @@
         </div>
     </div>
 </div>
-
+@push('scripts')
 <script>
+    
     // Toggle accordion functionality
     function toggleAccordion(id) {
         const content = document.getElementById(id);
@@ -140,7 +141,7 @@
         }
     }
     
-    document.addEventListener('DOMContentLoaded', function() {
+    
     const filterForm = document.getElementById('filter-form');
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
@@ -284,8 +285,9 @@
     }
     
     initializeFromURL();
-});
+
 
 </script>
+@endpush
 @endsection
 
