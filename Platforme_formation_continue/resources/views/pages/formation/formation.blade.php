@@ -29,14 +29,13 @@
 
                 <!-- Rating -->
                 <div class="flex items-center mb-6">
+                    <span class=" text-gray-800 mr-2">{{ $averageRating }}</span>
                     <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        @for ($i = 0; $i < 5; $i++)
+                            <i class="{{ $i < floor($averageRating) ? 'fas fa-star' : ($i < ceil($averageRating) && $averageRating - floor($averageRating) >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star') }}"></i>
+                        @endfor
                     </div>
-                    <span class="ml-2 text-gray-600">4.8 (461,444 Rating)</span>
+                    <span class="ml-2 text-gray-600"> ({{count($formation->reviews)}} Rating)</span>
                 </div>
 
                 <!-- Course Preview Image -->
@@ -199,104 +198,6 @@
                             <li>This course is for those who want to launch a Freelance Web Design career.</li>
                         </ul>
                     </div>
-
-                    <!-- Course Rating Section -->
-                    @if (count($formation->reviews) !== 0)
-                    <div class="mt-8">
-                        <h2 class="text-xl font-semibold mb-4">Evaluation du Formation</h2>
-
-                        <div class="flex items-center mb-4">
-                            <div class="mr-4">
-                                <!-- Display Average Rating -->
-                                <span class="text-3xl font-bold text-gray-800">{{ $averageRating }}</span>
-                                <div class="flex text-yellow-400">
-                                    @for ($i = 0; $i < 5; $i++)
-                                        <i class="fas fa-star{{ $i < floor($averageRating) ? '' : '-half-alt' }}"></i>
-                                    @endfor
-                                </div>
-                                <div class="text-sm text-gray-500">Evaluation du Formation</div>
-                            </div>
-
-                            <div class="flex-1">
-                                @foreach (range(5, 1) as $star)
-                                    <!-- Display Star Rating Distribution -->
-                                    <div class="flex items-center mb-1">
-                                        <div class="flex text-yellow-400 mr-2">
-                                            @for ($i = 0; $i < 5; $i++)
-                                                <i class="{{ $i < $star ? 'fas fa-star' : 'far fa-star' }}"></i>
-                                            @endfor
-                                        </div>
-                                        <span class="text-sm text-gray-600 mr-2">{{ $star }} Star Rating</span>
-                                        <div class="flex-1 bg-gray-200 rounded-full h-2">
-                                            <div class="bg-yellow-400 h-2 rounded-full"
-                                                style="width: {{ $ratingPercentages[$star] }}%"></div>
-                                        </div>
-                                        <span class="text-sm text-gray-600 ml-2">{{ $ratingPercentages[$star] }}%</span>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-
-                    <!-- Students Feedback Section -->
-                    <!-- Reviews Section with JavaScript Filtering -->
-                    <div class="mt-8">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-xl font-semibold">Les commentaires </h2>
-                            <div class="relative">
-                                <select id="rating-filter"
-                                    class="appearance-none bg-white border border-gray-300 px-4 py-2 pr-8 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                    <option value="6">All commentaire</option>
-                                    <option value="5">5 Star Rating</option>
-                                    <option value="4">4 Star Rating</option>
-                                    <option value="3">3 Star Rating</option>
-                                    <option value="2">2 Star Rating</option>
-                                    <option value="1">1 Star Rating</option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                        <div id="reviews-container">
-                            @foreach ($formation->reviews as $review)
-                                <div class="review-item border-t border-gray-200 py-4" data-rating="{{ $review->note }}">
-                                    <div class="flex items-start">
-                                        <img src="{{ asset('storage/images/formation1.png') }}"
-                                            alt="{{ $review->user->name }}" class="w-10 h-10 rounded-full mr-3">
-                                        <div>
-                                            <div class="flex items-center">
-                                                <h3 class="font-medium text-gray-800 mr-2">{{ $review->user->name }}</h3>
-                                                <span
-                                                    class="text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span>
-                                            </div>
-                                            <div class="flex text-yellow-400 my-1">
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    @if ($i <= $review->note)
-                                                        <i class="fas fa-star"></i>
-                                                    @else
-                                                        <i class="far fa-star"></i>
-                                                    @endif
-                                                @endfor
-                                            </div>
-                                            <p class="text-gray-700">{{ $review->commentaire }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <!-- No Reviews Message -->
-                        <div id="no-reviews-message" class="hidden text-center py-8 text-gray-500">
-                            No reviews match your selected filter.
-                        </div>
-                        @if (count($formation->reviews) == 0)
-                            <div id="no-reviews-message" class=" text-center py-8 text-gray-500">
-                                No reviews to show.
-                            </div>
-                        @endif
-
-                    </div>
                 </div>
             </div>
 
@@ -441,7 +342,145 @@
             </div>
         </div>
     </div>
+    <div class="container mx-auto mb-20">
+        <!-- Course Rating Section -->
+        @if (count($formation->reviews) !== 0)
+        <div class="mt-8">
+            <h2 class="text-xl font-semibold mb-4">Evaluation du Formation</h2>
 
+            <div class="flex items-center mb-4">
+                <div class="mr-4">
+                    <!-- Display Average Rating -->
+                    <span class="text-3xl font-bold text-gray-800">{{ $averageRating }}</span>
+                    <div class="flex text-yellow-400">
+                        @for ($i = 0; $i < 5; $i++)
+                            <i class="{{ $i < floor($averageRating) ? 'fas fa-star' : ($i < ceil($averageRating) && $averageRating - floor($averageRating) >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star') }}"></i>
+                        @endfor
+                    </div>
+                    <div class="text-sm text-gray-500">Evaluation du Formation</div>
+                </div>
+
+                <div class="flex-1">
+                    @foreach (range(5, 1) as $star)
+                        <!-- Display Star Rating Distribution -->
+                        <div class="flex items-center mb-1">
+                            <div class="flex text-yellow-400 mr-2">
+                                @for ($i = 0; $i < 5; $i++)
+                                    <i class="{{ $i < $star ? 'fas fa-star' : 'far fa-star' }}"></i>
+                                @endfor
+                            </div>
+                            <span class="text-sm text-gray-600 mr-2">{{ $star }} Star Rating</span>
+                            <div class="flex-1 bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-400 h-2 rounded-full"
+                                    style="width: {{ $ratingPercentages[$star] }}%"></div>
+                            </div>
+                            <span class="text-sm text-gray-600 ml-2">{{ $ratingPercentages[$star] }}%</span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        @endif
+
+        <!-- Reviews Section with JavaScript Filtering -->
+        <div class="mt-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold">Les commentaires </h2>
+                <div class="relative">
+                    <select id="rating-filter"
+                        class="appearance-none bg-white border border-gray-300 px-4 py-2 pr-8 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="6">All commentaire</option>
+                        <option value="5">5 Star Rating</option>
+                        <option value="4">4 Star Rating</option>
+                        <option value="3">3 Star Rating</option>
+                        <option value="2">2 Star Rating</option>
+                        <option value="1">1 Star Rating</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div id="reviews-container">
+                @foreach ($formation->reviews as $review)
+                    <div class="review-item border-t border-gray-200 py-4" data-rating="{{ $review->note }}">
+                        <div class="flex items-start">
+                            <img src="{{ asset('storage/images/formation1.png') }}"
+                                alt="{{ $review->user->name }}" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <div class="flex items-center">
+                                    <h3 class="font-medium text-gray-800 mr-2">{{ $review->user->name }}</h3>
+                                    <span
+                                        class="text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</span>
+                                </div>
+                                <div class="flex text-yellow-400 my-1">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $review->note)
+                                            <i class="fas fa-star"></i>
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
+                                </div>
+                                <p class="text-gray-700">{{ $review->commentaire }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- No Reviews Message -->
+            <div id="no-reviews-message" class="hidden text-center py-8 text-gray-500">
+                No reviews match your selected filter.
+            </div>
+            @if (count($formation->reviews) == 0)
+                <div id="no-reviews-message" class=" text-center py-8 text-gray-500">
+                    No reviews to show.
+                </div>
+            @endif
+
+        </div>
+    </div>
+    @if (session('status') === 'added-to-cart' || session('status') === 'already-in-cart')
+        <div x-data="{ show: true }" 
+            x-show="show" 
+            x-init="setTimeout(() => show = false, 5000)"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform translate-y-4"
+            x-transition:enter-end="opacity-100 transform translate-y-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 transform translate-y-0"
+            x-transition:leave-end="opacity-0 transform translate-y-4"
+            class="fixed top-4 right-4 z-50 max-w-sm w-full">
+            
+            <div class="flex items-center p-5 bg-white rounded-lg shadow-xl border-l-4 border-l-green-500">
+                <!-- Checkmark icon with animated circle -->
+                <div class="flex-shrink-0 relative">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <svg class="w-8 h-8 absolute top-0 left-0 text-green-500 animate-[spin_4s_ease-in-out_infinite]" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" />
+                    </svg>
+                </div>
+                
+                <!-- Message with title and content -->
+                <div class="ml-4 flex-1">
+                    @if (session('status') === 'added-to-cart')
+                        <h4 class="text-sm font-bold text-gray-800 mb-0.5">Success!</h4>
+                        <p class="text-sm text-gray-600">
+                            La formation a été ajoutée à votre panier avec succès.
+                        </p>
+                    @endif
+                    @if (session('status') === 'already-in-cart')
+                        <h4 class="text-sm font-bold text-gray-800 mb-0.5">Cette formation déjà dans le panier.</h4>
+                        
+                    @endif
+                </div>
+            </div>
+        </div>
+    @endif
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const ratingFilter = document.getElementById('rating-filter');

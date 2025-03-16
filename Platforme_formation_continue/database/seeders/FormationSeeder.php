@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Formation;
+use Carbon\Carbon;
 
 class FormationSeeder extends Seeder
 {
@@ -11,11 +12,21 @@ class FormationSeeder extends Seeder
     {
         $formations = [
             [
-                'nom' => 'Gestion des ressources humaines',
-                'description' => 'Gestion administrative et statuaire, politique de GRH, relations sociales, et fonction formation.',
-                'domaine_id' => 1, // Assuming this is the ID of the "Gestion des ressources humaines" domain in your domains table
-                'image' => 'gestion_ressources_humaines.jpg',
-                'etablissement_id' => 1, // Assuming this is the ID of the establishment in your etablissement table
+                'etablissement_id' => 1, // Make sure this ID exists in 'etablissements' table
+                'domaine_id' => 2, // Make sure this ID exists in 'domaines' table
+                'nom' => 'sions médicaux',
+                'description' => 'Apprenez à créer des applications web modernes avec HTML, CSS, JavaScript, Laravel et React.',
+                'sub_titles' => json_encode([
+                    'You will learn how to design beautiful websites using Figma, an interface design tool used by designers at Uber, Airbnb and Microsoft.',
+                    'You will learn secret tips of Freelance Web Designers and how they make great money freelancing online.',
+                    'Understand how to use both the Jupyter Notebook and create .py files',
+                    'You will learn how to take your designs and build them into powerful websites using WebFlow, a state of the art site builder used by teams at Dell, NASA and more.',
+                    'Get an understanding of how to create GUIs in the Jupyter Notebook system!'
+                ]),
+                'image' => 'formations1.jpg',
+                'trend' => true,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ],
             [
                 'nom' => 'Management',
@@ -23,6 +34,12 @@ class FormationSeeder extends Seeder
                 'domaine_id' => 2,
                 'image' => 'management.jpg',
                 'etablissement_id' => 1,
+                'sub_titles' => json_encode([
+                    'You will learn how to design beautiful websites using Figma, an interface design tool used by designers at Uber, Airbnb and Microsoft.',
+                    'You will learn secret tips of Freelance Web Designers and how they make great money freelancing online.',
+                    'Understand how to use both the Jupyter Notebook and create .py files',
+                    
+                ]),
             ],
             [
                 'nom' => 'Finances et gestion financière',
@@ -30,6 +47,11 @@ class FormationSeeder extends Seeder
                 'domaine_id' => 3,
                 'image' => 'finances_gestion.jpg',
                 'etablissement_id' => 1,
+                'sub_titles' => json_encode([
+                    'You will learn how to design beautiful websites using Figma, an interface design tool used by designers at Uber, Airbnb and Microsoft.',
+                    'You will learn secret tips of Freelance Web Designers and how they make great money freelancing online.',
+                    
+                ]),
             ],
             [
                 'nom' => 'Communication',

@@ -19,7 +19,7 @@ Route::get('/formation/{id}', [FormationController::class, 'show'])->name('forma
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/cart/add/{formationId}', function (){
-        return redirect()->back()->with('success', 'Formation added to your cart.');
+        return redirect()->back()->with('status', 'already-in-cart');
     })->name('cart.add');
 });
 
