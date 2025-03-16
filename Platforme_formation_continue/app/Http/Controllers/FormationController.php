@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Formation;
 use App\Models\Domaine;
 use App\Models\Etablissement;
+use App\Models\Avis;
+
 
 class FormationController extends Controller
 {
@@ -35,10 +37,33 @@ class FormationController extends Controller
     {
         $id = $request->id;
         
-        // Search in formation titles and descriptions
-        $formation = Formation::findOrFail($id);
+        // // Search in formation titles and descriptions
+        // $formation = Formation::findOrFail($id);
             
-        return view('pages.formation.formation', compact('formation'));
+        // return view('pages.formation.formation', compact('formation'));
+        $formation = Formation::findOrFail($id);
+        
+        // Get all reviews for the formation
+        $reviews = Avis::where('formation_id', $id)->get();
+        
+        // Calculate average rating
+        $averageRating = $reviews->avg('note') ?? 0;
+        $averageRating = number_format($averageRating, 1);
+        
+        // Count total reviews
+        $totalReviews = $reviews->count();
+        
+        // Calculate rating distribution percentages
+        $ratingCounts = $reviews->groupBy('note')->map->count();
+        
+        $ratingPercentages = [];
+        for ($i = 5; $i >= 1; $i--) {
+            $ratingPercentages[$i] = $totalReviews > 0 
+                ? round(($ratingCounts[$i] ?? 0) / $totalReviews * 100, 2)
+                : 0;
+        }
+        
+        return view('pages.formation.formation', compact('formation', 'reviews', 'averageRating', 'totalReviews', 'ratingPercentages'));
     }
     /**
      * filter for formations
@@ -81,9 +106,9 @@ class FormationController extends Controller
         // dd($request);
         $formations = $query->get();
         
-        if ($request->ajax()) {
-            return view('pages.formations.test', compact('formations'));
-        }
+        // if ($request->ajax()) {
+        //     return view('formations._formations_list', compact('formations'));
+        // }
         
         return view('pages.formations.formations', compact('formations' ,'domaines','etablissements'));
     }
