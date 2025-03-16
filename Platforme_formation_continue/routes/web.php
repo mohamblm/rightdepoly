@@ -17,6 +17,12 @@ Route::get('/etablissements', [EtablissementController::class, 'index'])->name('
 Route::get('/formations', [FormationController::class, 'index'])->name('formations');
 Route::get('/formation/{id}', [FormationController::class, 'show'])->name('formation.show');
 
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/add/{formationId}', function (){
+        return redirect()->back()->with('status', 'already-in-cart');
+    })->name('cart.add');
+});
+
 Route::get('/plans', function () {
     return view('pages.plans.plans');
 })->name('plans');

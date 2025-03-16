@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('domaine_id')->constrained('domaines')->onDelete('cascade');
             $table->string('nom');
             $table->text('description')->nullable();
+            $table->json('sub_titles')->nullable();
             $table->string('image');
             $table->boolean('trend')->default(false);
             $table->timestamps();

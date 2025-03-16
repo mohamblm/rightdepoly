@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Formation;
+use Carbon\Carbon;
 
 class FormationSeeder extends Seeder
 {
@@ -11,74 +12,123 @@ class FormationSeeder extends Seeder
     {
         $formations = [
             [
-                'nom' => 'Stratégie de communication digitale',
-                'description' => 'Élaborer et mettre en œuvre une stratégie de communication efficace sur les plateformes numériques.',
-                'domaine_id' => 1, // Communication
-                'image' => 'communication_digitale.jpg',
-                'etablissement_id' => 1, // ISTA NTIC
+                'etablissement_id' => 1, // Make sure this ID exists in 'etablissements' table
+                'domaine_id' => 2, // Make sure this ID exists in 'domaines' table
+                'nom' => 'sions médicaux',
+                'description' => 'Apprenez à créer des applications web modernes avec HTML, CSS, JavaScript, Laravel et React.',
+                'sub_titles' => json_encode([
+                    'You will learn how to design beautiful websites using Figma, an interface design tool used by designers at Uber, Airbnb and Microsoft.',
+                    'You will learn secret tips of Freelance Web Designers and how they make great money freelancing online.',
+                    'Understand how to use both the Jupyter Notebook and create .py files',
+                    'You will learn how to take your designs and build them into powerful websites using WebFlow, a state of the art site builder used by teams at Dell, NASA and more.',
+                    'Get an understanding of how to create GUIs in the Jupyter Notebook system!'
+                ]),
+                'image' => 'formations1.jpg',
+                'trend' => true,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ],
             [
-                'nom' => 'Techniques de communication interpersonnelle',
-                'description' => 'Améliorer ses compétences en communication orale et écrite pour des interactions professionnelles réussies.',
-                'domaine_id' => 1, // Communication
-                'image' => 'communication_interpersonnelle.jpg',
-                'etablissement_id' => 2, // IFMSAS
+                'nom' => 'Management',
+                'description' => 'Management stratégique, organisationnel, opérationnel, et des équipes.',
+                'domaine_id' => 2,
+                'image' => 'management.jpg',
+                'etablissement_id' => 1,
+                'sub_titles' => json_encode([
+                    'You will learn how to design beautiful websites using Figma, an interface design tool used by designers at Uber, Airbnb and Microsoft.',
+                    'You will learn secret tips of Freelance Web Designers and how they make great money freelancing online.',
+                    'Understand how to use both the Jupyter Notebook and create .py files',
+                    
+                ]),
             ],
             [
-                'nom' => 'Développement web avec Laravel',
-                'description' => 'Apprendre à construire des applications web robustes et évolutives en utilisant le framework Laravel.',
-                'domaine_id' => 2, // Informatique et systèmes d’information
-                'image' => 'laravel_developpement.jpg',
-                'etablissement_id' => 3, // CMC
+                'nom' => 'Finances et gestion financière',
+                'description' => 'Procédure budgétaire et comptable, gestion et stratégie financière, fiscalité.',
+                'domaine_id' => 3,
+                'image' => 'finances_gestion.jpg',
+                'etablissement_id' => 1,
+                'sub_titles' => json_encode([
+                    'You will learn how to design beautiful websites using Figma, an interface design tool used by designers at Uber, Airbnb and Microsoft.',
+                    'You will learn secret tips of Freelance Web Designers and how they make great money freelancing online.',
+                    
+                ]),
             ],
             [
-                'nom' => 'Administration de réseaux TCP/IP',
-                'description' => 'Configurer, gérer et sécuriser les réseaux informatiques basés sur le protocole TCP/IP.',
-                'domaine_id' => 2, // Informatique et systèmes d’information
-                'image' => 'administration_reseaux.jpg',
-                'etablissement_id' => 1, // ISTA NTIC
+                'nom' => 'Communication',
+                'description' => 'Stratégie de communication, techniques et outils de communication.',
+                'domaine_id' => 4,
+                'image' => 'communication.jpg',
+                'etablissement_id' => 1,
             ],
             [
-                'nom' => 'Anglais des affaires',
-                'description' => 'Développer ses compétences en anglais pour une communication efficace dans un contexte professionnel.',
-                'domaine_id' => 3, // Langues
-                'image' => 'anglais_affaires.jpg',
-                'etablissement_id' => 4, // Autre Etablissement
+                'nom' => 'Informatique et systèmes d’information',
+                'description' => 'Architecture et administration des systèmes d’information, réseaux et télécommunication.',
+                'domaine_id' => 5,
+                'image' => 'informatique_systemes.jpg',
+                'etablissement_id' => 1,
             ],
             [
-                'nom' => 'Français langue étrangère (FLE) - Niveau avancé',
-                'description' => 'Perfectionner sa maîtrise de la langue française pour des usages professionnels et académiques.',
-                'domaine_id' => 3, // Langues
-                'image' => 'fle_avance.jpg',
-                'etablissement_id' => 2, // IFMSAS
+                'nom' => 'Sécurité - Hygiène',
+                'description' => 'Prévention et opération d’incendie, sécurité dans la ville, gestion des risques technologiques et naturels.',
+                'domaine_id' => 6,
+                'image' => 'securite_hygiene.jpg',
+                'etablissement_id' => 1,
             ],
             [
-                'nom' => 'Gestion des stocks et des entrepôts',
-                'description' => 'Optimiser la gestion des stocks, l\'organisation des entrepôts et les flux de marchandises.',
-                'domaine_id' => 4, // Logistique
-                'image' => 'gestion_stocks.jpg',
-                'etablissement_id' => 1, // ISTA NTIC
+                'nom' => 'Commerce et marketing',
+                'description' => 'Stratégie marketing, technique commerciale et de vente.',
+                'domaine_id' => 7,
+                'image' => 'commerce_marketing.jpg',
+                'etablissement_id' => 1,
             ],
             [
-                'nom' => 'Techniques d\'approvisionnement et d\'achat',
-                'description' => 'Maîtriser les techniques d\'achat, la sélection des fournisseurs et la négociation des contrats.',
-                'domaine_id' => 4, // Logistique
-                'image' => 'techniques_approvisionnement.jpg',
-                'etablissement_id' => 3, // CMC
+                'nom' => 'Qualité',
+                'description' => 'Amélioration de la qualité, assurance qualité, système de management qualité.',
+                'domaine_id' => 8,
+                'image' => 'qualite.jpg',
+                'etablissement_id' => 1,
             ],
             [
-                'nom' => 'Leadership et gestion d\'équipe',
-                'description' => 'Développer ses compétences en leadership pour motiver, guider et gérer efficacement une équipe.',
-                'domaine_id' => 5, // Management
-                'image' => 'leadership_gestion.jpg',
-                'etablissement_id' => 2, // IFMSAS
+                'nom' => 'Technique',
+                'description' => 'Gestion de la production, gestion et maîtrise de l’énergie, gestion de la maintenance.',
+                'domaine_id' => 9,
+                'image' => 'technique.jpg',
+                'etablissement_id' => 1,
             ],
             [
-                'nom' => 'Gestion de projet agile',
-                'description' => 'Appliquer les principes et les méthodes agiles pour la planification et la réalisation de projets complexes.',
-                'domaine_id' => 5, // Management
-                'image' => 'gestion_projet_agile.jpg',
-                'etablissement_id' => 2, // IFMSAS
+                'nom' => 'Logistique',
+                'description' => 'Gestion des approvisionnements, gestion des stocks, gestion des magasins.',
+                'domaine_id' => 10,
+                'image' => 'logistique.jpg',
+                'etablissement_id' => 1,
+            ],
+            [
+                'nom' => 'Environnement',
+                'description' => 'Politique d’environnement, gestion des ressources, traitement des eaux usées et gestion des déchets.',
+                'domaine_id' => 11,
+                'image' => 'environnement.jpg',
+                'etablissement_id' => 1,
+            ],
+            [
+                'nom' => 'Affaires juridiques',
+                'description' => 'Mode et gestion des services publics, achats publics, contrats et assurances.',
+                'domaine_id' => 12,
+                'image' => 'affaires_juridiques.jpg',
+                'etablissement_id' => 1,
+            ],
+            [
+                'nom' => 'Langues',
+                'description' => 'Aspect général des langues, aspect technique et commercial des langues.',
+                'domaine_id' => 13,
+                'image' => 'langues.jpg',
+                'etablissement_id' => 1,
+            ],
+            [
+                'nom' => 'Santé',
+                'description' => 'Soins médicaux, secourisme, biomédical, soins dentaires et analyses médicales.',
+                'domaine_id' => 14,
+                'image' => 'sante.jpg',
+                'etablissement_id' => 1,
             ],
         ];
 
