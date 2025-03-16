@@ -13,7 +13,7 @@ class FormationSeeder extends Seeder
         $formations = [
             [
                 'etablissement_id' => 1, // Make sure this ID exists in 'etablissements' table
-                'domaine_id' => 2, // Make sure this ID exists in 'domaines' table
+                'domaine_id' => 1, // Modified domaine_id to 1
                 'nom' => 'sions médicaux',
                 'description' => 'Apprenez à créer des applications web modernes avec HTML, CSS, JavaScript, Laravel et React.',
                 'sub_titles' => json_encode([
@@ -31,46 +31,46 @@ class FormationSeeder extends Seeder
             [
                 'nom' => 'Management',
                 'description' => 'Management stratégique, organisationnel, opérationnel, et des équipes.',
-                'domaine_id' => 2,
+                'domaine_id' => 2, // Modified domaine_id to 2
                 'image' => 'management.jpg',
                 'etablissement_id' => 1,
                 'sub_titles' => json_encode([
                     'You will learn how to design beautiful websites using Figma, an interface design tool used by designers at Uber, Airbnb and Microsoft.',
                     'You will learn secret tips of Freelance Web Designers and how they make great money freelancing online.',
                     'Understand how to use both the Jupyter Notebook and create .py files',
-                    
+
                 ]),
             ],
             [
                 'nom' => 'Finances et gestion financière',
                 'description' => 'Procédure budgétaire et comptable, gestion et stratégie financière, fiscalité.',
-                'domaine_id' => 3,
+                'domaine_id' => 3, // Modified domaine_id to 3
                 'image' => 'finances_gestion.jpg',
                 'etablissement_id' => 1,
                 'sub_titles' => json_encode([
                     'You will learn how to design beautiful websites using Figma, an interface design tool used by designers at Uber, Airbnb and Microsoft.',
                     'You will learn secret tips of Freelance Web Designers and how they make great money freelancing online.',
-                    
+
                 ]),
             ],
             [
                 'nom' => 'Communication',
                 'description' => 'Stratégie de communication, techniques et outils de communication.',
-                'domaine_id' => 4,
+                'domaine_id' => 4, // Modified domaine_id to 4
                 'image' => 'communication.jpg',
                 'etablissement_id' => 1,
             ],
             [
                 'nom' => 'Informatique et systèmes d’information',
                 'description' => 'Architecture et administration des systèmes d’information, réseaux et télécommunication.',
-                'domaine_id' => 5,
+                'domaine_id' => 5, // Modified domaine_id to 5
                 'image' => 'informatique_systemes.jpg',
                 'etablissement_id' => 1,
             ],
             [
                 'nom' => 'Sécurité - Hygiène',
                 'description' => 'Prévention et opération d’incendie, sécurité dans la ville, gestion des risques technologiques et naturels.',
-                'domaine_id' => 6,
+                'domaine_id' => 3,
                 'image' => 'securite_hygiene.jpg',
                 'etablissement_id' => 1,
             ],

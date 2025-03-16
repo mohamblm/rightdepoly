@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->string('icon')->nullable();
             $table->boolean('trend')->default(false);
             $table->timestamps();
         });
