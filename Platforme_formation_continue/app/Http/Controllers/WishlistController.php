@@ -79,4 +79,30 @@ class WishlistController extends Controller
         return redirect()->back()->with('status', 'added-to-cart');
     }
 
+    public function add_and_redirect_to_wishlist($formationId)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('signup')->with('error', 'You need to sign up first.');
+        }
+
+        $user = Auth::user();
+
+        // Check if the formation already exists in the cart
+        $existingCartItem = Wishlist::where('user_id', $user->id)
+            ->where('formation_id', $formationId)
+            ->first();
+
+        if ($existingCartItem) {
+            return redirect()->route('profile/wishlist');
+        }
+
+        // Add the formation to the cart
+        Wishlist::create([
+            'user_id' => $user->id,
+            'formation_id' => $formationId
+        ]);
+
+        return redirect()->route('profile/wishlist');
+    }
+
 }

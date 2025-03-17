@@ -15,7 +15,7 @@
                                         {{ $formation->nom ?? 'Best LearnPress WordPress Theme Collection For 2023' }}
                                     </h3>
                                     
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 mb-3">
                                         {{ $formation->description ?? 'no description for this formations ...' }}
                                     </p>
                                     <div class="text-blue-400 mt-3">
@@ -23,6 +23,7 @@
                                         <span>{{ $formation->etablissement->nom }}</span>
                                         <i class="fas fa-filter ml-5"></i>
                                         <span>{{ $formation->domaine->nom }}</span>
+                                        
                                     </div>
                                 </a> 
                             </div>

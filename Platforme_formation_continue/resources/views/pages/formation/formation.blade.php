@@ -196,7 +196,7 @@
                             </button>
                             {{-- <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button> --}}
                         </form>
-                        <form action="{{ route('cart.add', $formation->id) }}" method="POST">
+                        <form action="{{ route('cart.devis', $formation->id) }}" method="POST">
                             @csrf
                             <button
                             class="w-full bg-white hover:bg-gray-50 text-blue-500 font-medium py-3 px-4 rounded border border-blue-500 mb-3">
