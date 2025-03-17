@@ -1,14 +1,16 @@
 <?php
 
+use App\Http\Controllers\EtablissementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\FormationController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DevisController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');    
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+Route::get('/etablissements', [EtablissementController::class, 'index'])->name('etablissements.index');
 
 
 
@@ -16,6 +18,12 @@ Route::get('/', function () {
 
 Route::get('/formations', [FormationController::class, 'index'])->name('formations');
 Route::get('/formation/{id}', [FormationController::class, 'show'])->name('formation.show');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/add/{formationId}', function (){
+        return redirect()->back()->with('status', 'already-in-cart');
+    })->name('cart.add');
+});
 
 Route::get('/plans', function () {
     return view('pages.plans.plans');

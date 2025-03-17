@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Etablissement;
 use App\Models\Domaine;
+use App\Models\Avis;
 
 class Formation extends Model
 {
@@ -45,9 +46,16 @@ class Formation extends Model
     {
         return $this->belongsTo(Domaine::class);
     }
+
     public function wishlist()
     {
         return $this->hasMany(Wishlist::class);
+    }
+
+
+    public function reviews()
+    {
+        return $this->hasMany(Avis::class,'formation_id');
     }
 
     

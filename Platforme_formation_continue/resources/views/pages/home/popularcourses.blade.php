@@ -189,9 +189,9 @@
                 </div>
 
             </div>
-            <!-- Swiper Pagination -->
-            <div class="swiper-pagination mySwiper-popular-pagination"></div>
+            
         </div>
+        
     </div>
 </section>
 
@@ -202,10 +202,6 @@
         const swiperPopular = new Swiper('.mySwiper-popular-courses', {
             slidesPerView: 1,
             spaceBetween: 20,
-            pagination: {
-                el: '.mySwiper-popular-pagination',
-                clickable: true,
-            },
             breakpoints: {
                 // when window width is >= 640px
                 640: {

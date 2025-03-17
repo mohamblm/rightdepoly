@@ -16,12 +16,12 @@
         <!-- Testimonials Slider -->
         <div class="relative">
             <!-- Slider Navigation -->
-            <button id="prev-testimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md text-blue-500 hover:text-blue-700 focus:outline-none lg:-left-6 hidden md:block">
+            <button id="prev-testimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md text-blue-500 hover:text-blue-700 focus:outline-none lg:-left-10 hidden md:block">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
             </button>
-            <button id="next-testimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md text-blue-500 hover:text-blue-700 focus:outline-none lg:-right-6 hidden md:block">
+            <button id="next-testimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md text-blue-500 hover:text-blue-700 focus:outline-none lg:-right-10 hidden md:block">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
