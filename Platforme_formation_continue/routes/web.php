@@ -3,25 +3,38 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FormationController;
 use Illuminate\Support\Facades\Route;
+<<<<<<< Updated upstream
+=======
+use App\Http\Controllers\DevisController;
+use App\Http\Controllers\EishlistController;
+
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+Route::get('/etablissements', [EtablissementController::class, 'index'])->name('etablissements.index');
+>>>>>>> Stashed changes
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');    
 
 
+<<<<<<< Updated upstream
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+=======
+// -------------------------------mohamed routes 
+>>>>>>> Stashed changes
 
 Route::get('/formations', [FormationController::class, 'index'])->name('formations');
 Route::get('/formation/{id}', [FormationController::class, 'show'])->name('formation.show');
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('/cart/add/{formationId}', function (){
-        return redirect()->back()->with('status', 'already-in-cart');
-    })->name('cart.add');
+    Route::post('/cart/add/{formationId}', [WishlistController::class , 'addToCart'])->name('cart.add');
 });
+// ------------------------------------------------------------------
+
 
 Route::get('/plans', function () {
     return view('pages.plans.plans');

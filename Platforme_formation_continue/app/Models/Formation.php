@@ -23,6 +23,11 @@ class Formation extends Model
         'image',
         'etablissement_id',
         'domaine_id',
+        'sub_titles',
+        'for_whos',
+        'requirements',
+        'includes',
+        'languages',
         'trend'
     ];
     

@@ -23,6 +23,30 @@ class FormationSeeder extends Seeder
                     'You will learn how to take your designs and build them into powerful websites using WebFlow, a state of the art site builder used by teams at Dell, NASA and more.',
                     'Get an understanding of how to create GUIs in the Jupyter Notebook system!'
                 ]),
+                'for_whos'=> json_encode([
+                    'Développeurs web débutants',
+                    'Développeurs web intermédiaires',
+                    'Développeurs web avancés',
+                    'Développeurs web juniors',
+                    'Développeurs web seniors',
+                ]),
+                'requirements' => json_encode([
+                    'Aucune connaissance préalable requise',
+                    'Un ordinateur avec accès à Internet',
+                    'Un navigateur web moderne (Chrome, Firefox, Safari, Edge)',
+                    'Un éditeur de code (VS Code, Sublime Text, Atom, etc.)',
+                    'Un compte GitHub (gratuit)',
+                ]),
+                'includes' => json_encode([
+                    '6 heures de vidéo à la demande',
+                    '1 article',
+                    '1 ressource téléchargeable',
+                    'Accès sur appareil mobile et TV',
+                    'Certificat de fin de formation',
+                ]),
+                'languages' => json_encode([
+                    'Français','Darija','Arabe','Anglais'
+                ]),
                 'image' => 'formations1.jpg',
                 'trend' => true,
                 'created_at' => Carbon::now(),
@@ -39,6 +63,30 @@ class FormationSeeder extends Seeder
                     'You will learn secret tips of Freelance Web Designers and how they make great money freelancing online.',
                     'Understand how to use both the Jupyter Notebook and create .py files',
                     
+                ]),
+                'for_whos'=> json_encode([
+                    'Développeurs web débutants',
+                    'Développeurs web intermédiaires',
+                    'Développeurs web avancés',
+                    'Développeurs web juniors',
+                    'Développeurs web seniors',
+                ]),
+                'requirements' => json_encode([
+                    'Aucune connaissance préalable requise',
+                    'Un ordinateur avec accès à Internet',
+                    'Un navigateur web moderne (Chrome, Firefox, Safari, Edge)',
+                    'Un éditeur de code (VS Code, Sublime Text, Atom, etc.)',
+                    'Un compte GitHub (gratuit)',
+                ]),
+                'includes' => json_encode([
+                    '6 heures de vidéo à la demande',
+                    '1 article',
+                    '1 ressource téléchargeable',
+                    'Accès sur appareil mobile et TV',
+                    'Certificat de fin de formation',
+                ]),
+                'languages' => json_encode([
+                    'Français'
                 ]),
             ],
             [
