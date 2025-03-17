@@ -9,28 +9,59 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\Wishlist ;
 
 class ProfileController extends Controller
 {
     public function index()
 {
-    return view('profile.profile', ['section' => 'settings']); // Default section
+    return view('profile.profile', ['section' => 'witshlist']); 
 }
 
 
     public function section(Request $request,$section)
     {
-        $validSections = ['historique', 'edite', 'messages'];
+        $validSections = ['historique', 'edite', 'wishlist'];
 
         if (!in_array($section, $validSections)) {
             abort(404);
         }
 
         
+        
+        $user = auth()->user();
+        if($section === 'wishlist' ){
+            $wishlist = $user->wishlists()
+            ->with([
+                'formation' => function($query) {
+                    $query->with(['etablissement']); // Only existing etablissements
+                }
+            ])
+            ->whereHas('formation') // Only wishlist items with existing formations
+            ->get();
+            return view('profile.profile', [
+                'section' => $section,
+                'user' => $user,
+                'wishlist' => $wishlist
+            ]);
+        }
+        if($section === 'historique' ){
+            $inscriptions = Auth::user()->inscriptions()
+            ->with(['formation', 'formation.etablissement'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+            return view('profile.profile', [
+                'section' => $section,
+                'user' => $user,
+                'inscriptions'=>$inscriptions
+            ]);
+      }
+
         return view('profile.profile', [
             'section' => $section,
-            'user' => $request->user(),
+            'user' => $user,
+            // 'wishlist' => $wishlist
         ]);
     }
     /**
@@ -84,7 +115,7 @@ class ProfileController extends Controller
     }
 
     $user->save();
-    return Redirect::route('profile.section', 'messages')
+    return Redirect::route('profile.section', 'edite')
     ->with('status', 'profile-updated')
     ->with('success', 'Le profil a été enregistré avec succès.');
 }
@@ -99,7 +130,7 @@ class ProfileController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $user = $request->user();
+        $user = $quest->user();
 
         Auth::logout();
 
@@ -110,4 +141,6 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+ 
 }

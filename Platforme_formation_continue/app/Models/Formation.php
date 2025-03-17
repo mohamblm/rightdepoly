@@ -45,6 +45,11 @@ class Formation extends Model
     {
         return $this->belongsTo(Domaine::class);
     }
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
     
     // /**
     //  * Get all tags as an array.
