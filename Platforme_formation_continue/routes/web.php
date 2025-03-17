@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\EtablissementController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DevisController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
@@ -41,6 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/wishlist/remove-item', [WishlistController::class, 'removeItem'])
+    ->name('wishlist.removeItem');
+    Route::post('/devis/download', [DevisController::class, 'download'])->name('devis.download');
 });
 
 

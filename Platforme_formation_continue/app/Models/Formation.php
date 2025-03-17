@@ -47,10 +47,17 @@ class Formation extends Model
         return $this->belongsTo(Domaine::class);
     }
 
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+
     public function reviews()
     {
         return $this->hasMany(Avis::class,'formation_id');
     }
+
     
     // /**
     //  * Get all tags as an array.
