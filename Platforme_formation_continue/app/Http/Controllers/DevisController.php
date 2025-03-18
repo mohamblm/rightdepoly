@@ -33,7 +33,7 @@ class DevisController extends Controller
             DB::table('inscriptions')->insert([
                 'user_id' => $user->id,
                 'formation_id' => $formationId,
-                 'number-personne'=>$formationData['participants'] ?? 0,
+                 'number_personne'=>$formationData['participants'] ?? 0,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
