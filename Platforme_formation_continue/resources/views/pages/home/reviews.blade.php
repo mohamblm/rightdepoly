@@ -48,7 +48,7 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus in aliquam duis facilisis feugiat sapien malesuada pretium tristique.
                             </p>
                             <div class="flex items-center">
-                                <img src="{{ asset('images/popularcourses/avatar1.jpg') }}" alt="Laura M." class="w-12 h-12 rounded-full object-cover border-2 border-gray-200" onerror="this.src='https://via.placeholder.com/48?text=LM'">
+                                <img src="{{ asset('storage/formations/avatar1.jpg') }}" alt="Laura M." class="w-12 h-12 rounded-full object-cover border-2 border-gray-200" onerror="this.src='https://placehold.jp/150x150.png'">
                                 <div class="ml-3">
                                     <p class="font-medium text-gray-800">Laura M. a suivi la formation :</p>
                                     <p class="text-blue-500">Petite Enfance <span class="text-gray-500">en 2017</span></p>
@@ -76,7 +76,7 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus in aliquam duis facilisis feugiat sapien malesuada pretium tristique.
                             </p>
                             <div class="flex items-center">
-                                <img src="{{ asset('images/popularcourses/avatar2.jpg') }}" alt="Laura M." class="w-12 h-12 rounded-full object-cover border-2 border-gray-200" onerror="this.src='https://via.placeholder.com/48?text=LM'">
+                                <img src="{{ asset('storage/formations/avatar2.jpg') }}" alt="Laura M." class="w-12 h-12 rounded-full object-cover border-2 border-gray-200" onerror="this.src='https://placehold.jp/150x150.png'">
                                 <div class="ml-3">
                                     <p class="font-medium text-gray-800">Laura M. a suivi la formation :</p>
                                     <p class="text-blue-500">Petite Enfance <span class="text-gray-500">en 2017</span></p>
@@ -104,7 +104,7 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus in aliquam duis facilisis feugiat sapien malesuada pretium tristique.
                             </p>
                             <div class="flex items-center">
-                                <img src="{{ asset('images/popularcourses/avatar3.jpg') }}" alt="Laura M." class="w-12 h-12 rounded-full object-cover border-2 border-gray-200" onerror="this.src='https://via.placeholder.com/48?text=LM'">
+                                <img src="{{ asset('storage/formations/avatar3.jpg') }}" alt="Laura M." class="w-12 h-12 rounded-full object-cover border-2 border-gray-200" onerror="this.src='https://placehold.jp/150x150.png'">
                                 <div class="ml-3">
                                     <p class="font-medium text-gray-800">Laura M. a suivi la formation :</p>
                                     <p class="text-blue-500">Petite Enfance <span class="text-gray-500">en 2017</span></p>
@@ -130,7 +130,7 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus in aliquam duis facilisis feugiat sapien malesuada pretium tristique.
                             </p>
                             <div class="flex items-center">
-                                <img src="{{ asset('images/popularcourses/avatar2.jpg') }}" alt="Laura M." class="w-12 h-12 rounded-full object-cover border-2 border-gray-200" onerror="this.src='https://via.placeholder.com/48?text=LM'">
+                                <img src="{{ asset('storage/formations/avatar2.jpg') }}" alt="Laura M." class="w-12 h-12 rounded-full object-cover border-2 border-gray-200" onerror="this.src='https://placehold.jp/150x150.png'">
                                 <div class="ml-3">
                                     <p class="font-medium text-gray-800">Laura M. a suivi la formation :</p>
                                     <p class="text-blue-500">Petite Enfance <span class="text-gray-500">en 2017</span></p>
