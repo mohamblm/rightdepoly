@@ -20,9 +20,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::get('/etablissements', [EtablissementController::class, 'index'])->name('etablissements.index');
 
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-Route::get('/etablissements', [EtablissementController::class, 'index'])->name('etablissements.index');
 
 
 
@@ -72,29 +70,29 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard.index');
     
     // Formations
-    Route::resource('formations', FormationadminController::class)->names([
+    Route::resource('dashboardformations', FormationadminController::class)->names([
         'index' => 'admin.formations.index',
 
     ]);
     
     // Domaines
-    Route::resource('domaines', DomaineadminController::class)->names([
+    Route::resource('dashboarddomaines', DomaineadminController::class)->names([
         'index' => 'admin.domaines.index',
 
     ]);
     // Etablissements
-    Route::resource('etablissements', EtablissementadminController::class)->names([
+    Route::resource('dashboardetablissements', EtablissementadminController::class)->names([
         'index' => 'admin.etablissements.index',
 
     ]);
     
     // Inscriptions
-    Route::resource('inscriptions', InscriptionadminController::class)->names([
+    Route::resource('dashboardinscriptions', InscriptionadminController::class)->names([
         'index' => 'admin.inscriptions.index'
     ]);
     
     // Utilisateurs
-    Route::resource('utilisateurs', UtilisateurController::class)->names([
+    Route::resource('dashboardutilisateurs', UtilisateurController::class)->names([
         'index' => 'admin.utilisateurs.index'
     ]);
 });
