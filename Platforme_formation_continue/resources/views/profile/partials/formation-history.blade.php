@@ -3,7 +3,7 @@
     <h2 class="text-2xl font-bold mb-6">Formation Historic</h2>
     
     @foreach($inscriptions->groupBy(function($inscription) {
-        return $inscription->created_at->isoFormat('D MMMM YYYY [à] HH:mm');
+        return $inscription->created_at?->isoFormat('D MMMM YYYY [à] HH:mm') ?? 'N/A';
     }) as $date => $dateInscriptions)
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-8 overflow-hidden">
             <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
