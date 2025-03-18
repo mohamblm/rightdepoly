@@ -16,7 +16,7 @@ class InscriptionSeeder extends Seeder
             [
                 'user_id' => 1,
                 'formation_id' => 1,
-                'duree' => '5 jours',
+                // 'duree' => '5 jours',
                 'status' => 'valid',
                 'created_at' => Carbon::create(2024, 1, 10),
                 'updated_at' => now(),
