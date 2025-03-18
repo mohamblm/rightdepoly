@@ -1,13 +1,20 @@
 <?php
 
-use App\Http\Controllers\EtablissementController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AvisController;
+use App\Http\Controllers\DevisController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\FormationController;
-use App\Http\Controllers\WelcomeController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DevisController;
-use App\Http\Controllers\AvisController;
+use App\Http\Controllers\EtablissementController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UtilisateurController;
+use App\Http\Controllers\Admin\DomaineadminController;
+use App\Http\Controllers\Admin\FormationadminController;
+use App\Http\Controllers\Admin\InscriptionadminController;
+use App\Http\Controllers\Admin\EtablissementadminController;
+
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
@@ -59,6 +66,44 @@ Route::middleware('auth')->group(function () {
     ->name('wishlist.removeItem');
     Route::post('/devis/download', [DevisController::class, 'download'])->name('devis.download');
 });
+
+Route::middleware(['auth'])->group(function () {
+    // Dashboard
+    Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard.index');
+    
+    // Formations
+    Route::resource('formations', FormationadminController::class)->names([
+        'index' => 'admin.formations.index',
+
+    ]);
+    
+    // Domaines
+    Route::resource('domaines', DomaineadminController::class)->names([
+        'index' => 'admin.domaines.index',
+
+    ]);
+    // Etablissements
+    Route::resource('etablissements', EtablissementadminController::class)->names([
+        'index' => 'admin.etablissements.index',
+
+    ]);
+    
+    // Inscriptions
+    Route::resource('inscriptions', InscriptionadminController::class)->names([
+        'index' => 'admin.inscriptions.index'
+    ]);
+    
+    // Utilisateurs
+    Route::resource('utilisateurs', UtilisateurController::class)->names([
+        'index' => 'admin.utilisateurs.index'
+    ]);
+});
+
+Route::get('/admin', function () {
+    return view('admin.dashboard.index');
+})->middleware(['auth'])->name('dashboard.index');
+
+
 
 
 
