@@ -26,9 +26,6 @@ class ProfileController extends Controller
         if (!in_array($section, $validSections)) {
             abort(404);
         }
-
-        
-        
         $user = auth()->user();
         if($section === 'wishlist' ){
             $wishlist = $user->wishlists()
