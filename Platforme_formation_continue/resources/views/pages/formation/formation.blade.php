@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         {{ __('Formations') }}
@@ -19,12 +19,12 @@
     </div> --}}
 
     <!-- Main Content -->
-    <div class="container mx-auto px-4 py-20">
+    <div class="container mx-auto px-10 pt-20 pb-8">
         <div class="flex flex-col md:flex-row">
-            <!-- Left Column - Course Info -->
+            <!-- Left Column - Formation Info -->
             <div class="md:w-2/3 pr-0 md:pr-8">
                 <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">{{ $formation->nom }}</h1>
-                <p class="text-gray-600 mb-4">3 in 1 Course: Learn to design websites with Figma, build with Webflow, and
+                <p class="text-gray-600 mb-4">3 in 1 Formation: Learn to design websites with Figma, build with Webflow, and
                     make a living freelancing.</p>
 
                 <!-- Rating -->
@@ -38,9 +38,9 @@
                     <span class="ml-2 text-gray-600"> ({{count($formation->reviews)}} Rating)</span>
                 </div>
 
-                <!-- Course Preview Image -->
+                <!-- Formation Preview Image -->
                 <div class="relative rounded-lg overflow-hidden mb-8 bg-pink-100">
-                    <img src="{{ asset('storage/images/formation1.png') }}" alt="Course Preview"
+                    <img src="{{ asset('storage/images/formation1.png') }}" alt="Formation Preview"
                         class="w-full object-cover h-64 md:h-96">
                     {{-- <button class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg">
                         <i class="fas fa-play text-blue-500 text-xl"></i>
@@ -59,12 +59,16 @@
                                 class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Curriculum</a>
                         </li>
                         <li class="mr-2">
-                            <a href="#Instructor"
-                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Instructor</a>
+                            <a href="#Aqui"
+                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">À qui</a>
                         </li>
                         <li class="mr-2">
-                            <a href="#"
-                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Review</a>
+                            <a href="#Requirements"
+                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Requirements</a>
+                        </li>
+                        <li class="mr-2">
+                            <a href="#Reviews"
+                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Reviews</a>
                         </li>
                     </ul>
                 </div>
@@ -81,127 +85,50 @@
 
                     
                     <!-- Ce que vous apprendrez dans ce cours Section -->
-                    <div class="mt-8 border border-gray-200 rounded-lg p-6">
+                    <div id="Curriculum" class="mt-8 border border-gray-200 rounded-lg p-6">
                         <h2 class="text-xl font-semibold mb-4">Ce que vous apprendrez dans ce cours</h2>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="flex">
-                                <div
-                                    class="flex-shrink-0 h-6 w-6 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                                    <span class="text-white text-xs">✓</span>
+                            @foreach(json_decode($formation->sub_titles)?? [] as $sub_title)
+                                <div class="flex">
+                                    <div
+                                        class="flex-shrink-0 h-6 w-6 rounded-full bg-green-500 flex items-center justify-center mt-1">
+                                        <span class="text-white text-xs">✓</span>
+                                    </div>
+                                    <p class="ml-3 text-gray-700 text-sm">{{$sub_title}}</p>
                                 </div>
-                                <p class="ml-3 text-gray-700 text-sm">You will learn how to design beautiful websites using
-                                    Figma, an interface design tool used by designers at Uber, Airbnb and Microsoft.</p>
-                            </div>
-
-                            <div class="flex">
-                                <div
-                                    class="flex-shrink-0 h-6 w-6 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                                    <span class="text-white text-xs">✓</span>
-                                </div>
-                                <p class="ml-3 text-gray-700 text-sm">You will learn how to take your designs and build them
-                                    into powerful websites using WebFlow, a state of the art site builder used by teams at
-                                    Dell, NASA and more.</p>
-                            </div>
-
-                            <div class="flex">
-                                <div
-                                    class="flex-shrink-0 h-6 w-6 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                                    <span class="text-white text-xs">✓</span>
-                                </div>
-                                <p class="ml-3 text-gray-700 text-sm">You will learn secret tips of Freelance Web Designers
-                                    and how they make great money freelancing online.</p>
-                            </div>
-
-                            <div class="flex">
-                                <div
-                                    class="flex-shrink-0 h-6 w-6 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                                    <span class="text-white text-xs">✓</span>
-                                </div>
-                                <p class="ml-3 text-gray-700 text-sm">Learn to use Python professionally, learning both
-                                    Python 2 and Python 3!</p>
-                            </div>
-
-                            <div class="flex">
-                                <div
-                                    class="flex-shrink-0 h-6 w-6 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                                    <span class="text-white text-xs">✓</span>
-                                </div>
-                                <p class="ml-3 text-gray-700 text-sm">Understand how to use both the Jupyter Notebook and
-                                    create .py files</p>
-                            </div>
-
-                            <div class="flex">
-                                <div
-                                    class="flex-shrink-0 h-6 w-6 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                                    <span class="text-white text-xs">✓</span>
-                                </div>
-                                <p class="ml-3 text-gray-700 text-sm">Get an understanding of how to create GUIs in the
-                                    Jupyter Notebook system!</p>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
 
                     <!-- À qui s'adresse ce Formation Section -->
-                    <div class="mt-8">
+                    <div id="Aqui" class="mt-8">
                         <h2 class="text-xl font-semibold mb-4">À qui s'adresse ce Formation :</h2>
 
                         <ul class="space-y-3 text-gray-700">
+                            @foreach(json_decode($formation->for_whos)?? [] as $forElement)
                             <li class="flex items-start">
                                 <span class="text-blue-500 mr-2">❯</span>
-                                <span>This course is for those who want to launch a Freelance Web Design career.</span>
+                                <span>{{$forElement}}</span>
                             </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-500 mr-2">❯</span>
-                                <span>Praesent eget consequat elit. Duis a pretium purus.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-500 mr-2">❯</span>
-                                <span>Sed sagittis suscipit condimentum pellentesque vulputate feugiat lorem nec
-                                    accumsan.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-500 mr-2">❯</span>
-                                <span>Sed nec dapibus orci integer nisi turpis, eleifend at amet aliquam vel, lectus quis
-                                    ex.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-500 mr-2">❯</span>
-                                <span>Those who are looking to reboot their work life and try a new profession that is fun,
-                                    rewarding and highly in-demand.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-500 mr-2">❯</span>
-                                <span>Nemo sector consequat lorem, in posuere enim hendrerit sed.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-500 mr-2">❯</span>
-                                <span>Duis ornare enim ullamcorper congue consectetur suspendisse interdum tristique est sed
-                                    molestie.</span>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
 
                     <!-- Formation requirements Section -->
-                    <div class="mt-8">
+                    <div id="Requirements" class="mt-8">
                         <h2 class="text-xl font-semibold mb-4">Formation requirements</h2>
 
                         <ul class="list-disc pl-5 space-y-3 text-gray-700">
-                            <li>Praesent eget consequat lorem, in posuere enim hendrerit sed.</li>
-                            <li>Sed sagittis suscipit condimentum pellentesque vulputate feugiat lorem nec accumsan.</li>
-                            <li>Duis ornare enim ullamcorper congue consectetur suspendisse interdum tristique est sed
-                                molestie.</li>
-                            <li>Those who are looking to reboot their work life and try a new profession that is fun,
-                                rewarding and highly in-demand.</li>
-                            <li>Praesent eget consequat elit. Duis a pretium purus.</li>
-                            <li>Sed nec dapibus orci integer nisi turpis, eleifend at amet aliquam vel, lectus quis ex.</li>
-                            <li>This course is for those who want to launch a Freelance Web Design career.</li>
+                            @foreach(json_decode($formation->requirements)?? [] as $requirement)
+                                <li>{{$requirement}}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column - Course Purchase Card -->
+            <!-- Right Column - Formation Purchase Card -->
             <div class="md:w-1/3 mt-8 md:mt-0">
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden sticky top-4">
                     <!-- Discount Banner -->
@@ -210,26 +137,26 @@
                         <span class="text-sm">2 days left at this offer!</span>
                     </div>
 
-                    <!-- Course Details -->
+                    <!-- Formation Details -->
                     <div class="p-6">
-                        <!-- Course Duration -->
+                        <!-- Formation Duration -->
                         <div class="flex justify-between mb-4">
                             <div class="flex items-center">
                                 <span class="text-gray-500 mr-2">
                                     <i class="far fa-clock"></i>
                                 </span>
-                                <span class="text-sm text-gray-600">Course Duration</span>
+                                <span class="text-sm text-gray-600">Formation Duration</span>
                             </div>
                             <span class="text-sm text-gray-800">6 Month</span>
                         </div>
 
-                        <!-- Course Level -->
+                        <!-- Formation Level -->
                         <div class="flex justify-between mb-4">
                             <div class="flex items-center">
                                 <span class="text-gray-500 mr-2">
                                     <i class="fas fa-signal"></i>
                                 </span>
-                                <span class="text-sm text-gray-600">Course Level</span>
+                                <span class="text-sm text-gray-600">Formation Level</span>
                             </div>
                             <span class="text-sm text-gray-800">Beginner and Intermediate</span>
                         </div>
@@ -253,7 +180,11 @@
                                 </span>
                                 <span class="text-sm text-gray-600">Language</span>
                             </div>
-                            <span class="text-sm text-gray-800">Mandarin</span>
+                            <span class="text-sm text-gray-800">
+                                @foreach(json_decode($formation->languages)?? [] as $language)
+                                    {{$language.', '}}
+                                @endforeach
+                            </span>
                         </div>
 
                         <!-- Action Buttons -->
@@ -265,60 +196,47 @@
                             </button>
                             {{-- <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button> --}}
                         </form>
-                        <button
-                            class="w-full bg-white hover:bg-gray-50 text-blue-500 font-medium py-3 px-4 rounded border border-blue-500 mb-6">
-                            Demande De Devis
-                        </button>
+                        <form action="{{ route('cart.devis', $formation->id) }}" method="POST">
+                            @csrf
+                            <button
+                            class="w-full bg-white hover:bg-gray-50 text-blue-500 font-medium py-3 px-4 rounded border border-blue-500 mb-3">
+                                Demande De Devis
+                            </button>
+                            {{-- <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button> --}}
+                        </form>
+                        
 
                         <!-- Secondary Actions -->
-                        <div class="flex justify-between mb-6">
+                        {{-- <div class="flex justify-between mb-6">
                             <button class="text-gray-600 text-sm hover:text-blue-500">
                                 <i class="far fa-heart mr-1"></i> Add To Wishlist
                             </button>
                             <button class="text-gray-600 text-sm hover:text-blue-500">
-                                <i class="fas fa-gift mr-1"></i> Gift Course
+                                <i class="fas fa-gift mr-1"></i> Gift Formation
                             </button>
-                        </div>
+                        </div> --}}
 
                         <!-- Guarantee Notice -->
                         <div class="text-center text-xs text-gray-500 mb-6">
-                            <p>Note: All courses have 30-days money-back guarantee</p>
+                            <p>Note: All Formations have 30-days money-back guarantee</p>
                         </div>
 
                         <!-- What's Included -->
                         <div>
-                            <h3 class="font-medium text-gray-800 mb-4">This course includes:</h3>
+                            <h3 class="font-medium text-gray-800 mb-4">This Formation includes:</h3>
                             <ul class="space-y-3">
-                                <li class="flex items-center text-sm text-gray-600">
-                                    <i class="far fa-clock text-blue-500 mr-3"></i>
-                                    Lifetime access
-                                </li>
-                                <li class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-undo text-blue-500 mr-3"></i>
-                                    30-days money-back guarantee
-                                </li>
-                                <li class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-file-download text-blue-500 mr-3"></i>
-                                    Free exercises, files & downloadable resources
-                                </li>
-                                <li class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-certificate text-blue-500 mr-3"></i>
-                                    Shareable certificate of completion
-                                </li>
-                                <li class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-closed-captioning text-blue-500 mr-3"></i>
-                                    English subtitles
-                                </li>
-                                <li class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-mobile-alt text-blue-500 mr-3"></i>
-                                    100% Formation on partenariat
-                                </li>
+                                @foreach(json_decode($formation->includes)?? [] as $include)
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <i class="fa-solid fa-arrow-right text-blue-500 mr-3"></i>
+                                        {{$include}}
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
 
-                        <!-- Share Course -->
+                        <!-- Share Formation -->
                         <div class="mt-6">
-                            <h3 class="text-sm font-medium text-gray-800 mb-3">Share this course:</h3>
+                            <h3 class="text-sm font-medium text-gray-800 mb-3">Share this Formation:</h3>
                             <div class="flex space-x-3">
                                 <button class="text-gray-600 hover:text-blue-500">
                                     <i class="fas fa-link"></i>
@@ -342,13 +260,15 @@
             </div>
         </div>
     </div>
-    <div class="container mx-auto mb-20">
-        <!-- Course Rating Section -->
+
+    {{-- reriews --}}
+    <div id="Reviews" class="container mx-auto px-10 mb-20">
+        <!-- Formation Rating Section -->
         @if (count($formation->reviews) !== 0)
         <div class="mt-8">
             <h2 class="text-xl font-semibold mb-4">Evaluation du Formation</h2>
 
-            <div class="flex items-center mb-4">
+            <div class="flex items-center mb-4 ">
                 <div class="mr-4">
                     <!-- Display Average Rating -->
                     <span class="text-3xl font-bold text-gray-800">{{ $averageRating }}</span>
@@ -384,19 +304,29 @@
 
         <!-- Reviews Section with JavaScript Filtering -->
         <div class="mt-8">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-semibold">Les commentaires </h2>
-                <div class="relative">
-                    <select id="rating-filter"
-                        class="appearance-none bg-white border border-gray-300 px-4 py-2 pr-8 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="6">All commentaire</option>
-                        <option value="5">5 Star Rating</option>
-                        <option value="4">4 Star Rating</option>
-                        <option value="3">3 Star Rating</option>
-                        <option value="2">2 Star Rating</option>
-                        <option value="1">1 Star Rating</option>
-                    </select>
-
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">Les commentaires</h2>
+                <div class="flex items-center space-x-3">
+                    <!-- Filter Dropdown with Custom Styling -->
+                    <div class="relative">
+                        <select id="rating-filter"
+                            class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2.5 pr-10 text-gray-700 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                            <option value="6">Tous les commentaires</option>
+                            <option value="5">5 étoiles</option>
+                            <option value="4">4 étoiles</option>
+                            <option value="3">3 étoiles</option>
+                            <option value="2">2 étoiles</option>
+                            <option value="1">1 étoile</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Modal Trigger Button -->
+                    <button id="openRatingModal" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-5 rounded-lg shadow-sm transition-all duration-200 flex items-center">
+                        <span class="text-sm">Évaluer cette formation</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -440,7 +370,79 @@
 
         </div>
     </div>
-    @if (session('status') === 'added-to-cart' || session('status') === 'already-in-cart')
+    
+
+<!-- Modal Backdrop -->
+<div id="ratingModalBackdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden flex items-center justify-center transition-opacity duration-300 opacity-0">
+    <!-- Modal Container -->
+    <div id="ratingModal" class="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md scale-95 opacity-0 transition-all duration-300">
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="bg-gray-50 px-6 py-4 border-b flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-gray-800">Évaluer cette formation</h3>
+                <button id="closeRatingModal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-6">
+                <form action="{{ route('avis.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="formation_id" value="{{ $formation->id }}">
+                
+                    <!-- Rating System -->
+                    <div class="mb-6">
+                        <label class="block text-gray-800 font-medium mb-3">Notez cette formation</label>
+                        <div class="rating-container flex justify-center space-x-3">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <label class="cursor-pointer rating-star group">
+                                    <input type="radio" name="rating" value="{{ $i }}" class="hidden peer" required>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400 peer-checked:text-yellow-400 group-hover:text-yellow-300 transition-colors duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </label>
+                            @endfor
+                        </div>
+                    </div>
+                
+                    <!-- Comment Input -->
+                    <div class="mb-6">
+                        <label for="comment" class="block text-gray-800 font-medium mb-2">Votre commentaire</label>
+                        <textarea id="comment" name="comment" rows="4" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
+                            placeholder="Partagez votre expérience avec cette formation..."></textarea>
+                    </div>
+                
+                    <!-- Form Footer -->
+                    <div class="flex justify-end space-x-3 mt-8">
+                        <button type="button" id="cancelButton" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            Annuler
+                        </button>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 text-white font-medium py-2 px-6 rounded-lg transition-all duration-200 flex items-center justify-center">
+                            <span>Envoyer</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+    
+
+
+
+
+    {{-- notifiation --}}
+    @if (session('status') )
         <div x-data="{ show: true }" 
             x-show="show" 
             x-init="setTimeout(() => show = false, 5000)"
@@ -472,21 +474,27 @@
                         <p class="text-sm text-gray-600">
                             La formation a été ajoutée à votre panier avec succès.
                         </p>
-                    @endif
-                    @if (session('status') === 'already-in-cart')
+                    @elseif(session('status') === 'already-in-cart')
                         <h4 class="text-sm font-bold text-gray-800 mb-0.5">Cette formation déjà dans le panier.</h4>
-                        
+                    @elseif(session('status') === 'added_commit')
+                        <h4 class="text-sm font-bold text-gray-800 mb-0.5">Success!</h4>
+                        <p class="text-sm text-gray-600">
+                            Votre avis a été ajouté avec succès !.
+                        </p>
                     @endif
                 </div>
             </div>
         </div>
     @endif
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+
+@push('scripts')
+<script>
             const ratingFilter = document.getElementById('rating-filter');
             const reviewsContainer = document.getElementById('reviews-container');
             const noReviewsMessage = document.getElementById('no-reviews-message');
             const reviewItems = document.querySelectorAll('.review-item');
+
+            
 
             ratingFilter.addEventListener('change', function() {
 
@@ -509,6 +517,95 @@
                 // Show/hide "no reviews" message based on visible reviews count
                 noReviewsMessage.style.display = (visibleReviews === 0) ? "block" : "none";
             });
+        
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Modal elements
+        const modal = document.getElementById('ratingModal');
+        const backdrop = document.getElementById('ratingModalBackdrop');
+        const openBtn = document.getElementById('openRatingModal');
+        const closeBtn = document.getElementById('closeRatingModal');
+        const cancelBtn = document.getElementById('cancelButton');
+        
+        // Stars functionality
+        const stars = document.querySelectorAll('.rating-star');
+        
+        stars.forEach((star, index) => {
+            star.addEventListener('mouseover', function() {
+                // Highlight current star and all previous stars
+                for (let i = 0; i <= index; i++) {
+                    stars[i].querySelector('svg').classList.add('text-yellow-300');
+                }
+            });
+            
+            star.addEventListener('mouseout', function() {
+                // Remove highlight from stars that aren't selected
+                stars.forEach(s => {
+                    if (!s.querySelector('input').checked) {
+                        s.querySelector('svg').classList.remove('text-yellow-300');
+                    }
+                });
+            });
+            
+            star.addEventListener('click', function() {
+                // Reset all stars
+                stars.forEach(s => {
+                    s.querySelector('svg').classList.remove('text-yellow-400');
+                });
+                
+                // Highlight selected stars
+                for (let i = 0; i <= index; i++) {
+                    stars[i].querySelector('svg').classList.add('text-yellow-400');
+                }
+            });
         });
-    </script>
+        
+        // Open modal function
+        function openModal() {
+            backdrop.classList.remove('hidden');
+            // Trigger reflow to enable transitions
+            void backdrop.offsetWidth;
+            backdrop.classList.add('opacity-100');
+            modal.classList.add('opacity-100', 'scale-100');
+            modal.classList.remove('scale-95');
+            
+            // Disable body scroll
+            document.body.classList.add('overflow-hidden');
+        }
+        
+        // Close modal function
+        function closeModal() {
+            backdrop.classList.remove('opacity-100');
+            modal.classList.remove('opacity-100', 'scale-100');
+            modal.classList.add('scale-95');
+            
+            // Wait for animation to finish before hiding
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }, 300);
+        }
+        
+        // Event listeners
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        
+        // Close when clicking outside the modal
+        backdrop.addEventListener('click', function(event) {
+            if (event.target === backdrop) {
+                closeModal();
+            }
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && !backdrop.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    });
+</script>
+@endpush
 @endsection

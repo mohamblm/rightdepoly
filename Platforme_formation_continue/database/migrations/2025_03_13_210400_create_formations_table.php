@@ -16,9 +16,13 @@ return new class extends Migration
             $table->foreignId('etablissement_id')->constrained('etablissements')->onDelete('cascade');
             $table->foreignId('domaine_id')->constrained('domaines')->onDelete('cascade');
             $table->string('nom');
+            $table->string('image');
             $table->text('description')->nullable();
             $table->json('sub_titles')->nullable();
-            $table->string('image');
+            $table->json('for_whos')->nullable();
+            $table->json('requirements')->nullable();
+            $table->json('includes')->nullable();
+            $table->json('languages')->nullable();
             $table->boolean('trend')->default(false);
             $table->timestamps();
         });

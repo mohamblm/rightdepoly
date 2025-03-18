@@ -24,7 +24,7 @@
 </div>
 
 <!-- Main content area -->
-<div class="container mx-auto  py-8 mb-20">
+<div class="container mx-auto px-10  py-8 mb-20">
     <div class="flex flex-col md:flex-row gap-6">
         <!-- Left sidebar filters -->
         <div class="w-full md:w-64 shrink-0">
@@ -82,7 +82,7 @@
             </form>
             
             <!-- Tag filters -->
-            <div class="mt-8">
+            <div class="votre_filter mt-8 ">
                 <h3 class="text-lg font-semibold mb-4">Votre Filter</h3>
                 <div id="selected-filters" class="flex flex-wrap gap-2">
                     <!-- Dynamically populated tags will appear here -->
@@ -99,29 +99,7 @@
             <!-- Articles list -->
             <div id="formations-container" class="space-y-6">
                 <!-- Formation items will be loaded here -->
-                @foreach($formations ?? [] as $formation)
-        
-                <div  class="bg-white rounded-lg shadow-md overflow-hidden" onclick="window.location='{{ route('formation.show', ['id' => $formation->id]) }}'">
-                    <div class="md:flex">
-                        <div class="md:w-1/3">
-                            <img src="{{ asset('storage/images/' . 'formation1.png') }}" alt="{{ $formation->nom ?? 'Formation' }}" class="h-48 w-full object-cover md:h-full">
-                        </div>
-                        <div class="p-6 md:w-2/3">
-                            <h3 class="text-xl font-bold mb-2">
-                                <a href="{{route('formation.show',['id'=>$formation->id])}}" class="text-gray-900 hover:text-blue-600">{{ $formation->nom ?? 'Best LearnPress WordPress Theme Collection For 2023' }}</a>
-                            </h3>
-                            <div class="text-blue-400 mb-3">
-                                <i class="far fa-calendar-alt mr-1"></i>
-                                <span>{{ $formation->created_at ?? 'Jan 24, 2023' }}</span>
-                            </div>
-                            <p class="text-gray-600">
-                                {{ $formation->description ?? 'Looking for an amazing & well-functional LearnPress WordPress Theme? Online education...' }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-        
-                @endforeach
+               @include('pages.formations.partials.formations_list')
 
                 
             </div>
@@ -192,6 +170,14 @@
 
     function updateSelectedFilters() {
         selectedFiltersContainer.innerHTML = '';
+
+        const filterContainer = document.querySelector('.votre_filter'); // "Votre Filter" div
+
+        if (Object.keys(activeFilters).length === 0) {
+            filterContainer.classList.add('hidden'); // Hide if no filters are selected
+        } else {
+            filterContainer.classList.remove('hidden'); // Show if filters exist
+        }
 
         Object.keys(activeFilters).forEach(category => {
             activeFilters[category].forEach((label, value) => {
