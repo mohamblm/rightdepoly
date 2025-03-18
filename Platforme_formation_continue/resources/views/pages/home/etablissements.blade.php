@@ -42,7 +42,7 @@
                                         </svg>
                                         <span class="text-xs text-gray-500 ml-1"> {{ $etablissement->adresse }}</span>
                                     </div>
-                                    <a href="#" class="text-blue-600 text-sm font-semibold hover:underline">En savoir plus</a>
+                                    
                                 </div>
                             </div>
                         </div>

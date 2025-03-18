@@ -58,6 +58,20 @@ class Formation extends Model
         return $this->hasMany(Avis::class,'formation_id');
     }
 
+    public function inscriptions()
+    {
+        return $this->hasMany(Inscription::class);
+    }
+
+    public function participants()
+    {
+        return $this->belongsToMany(User::class, 'inscriptions', 'formation_id', 'user_id');
+    }
+
+    public function recentParticipants()
+    {
+        return $this->inscriptions()->with('user')->orderBy('created_at', 'desc')->take(3);
+    }
     
     // /**
     //  * Get all tags as an array.
