@@ -1,41 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="pt-30">
-@include('profile.partials.topSection')
-<div class="container mb-40 mt-40">
-    <div class="row">
-        <!-- Sidebar -->
-        <div class="list-group">
-    <a href="{{ route('profile.section', 'settings') }}" class="list-group-item 
-        {{ request()->is('profile/settings') ? 'active' : '' }}">
-        Settings
-    </a>
-    <a href="{{ route('profile.section', 'courses') }}" class="list-group-item 
-        {{ request()->is('profile/courses') ? 'active' : '' }}">
-        Courses
-    </a>
-    <a href="{{ route('profile.section', 'messages') }}" class="list-group-item 
-        {{ request()->is('profile/messages') ? 'active' : '' }}">
-        Messages
-    </a>
-</div>
-        <!-- Profile Content -->
-        <div class="col-md-9">
-            <div class="card p-4">
-                    <!-- Dynamic Section -->
-                @if ($section == 'settings')
-                    <p>hhfhf</p>
-                @elseif ($section == 'courses')
-                @include('profile.partials.topSection')
-                @elseif ($section == 'messages')
-                    @include('profile.partials.edit')
-            
-                @endif
-            </div>
+<div class=" p-0">
+    <!-- Top section with blue background and profile info is included here -->
+    @include('profile.partials.topSection')
+
+
+    <!-- Content Area -->
+    <div class="container p-20">
+        <!-- Dynamic Section -->
+        <div class="card p-4">
+        @if ($section == 'wishlist')
+                @include('profile.partials.wishlist', ['wishlist' => $wishlist])
+            @elseif ($section == 'historique')
+               @include('profile.partials.formation-history',['inscriptions' =>$inscriptions])
+            @elseif ($section == 'edite')
+                @include('profile.partials.edit')
+            @endif
         </div>
     </div>
 </div>
-</div>
+<script src="//unpkg.com/alpinejs" defer></script>
 @endsection
-

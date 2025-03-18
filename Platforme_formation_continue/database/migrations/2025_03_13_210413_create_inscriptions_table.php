@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('formation_id')->constrained('formations')->onDelete('cascade');
-            $table->string('duree');
-            $table->enum('status', ['en cours', 'valid'])->default('en cours');
+            $table->string('number-personne');
             $table->timestamps();
         });
     }

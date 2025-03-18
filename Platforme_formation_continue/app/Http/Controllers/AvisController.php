@@ -34,4 +34,23 @@ class AvisController extends Controller
         
         return view('formation.show', compact('formation', 'reviews', 'averageRating', 'totalReviews', 'ratingPercentages'));
     }
+    public function store(Request $request)
+    {
+        
+        $request->validate([
+            'formation_id' => 'required|exists:formations,id',
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string|max:1000',
+        ]);
+        
+        Avis::create([
+            'formation_id' => $request->formation_id,
+            'user_id' => auth()->id(),
+            'note' => $request->rating,
+            'commentaire' => $request->comment,
+        ]);
+        return redirect()->back()->with('status', 'added_commit');
+        
+    }
+
 }

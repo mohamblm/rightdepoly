@@ -82,7 +82,7 @@
             </form>
             
             <!-- Tag filters -->
-            <div class="mt-8">
+            <div class="votre_filter mt-8 ">
                 <h3 class="text-lg font-semibold mb-4">Votre Filter</h3>
                 <div id="selected-filters" class="flex flex-wrap gap-2">
                     <!-- Dynamically populated tags will appear here -->
@@ -170,6 +170,14 @@
 
     function updateSelectedFilters() {
         selectedFiltersContainer.innerHTML = '';
+
+        const filterContainer = document.querySelector('.votre_filter'); // "Votre Filter" div
+
+        if (Object.keys(activeFilters).length === 0) {
+            filterContainer.classList.add('hidden'); // Hide if no filters are selected
+        } else {
+            filterContainer.classList.remove('hidden'); // Show if filters exist
+        }
 
         Object.keys(activeFilters).forEach(category => {
             activeFilters[category].forEach((label, value) => {

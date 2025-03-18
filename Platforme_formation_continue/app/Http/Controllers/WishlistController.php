@@ -93,7 +93,7 @@ class WishlistController extends Controller
             ->first();
 
         if ($existingCartItem) {
-            return redirect()->route('profile/wishlist');
+            return redirect()->route('profile.section', 'wishlist');
         }
 
         // Add the formation to the cart
@@ -102,7 +102,7 @@ class WishlistController extends Controller
             'formation_id' => $formationId
         ]);
 
-        return redirect()->route('profile/wishlist');
+        return redirect()->route('profile.section', 'wishlist');
     }
 
 }

@@ -4,34 +4,45 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class DomaineSeeder extends Seeder
 {
     public function run()
     {
         $domaines = [
-            ['nom' => 'Technique', 'description' => 'Formations liées à la gestion technique et industrielle.'],
-            ['nom' => 'Logistique', 'description' => 'Formations sur la gestion des stocks, approvisionnements et magasins.'],
-            ['nom' => 'Environnement', 'description' => 'Gestion des ressources, traitement des déchets et des eaux.'],
-            ['nom' => 'Affaires juridiques', 'description' => 'Droit, assurances et marchés publics.'],
-            ['nom' => 'Langues', 'description' => 'Aspects généraux et techniques des langues.'],
-            ['nom' => 'Santé', 'description' => 'Soins médicaux, diagnostics et analyses médicales.'],
-            ['nom' => 'Alphabétisation fonctionnelle', 'description' => 'Programmes d’alphabétisation et d’apprentissage.'],
-            ['nom' => 'Gestion des ressources humaines', 'description' => 'Politiques RH, relations sociales et conditions de travail.'],
-            ['nom' => 'Management', 'description' => 'Stratégie, organisation et gestion des équipes.'],
-            ['nom' => 'Finances et gestion financière', 'description' => 'Fiscalité, comptabilité et gestion budgétaire.'],
-            ['nom' => 'Communication', 'description' => 'Stratégies et outils de communication.'],
-            ['nom' => 'Informatique et systèmes d’information', 'description' => 'Réseaux, administration et outils informatiques.'],
-            ['nom' => 'Sécurité - Hygiène', 'description' => 'Prévention des risques et sécurité au travail.'],
-            ['nom' => 'Commerce et marketing', 'description' => 'Marketing, commerce et techniques de vente.'],
-            ['nom' => 'Qualité', 'description' => 'Gestion et amélioration de la qualité.'],
+            [
+                'nom' => 'Communication',
+                'description' => 'Formations axées sur les stratégies de communication, la prise de parole en public et les relations interpersonnelles.',
+                'image' => 'communication.png',
+                'icon' => 'fa-solid fa-comments',
+            ],
+            [
+                'nom' => 'Informatique et systèmes d’information',
+                'description' => 'Formations sur les réseaux, l\'administration de systèmes, le développement et les outils informatiques.',
+                'image' => 'informatique.png',
+                'icon' => 'fa-solid fa-laptop',
+            ],
+            [
+                'nom' => 'Langues',
+                'description' => 'Formations générales et techniques pour l\'apprentissage et le perfectionnement des langues étrangères.',
+                'image' => 'langue.png',
+                'icon' => 'fa-solid fa-language',
+            ],
+            [
+                'nom' => 'Logistique',
+                'description' => 'Formations dédiées à la gestion des stocks, des approvisionnements, des entrepôts et de la chaîne logistique.',
+                'image' => 'logistique.png',
+                'icon' => 'fa-solid fa-truck-fast',
+            ],
+            [
+                'nom' => 'Management',
+                'description' => 'Formations sur la stratégie d\'entreprise, l\'organisation du travail et la gestion des équipes.',
+                'image' => 'management.png',
+                'icon' => 'fa-solid fa-users-gear',
+            ],
         ];
 
         DB::table('domaines')->insert($domaines);
     }
 }
-
-
-
-
-

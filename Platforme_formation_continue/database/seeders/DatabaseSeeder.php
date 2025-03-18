@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             DomaineSeeder::class,
             FormationSeeder::class,
             AvisSeeder::class,
-            InscriptionSeeder::class,
+            // InscriptionSeeder::class,
             
         ]);
     }

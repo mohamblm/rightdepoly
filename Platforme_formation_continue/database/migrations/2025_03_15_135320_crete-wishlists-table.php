@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('domaines', function (Blueprint $table) {
+        Schema::create('wishlists', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->text('description')->nullable();
-            $table->string('image')->nullable();
-            $table->string('icon')->nullable();
-            $table->boolean('trend')->default(false);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('formation_id')->constrained('formations')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('domaines');
+        Schema::dropIfExists('wishlists');
     }
 };

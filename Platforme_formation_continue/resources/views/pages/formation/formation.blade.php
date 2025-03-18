@@ -304,19 +304,29 @@
 
         <!-- Reviews Section with JavaScript Filtering -->
         <div class="mt-8">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-semibold">Les commentaires </h2>
-                <div class="relative">
-                    <select id="rating-filter"
-                        class="appearance-none bg-white border border-gray-300 px-4 py-2 pr-8 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="6">All commentaire</option>
-                        <option value="5">5 Star Rating</option>
-                        <option value="4">4 Star Rating</option>
-                        <option value="3">3 Star Rating</option>
-                        <option value="2">2 Star Rating</option>
-                        <option value="1">1 Star Rating</option>
-                    </select>
-
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">Les commentaires</h2>
+                <div class="flex items-center space-x-3">
+                    <!-- Filter Dropdown with Custom Styling -->
+                    <div class="relative">
+                        <select id="rating-filter"
+                            class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2.5 pr-10 text-gray-700 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                            <option value="6">Tous les commentaires</option>
+                            <option value="5">5 étoiles</option>
+                            <option value="4">4 étoiles</option>
+                            <option value="3">3 étoiles</option>
+                            <option value="2">2 étoiles</option>
+                            <option value="1">1 étoile</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Modal Trigger Button -->
+                    <button id="openRatingModal" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-5 rounded-lg shadow-sm transition-all duration-200 flex items-center">
+                        <span class="text-sm">Évaluer cette formation</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -360,8 +370,79 @@
 
         </div>
     </div>
+    
+
+<!-- Modal Backdrop -->
+<div id="ratingModalBackdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden flex items-center justify-center transition-opacity duration-300 opacity-0">
+    <!-- Modal Container -->
+    <div id="ratingModal" class="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md scale-95 opacity-0 transition-all duration-300">
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="bg-gray-50 px-6 py-4 border-b flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-gray-800">Évaluer cette formation</h3>
+                <button id="closeRatingModal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-6">
+                <form action="{{ route('avis.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="formation_id" value="{{ $formation->id }}">
+                
+                    <!-- Rating System -->
+                    <div class="mb-6">
+                        <label class="block text-gray-800 font-medium mb-3">Notez cette formation</label>
+                        <div class="rating-container flex justify-center space-x-3">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <label class="cursor-pointer rating-star group">
+                                    <input type="radio" name="rating" value="{{ $i }}" class="hidden peer" required>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400 peer-checked:text-yellow-400 group-hover:text-yellow-300 transition-colors duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </label>
+                            @endfor
+                        </div>
+                    </div>
+                
+                    <!-- Comment Input -->
+                    <div class="mb-6">
+                        <label for="comment" class="block text-gray-800 font-medium mb-2">Votre commentaire</label>
+                        <textarea id="comment" name="comment" rows="4" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
+                            placeholder="Partagez votre expérience avec cette formation..."></textarea>
+                    </div>
+                
+                    <!-- Form Footer -->
+                    <div class="flex justify-end space-x-3 mt-8">
+                        <button type="button" id="cancelButton" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            Annuler
+                        </button>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 text-white font-medium py-2 px-6 rounded-lg transition-all duration-200 flex items-center justify-center">
+                            <span>Envoyer</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    
+    
+
+
+
+
     {{-- notifiation --}}
-    @if (session('status') === 'added-to-cart' || session('status') === 'already-in-cart')
+    @if (session('status') )
         <div x-data="{ show: true }" 
             x-show="show" 
             x-init="setTimeout(() => show = false, 5000)"
@@ -393,10 +474,13 @@
                         <p class="text-sm text-gray-600">
                             La formation a été ajoutée à votre panier avec succès.
                         </p>
-                    @endif
-                    @if (session('status') === 'already-in-cart')
+                    @elseif(session('status') === 'already-in-cart')
                         <h4 class="text-sm font-bold text-gray-800 mb-0.5">Cette formation déjà dans le panier.</h4>
-                        
+                    @elseif(session('status') === 'added_commit')
+                        <h4 class="text-sm font-bold text-gray-800 mb-0.5">Success!</h4>
+                        <p class="text-sm text-gray-600">
+                            Votre avis a été ajouté avec succès !.
+                        </p>
                     @endif
                 </div>
             </div>
@@ -405,11 +489,12 @@
 
 @push('scripts')
 <script>
-        document.addEventListener('DOMContentLoaded', function() {
             const ratingFilter = document.getElementById('rating-filter');
             const reviewsContainer = document.getElementById('reviews-container');
             const noReviewsMessage = document.getElementById('no-reviews-message');
             const reviewItems = document.querySelectorAll('.review-item');
+
+            
 
             ratingFilter.addEventListener('change', function() {
 
@@ -432,7 +517,95 @@
                 // Show/hide "no reviews" message based on visible reviews count
                 noReviewsMessage.style.display = (visibleReviews === 0) ? "block" : "none";
             });
+        
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Modal elements
+        const modal = document.getElementById('ratingModal');
+        const backdrop = document.getElementById('ratingModalBackdrop');
+        const openBtn = document.getElementById('openRatingModal');
+        const closeBtn = document.getElementById('closeRatingModal');
+        const cancelBtn = document.getElementById('cancelButton');
+        
+        // Stars functionality
+        const stars = document.querySelectorAll('.rating-star');
+        
+        stars.forEach((star, index) => {
+            star.addEventListener('mouseover', function() {
+                // Highlight current star and all previous stars
+                for (let i = 0; i <= index; i++) {
+                    stars[i].querySelector('svg').classList.add('text-yellow-300');
+                }
+            });
+            
+            star.addEventListener('mouseout', function() {
+                // Remove highlight from stars that aren't selected
+                stars.forEach(s => {
+                    if (!s.querySelector('input').checked) {
+                        s.querySelector('svg').classList.remove('text-yellow-300');
+                    }
+                });
+            });
+            
+            star.addEventListener('click', function() {
+                // Reset all stars
+                stars.forEach(s => {
+                    s.querySelector('svg').classList.remove('text-yellow-400');
+                });
+                
+                // Highlight selected stars
+                for (let i = 0; i <= index; i++) {
+                    stars[i].querySelector('svg').classList.add('text-yellow-400');
+                }
+            });
         });
+        
+        // Open modal function
+        function openModal() {
+            backdrop.classList.remove('hidden');
+            // Trigger reflow to enable transitions
+            void backdrop.offsetWidth;
+            backdrop.classList.add('opacity-100');
+            modal.classList.add('opacity-100', 'scale-100');
+            modal.classList.remove('scale-95');
+            
+            // Disable body scroll
+            document.body.classList.add('overflow-hidden');
+        }
+        
+        // Close modal function
+        function closeModal() {
+            backdrop.classList.remove('opacity-100');
+            modal.classList.remove('opacity-100', 'scale-100');
+            modal.classList.add('scale-95');
+            
+            // Wait for animation to finish before hiding
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }, 300);
+        }
+        
+        // Event listeners
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        
+        // Close when clicking outside the modal
+        backdrop.addEventListener('click', function(event) {
+            if (event.target === backdrop) {
+                closeModal();
+            }
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && !backdrop.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    });
 </script>
 @endpush
 @endsection
