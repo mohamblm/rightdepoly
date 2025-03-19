@@ -1,4 +1,15 @@
-<aside class="w-64 bg-blue-900 text-white">
+<!-- admin/layouts/sidebar.blade.php -->
+<aside :class="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}" 
+       class="fixed inset-y-0 left-0 z-30 w-64 bg-blue-900 text-white transform transition-transform duration-200 ease-in-out lg:translate-x-0 lg:static lg:inset-0">
+    <!-- Close button for mobile -->
+    <div class="absolute top-0 right-0 p-2 lg:hidden">
+        <button @click="sidebarOpen = false" class="p-1 text-white focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </div>
+    
     <!-- Logo -->
     <div class="px-6 py-4 flex items-center border-b border-blue-800">
         <div class="rounded-full bg-blue-500 p-2 mr-3">

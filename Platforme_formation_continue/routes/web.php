@@ -81,9 +81,14 @@ Route::middleware(['auth'])->group(function () {
 
     ]);
     // Etablissements
-    Route::resource('dashboardetablissements', EtablissementadminController::class)->names([
+    Route::resource('dashboardetablissements', EtablissementadminController::class)
+    ->names([
         'index' => 'admin.etablissements.index',
-
+        'create' => 'admin.etablissements.create',
+        'store' => 'admin.etablissements.store',
+        'edit' => 'admin.etablissements.edit', // Nom correct pour la route edit
+        'update' => 'admin.etablissements.update',
+        'destroy' => 'admin.etablissements.destroy',
     ]);
     
     // Inscriptions
