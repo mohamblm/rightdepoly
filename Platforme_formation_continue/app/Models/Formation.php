@@ -30,6 +30,12 @@ class Formation extends Model
         'languages',
         'trend'
     ];
+    protected $casts = [
+        'sub_titles' => 'array',
+        'requirements' => 'array',
+        'includes' => 'array',
+        'for_whos' => 'array',
+    ];
     
     // /**
     //  * Get the tags associated with the formation.

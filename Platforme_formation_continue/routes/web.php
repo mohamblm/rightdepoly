@@ -72,6 +72,12 @@ Route::middleware(['auth'])->group(function () {
     // Formations
     Route::resource('dashboardformations', FormationadminController::class)->names([
         'index' => 'admin.formations.index',
+        'create' => 'admin.formations.create',
+        'store' => 'admin.formations.store',
+        'edit' => 'admin.formations.edit',
+        'update' => 'admin.formations.update',
+        'destroy' => 'admin.formations.destroy',
+        
 
     ]);
     
