@@ -100,12 +100,15 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('dashboardutilisateurs', UtilisateurController::class)->names([
         'index' => 'admin.utilisateurs.index'
     ]);
+    Route::get('/utilisateurs/{user}', [\App\Http\Controllers\Admin\UtilisateurController::class, 'show'])
+         ->name('admin.utilisateurs.show');
+    Route::delete('/users/{user}', [UtilisateurController::class, 'destroy'])->name('users.destroy');
+    Route::put('/users/{user}', [UtilisateurController::class, 'update'])->name('users.update');
 });
 
 Route::get('/admin', function () {
     return view('admin.dashboard.index');
 })->middleware(['auth'])->name('dashboard.index');
-
 
 
 
