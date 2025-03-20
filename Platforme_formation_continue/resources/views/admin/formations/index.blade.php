@@ -22,12 +22,12 @@
                         <form action="{{ route('admin.formations.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
                             <div>
                                 <label for="search" class="block text-sm font-medium text-gray-700">Recherche</label>
-                                <input type="text" name="search" id="search" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500" placeholder="Nom de la formation..." value="{{ request('search') }}">
+                                <input type="text" name="search" id="search" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 p-3 h-12" placeholder="Nom de la formation..." value="{{ request('search') }}">
                             </div>
                             
                             <div>
-                                <label for="domaine" class="block text-sm font-medium text-gray-700">Domaine</label>
-                                <select name="domaine" id="domaine" class="select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500">
+                                <label for="domaine" class=" block text-sm font-medium text-gray-700">Domaine</label>
+                                <select name="domaine" id="domaine" class="select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 p-3 h-12">
                                     <option value="">Tous</option>
                                     @foreach($domaines as $domaine)
                                         <option value="{{ $domaine->id }}" {{ request('domaine') == $domaine->id ? 'selected' : '' }}>{{ $domaine->nom }}</option>
@@ -37,7 +37,7 @@
                             
                             <div>
                                 <label for="etablissement" class="select block text-sm font-medium text-gray-700">Établissement</label>
-                                <select name="etablissement" id="etablissement" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500">
+                                <select name="etablissement" id="etablissement" class=" select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 p-3 h-12">
                                     <option value="">Tous</option>
                                     @foreach($etablissements as $etablissement)
                                         <option value="{{ $etablissement->id }}" {{ request('etablissement') == $etablissement->id ? 'selected' : '' }}>{{ $etablissement->nom }}</option>
@@ -70,38 +70,39 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200" id="formations-table-body">
                                 @forelse($formations as $formation)
-                                <tr class="hover:bg-gray-50">
+                                <tr class="hover:bg-gray-50" data-formation-id="{{ $formation->id }}">
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-20 w-20  overflow-hidden bg-gray-100">
-                                                
-                                                <img src="{{ asset('storage/'.$formation->image) }} " alt="{{ $formation->nom }}" class="h-full w-full object-cover">
-                                            
+                                            <div class="flex-shrink-0 h-20 w-20 overflow-hidden bg-gray-100">
+                                                <img src="{{ asset('storage/'.$formation->image) }}" 
+                                                     alt="{{ $formation->nom }}" 
+                                                     class="formation-image h-full w-full object-cover">
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">{{ $formation->nom }}</div>
-                                                <div class="text-sm text-gray-500">
+                                                <div class="formation-name text-sm font-medium text-gray-900">
+                                                    {{ $formation->nom }}
+                                                </div>
+                                                <div class="trend-container text-sm text-gray-500">
                                                     @if($formation->trend)
-                                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-blue-800">
+                                                        <span class="formation-trend inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-blue-800">
                                                             Trending
                                                         </span>
                                                     @endif
-                                                    {{-- <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                                        {{ $formation->domaine->nom }}
-                                                    </span>
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                                        {{ $formation->etablissement->nom }}
-                                                    </span> --}}
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900">{{ $formation->etablissement->nom }}</div>
+                                        <div class="formation-etablissement text-sm text-gray-900">
+                                            {{ $formation->etablissement->nom }}
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900">{{ $formation->domaine->nom }}</div>
+                                        <div class="formation-domaine text-sm text-gray-900">
+                                            {{ $formation->domaine->nom }}
+                                        </div>
                                     </td>
+                                
                                     {{-- <td class="px-6 py-4">
                                         <div class="text-sm text-gray-500 max-w-xs ">{{ $formation->description }}</div>
                                     </td> --}}
@@ -116,7 +117,7 @@
                                             </svg>
                                         </button>
                                         
-                                        <form action="{{route('admin.formations.destroy',$formation->id)}}" id='form_{{$formation->id}}' method="POST">
+                                        
                                             @csrf
                                             @method('DELETE')
                                             <button 
@@ -128,7 +129,7 @@
                                                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                                                     </svg>
                                                 </button>
-                                        </form>
+                                       
                                     </td>
                                 </tr>
                                 @empty
@@ -155,6 +156,33 @@
         </div>
     </div>
 
+
+    <!-- Modal de confirmation de suppression -->
+    <div id="deleteModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h3 class="text-lg font-medium text-gray-900">Confirmation de suppression</h3>
+            </div>
+            <div class="px-6 py-4">
+                <p class="text-sm text-gray-500">
+                    Êtes-vous sûr de vouloir supprimer cet formation ? Cette action est irréversible.
+                </p>
+            </div>
+            <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3 rounded-b-lg">
+                <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">
+                    Annuler
+                </button>
+                <form id="deleteForm" method="POST" action="">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                        Supprimer
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
      {{-- notifiation --}}
      @if (session('success') )
      <div x-data="{ show: true }" 
@@ -196,6 +224,15 @@
 @include('admin.formations.edit')
     <!-- Scripts pour le filtrage automatique -->
     <script>
+        // Fonctions pour le modal de suppression
+        function confirmDelete(formationId) {
+            document.getElementById('deleteForm').action = `/dashboardformations/${formationId}`;
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+        
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
         // Fonction de debounce pour le champ de recherche
         let debounceTimer;
         const searchInput = document.getElementById('search');
@@ -213,13 +250,7 @@
             });
         });
         
-        function confirmDelete(id) {
-            event.preventDefault();
-            if(confirm('Are you sure you want to delete this formation?'+id)) {
-                document.getElementById('form_'+id).submit();
-
-            }
-        }
+        
         document.getElementById('show-add-modal').addEventListener('click', function(e) {
     e.preventDefault();
     document.getElementById('add-formation-modal').classList.remove('hidden');

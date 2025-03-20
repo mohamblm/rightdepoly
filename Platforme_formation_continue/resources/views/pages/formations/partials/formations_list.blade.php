@@ -4,7 +4,7 @@
             <div class="md:w-1/3 relative">
                 <a href="{{ route('formation.show', ['id' => $formation->id]) }}" class="block h-full">
                     <img 
-                        src="{{ asset('storage/'.$formation->imgae) }}" 
+                        src="{{ asset('storage/'.$formation->image) }}" 
                         alt="{{ $formation->nom ?? 'Formation' }}" 
                         class="h-56 w-full object-cover md:h-full transition-transform duration-300 hover:scale-105"
                         loading="lazy"

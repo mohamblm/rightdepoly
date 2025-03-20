@@ -65,11 +65,11 @@ class FormationadminController extends Controller
         // dd($request->all());
         //Handle JSON fields
 
-        $formation->sub_titles = json_encode($request->sub_titles);
-        $formation->requirements = json_encode($request->requirements);
-        $formation->includes = json_encode($request->includes);
-        $formation->for_whos = json_encode($request->for_whos);
-        $formation->languages = json_encode($request->languages);
+        $formation->sub_titles = $request->sub_titles ?? null ;
+        $formation->requirements = $request->requirements ?? null;
+        $formation->includes = $request->includes ?? null;
+        $formation->for_whos = $request->for_whos ?? null;
+        $formation->languages = json_encode($request->languages) ?? null;
         
         // Handle image upload
         if ($request->hasFile('image')) {
@@ -90,11 +90,11 @@ class FormationadminController extends Controller
         $formation->trend = $request->has('trend') ? true : false;
         
         //Handle JSON fields
-        $formation->sub_titles = json_encode($request->sub_titles);
-        $formation->requirements = json_encode($request->requirements);
-        $formation->includes = json_encode($request->includes);
-        $formation->for_whos = json_encode($request->for_whos);
-        $formation->languages = json_encode($request->languages);
+        $formation->sub_titles = $request->sub_titles ?? null ;
+        $formation->requirements = $request->requirements ?? null;
+        $formation->includes = $request->includes ?? null;
+        $formation->for_whos = $request->for_whos ?? null;
+        $formation->languages = json_encode($request->languages) ?? null;
         
         // Handle image upload
         if ($request->hasFile('image')) {
@@ -103,8 +103,9 @@ class FormationadminController extends Controller
         }
         
         $formation->save();
+        $formation=Formation::with(['domaine', 'etablissement'])->find($id);
         
-        return response()->json(['success' => true, 'message' => 'Formation updated successfully!']);
+        return response()->json(['success' => true,'formation'=>$formation, 'message' => 'Formation updated successfully!']);
     }
 
 
