@@ -2,23 +2,44 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
+use App\Models\User;
+use App\Notifications\NewUserRegistered;
+use App\Notifications\ContactFormSubmission;
 
-class AppServiceProvider extends ServiceProvider
+class EventServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * The event to listener mappings for the application.
+     *
+     * @var array<class-string, array<int, class-string>>
      */
-    public function register(): void
-    {
-        //
-    }
+    protected $listen = [
+        Registered::class => [
+            SendEmailVerificationNotification::class,
+            'App\Listeners\SendNewUserNotification',
+        ],
+        'App\Events\ContactFormSubmitted' => [
+            'App\Listeners\SendContactFormNotification',
+        ],
+    ];
 
-    /**
-     * Bootstrap any application services.
-     */
+    // /**
+    //  * Register any events for your application.
+    //  */
     public function boot(): void
     {
-        //
+        // Notify admins when a new user registers
+        // Event::listen(Registered::class, function (Registered $event) {
+        //     $admins = User::where('role','admin')->get();
+            
+        //     foreach ($admins as $admin) {
+        //         $admin->notify(new NewUserRegistered($event->user));
+        //     }
+        // });
+        Telescope::startRecording();
     }
 }

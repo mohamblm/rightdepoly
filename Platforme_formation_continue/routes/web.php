@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DomaineadminController;
 use App\Http\Controllers\Admin\FormationadminController;
 use App\Http\Controllers\Admin\InscriptionadminController;
 use App\Http\Controllers\Admin\EtablissementadminController;
+use App\Http\Controllers\Controller;
 
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
@@ -107,8 +108,15 @@ Route::get('/admin', function () {
     return view('admin.dashboard.index');
 })->middleware(['auth'])->name('dashboard.index');
 
-
-
-
+// Route::middleware('auth')->group(function () {
+    
+// });
+Route::middleware('auth')->group(function () {
+    Route::get('/notifications/showall', [App\Http\Controllers\NotificationController::class, 'showAll'])->name('notifications.index');
+    Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index']);
+    Route::post('/notifications/{id}/mark-as-read', [App\Http\Controllers\NotificationController::class, 'markAsRead']);
+    Route::post('/notifications/mark-all-as-read', [App\Http\Controllers\NotificationController::class, 'markAllAsRead']);
+});
+Route::get('/test',[FormationController::class,'test']);
 
 require __DIR__.'/auth.php';
