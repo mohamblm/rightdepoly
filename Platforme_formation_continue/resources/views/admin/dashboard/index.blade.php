@@ -1,11 +1,13 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-    <div class="mb-6">
-        <h1 class="text-3xl font-bold">Dashboard</h1>
+    <!-- Welcome Message -->
+    <div class="px-4 md:px-6 py-2 bg-gray-100">
+        <p class="text-gray-500">Salut {{ $userName }}, Bon retour 👋</p>
+        <h2 class="text-2xl font-bold text-gray-800">Votre tableau de bord aujourd'hui</h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 p-4">
         <!-- Formations Card -->
         <div class="bg-white rounded-lg shadow overflow-hidden">
             <div class="p-6 flex items-center">
@@ -16,7 +18,7 @@
                 </div>
                 <div>
                     <p class="text-gray-500">Formations</p>
-                    <p class="text-3xl font-bold"></p>
+                    <p class="text-3xl font-bold">{{ $formationsNumber }}</p>
                 </div>
             </div>
         </div>
@@ -31,7 +33,7 @@
                 </div>
                 <div>
                     <p class="text-gray-500">Domaines</p>
-                    <p class="text-3xl font-bold"></p>
+                    <p class="text-3xl font-bold">{{ $domainesNumber }}</p>
                 </div>
             </div>
         </div>
@@ -46,19 +48,38 @@
                 </div>
                 <div>
                     <p class="text-gray-500">Inscriptions</p>
-                    <p class="text-3xl font-bold"></p>
+                    <p class="text-3xl font-bold">{{ $inscriptionsNumber }}</p>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Recent Activity Section -->
-    <div class="mt-8">
-        <h2 class="text-xl font-semibold mb-4">Recent Activity</h2>
+        
+        <!-- Etablissements Card -->
         <div class="bg-white rounded-lg shadow overflow-hidden">
-            <div class="p-6">
-                <!-- Placeholder for recent activity content -->
-                <p class="text-gray-500">No recent activity to display.</p>
+            <div class="p-6 flex items-center">
+                <div class="p-3 rounded-full bg-green-100 mr-4">
+                    <svg class="h-8 w-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-gray-500">Etablissements</p>
+                    <p class="text-3xl font-bold">{{ $etablissementsNumber }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Utilisateurs Card -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <div class="p-6 flex items-center">
+                <div class="p-3 rounded-full bg-purple-100 mr-4">
+                    <svg class="h-8 w-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-gray-500">Utilisateurs</p>
+                    <p class="text-3xl font-bold">{{ $utilisateursNumber }}</p>
+                </div>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@ use App\Models\Domaine;
 class Etablissement extends Model {
     use HasFactory;
 
-    protected $fillable = ['nom', 'adresse', 'telephone', 'image', 'localisation'];
+    protected $fillable = ['nom', 'adresse', 'telephone', 'image', 'localisation','description'];
 
 
     public function domaines()

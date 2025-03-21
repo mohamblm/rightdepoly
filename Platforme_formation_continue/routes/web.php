@@ -66,9 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/devis/download', [DevisController::class, 'download'])->name('devis.download');
 });
 
-Route::middleware(['auth'])->group(function () {
-    // Dashboard
-    Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::middleware(['auth','IsAdmin'])->group(function () {
+
     
     // Formations
     Route::resource('dashboardformations', FormationadminController::class)->names([
@@ -88,7 +87,8 @@ Route::middleware(['auth'])->group(function () {
 
     ]);
     // Etablissements
-    Route::resource('dashboardetablissements', EtablissementadminController::class)->names([
+    Route::resource('dashboardetablissements', EtablissementadminController::class)
+    ->names([
         'index' => 'admin.etablissements.index',
 
     ]);
@@ -102,11 +102,14 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('dashboardutilisateurs', UtilisateurController::class)->names([
         'index' => 'admin.utilisateurs.index'
     ]);
-});
+    Route::get('/utilisateurs/{user}', [\App\Http\Controllers\Admin\UtilisateurController::class, 'show'])
+         ->name('admin.utilisateurs.show');
+    Route::delete('/users/{user}', [UtilisateurController::class, 'destroy'])->name('users.destroy');
+    Route::put('/users/{user}', [UtilisateurController::class, 'update'])->name('users.update');
+    // Dashboard
+    Route::get('/admin', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard.index');
 
-Route::get('/admin', function () {
-    return view('admin.dashboard.index');
-})->middleware(['auth'])->name('dashboard.index');
+});
 
 // Route::middleware('auth')->group(function () {
     

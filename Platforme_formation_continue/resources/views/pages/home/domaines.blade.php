@@ -20,7 +20,7 @@
                                 <img src="{{ asset('storage/domaines/'.$domaine->image) }}" alt="{{ $domaine->nom }}" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
                                     <div class="bg-white rounded-full w-10 h-10 flex items-center justify-center">
-                                        <i class="{{ $domaine->icon }} text-black"></i>
+                                        <i class=" {{ $domaine->icon }} text-black"></i>
                                     </div>
                                 </div>
                             </div>
