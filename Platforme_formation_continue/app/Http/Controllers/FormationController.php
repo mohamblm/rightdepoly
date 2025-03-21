@@ -7,6 +7,10 @@ use App\Models\Formation;
 use App\Models\Domaine;
 use App\Models\Etablissement;
 use App\Models\Avis;
+use App\Models\User;
+use App\Events\NewNotification;
+use App\Notifications\NewUserRegistered;
+use Illuminate\Support\Facades\Notification;
 
 
 class FormationController extends Controller
@@ -111,5 +115,30 @@ class FormationController extends Controller
         // }
         
         return view('pages.formations.formations', compact('formations' ,'domaines','etablissements'));
+    }
+    public function test(){
+    //     $user = User::create([
+    //         'name' => 'mohamed',
+    //         'email' => 'moham23@gmail.com',
+    //         'password' => 'password111',
+    //     ]);
+        
+        // Find all admins (assuming 'admin' is stored in the 'role' column)
+        // $admins = User::where('role', 'admin')->get();
+
+        // Notify all admins
+        // Notification::send($admins, new NewUserRegistered($user));
+        // event(new NewNotification(['data'=>'salam']));
+        $notification= [
+            'title' => 'New User Registration',
+            'message' => 'User  has registered',
+            'user_id' =>1000,
+            'type' => 'user_registration'
+        ];
+        
+        // broadcast(new NewNotification((object) $message));
+        event(new NewNotification($notification));
+
+    return response()->json('success', 200);
     }
 }

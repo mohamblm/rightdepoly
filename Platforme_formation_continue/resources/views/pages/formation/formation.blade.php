@@ -40,7 +40,7 @@
 
                 <!-- Formation Preview Image -->
                 <div class="relative rounded-lg overflow-hidden mb-8 bg-pink-100">
-                    <img src="{{ asset('storage/images/formation1.png') }}" alt="Formation Preview"
+                    <img src="{{ asset('storage/'.$formation->image) }}" alt="Formation Preview"
                         class="w-full object-cover h-64 md:h-96">
                     {{-- <button class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg">
                         <i class="fas fa-play text-blue-500 text-xl"></i>
@@ -89,7 +89,8 @@
                         <h2 class="text-xl font-semibold mb-4">Ce que vous apprendrez dans ce cours</h2>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            @foreach(json_decode($formation->sub_titles)?? [] as $sub_title)
+                            {{-- @dd(json_decode($formation->sub_titles)) --}}
+                            @foreach(json_decode($formation->sub_titles) ?? [] as $sub_title)
                                 <div class="flex">
                                     <div
                                         class="flex-shrink-0 h-6 w-6 rounded-full bg-green-500 flex items-center justify-center mt-1">
@@ -518,10 +519,6 @@
                 noReviewsMessage.style.display = (visibleReviews === 0) ? "block" : "none";
             });
         
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Modal elements
         const modal = document.getElementById('ratingModal');
         const backdrop = document.getElementById('ratingModalBackdrop');
         const openBtn = document.getElementById('openRatingModal');
@@ -605,7 +602,7 @@
                 closeModal();
             }
         });
-    });
+ 
 </script>
 @endpush
 @endsection

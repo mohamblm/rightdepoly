@@ -15,7 +15,7 @@
             </div>
             
             <!-- Modal Body -->
-            <div class="max-h-[calc(100vh-200px)] overflow-y-auto p-6">
+            <div class="max-h-[calc(100vh-200px)] overflow-y-auto p-6 bg-gray-100">
                 <form id="add-formation-form" action="{{ route('admin.formations.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     
@@ -26,13 +26,13 @@
                             
                             <div>
                                 <label for="nom" class="block text-sm font-medium text-gray-700">Name</label>
-                                <input type="text" name="nom" id="nom" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                                <input type="text" name="nom" id="nom" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-3 " required>
                             </div>
                             
                             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
                                     <label for="etablissement_id" class="block text-sm font-medium text-gray-700">Établissement</label>
-                                    <select name="etablissement_id" id="etablissement_id" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 " required>
+                                    <select name="etablissement_id" id="etablissement_id" class="p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 " required>
                                         <option value="">Select an établissement</option>
                                         @foreach($etablissements as $etablissement)
                                             <option value="{{ $etablissement->id }}">{{ $etablissement->nom }}</option>
@@ -42,7 +42,7 @@
                                 
                                 <div>
                                     <label for="domaine_id" class="block text-sm font-medium text-gray-700">Domaine</label>
-                                    <select name="domaine_id" id="domaine_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 " required>
+                                    <select name="domaine_id" id="domaine_id" class="p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 " required>
                                         <option value="">Select a domaine</option>
                                         @foreach($domaines as $domaine)
                                             <option value="{{ $domaine->id }}">{{ $domaine->nom }}</option>
@@ -53,7 +53,7 @@
                             
                             <div>
                                 <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                                <textarea name="description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"></textarea>
+                                <textarea name="description" id="description" rows="4" class=" p-2 mt-1 block w-full rounded-md focus:outline-none border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"></textarea>
                             </div>
                             
                             <div>
@@ -75,7 +75,7 @@
                             </div>
                             
                             <div class="flex items-center">
-                                <input type="checkbox" name="trend" id="trend" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <input type="checkbox" name="trend" id="trend" class="h-4 w-4 rounded focus:outline-none border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <label for="trend" class="ml-2 block text-sm text-gray-700">Mark as trending</label>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                             <h4 class="text-lg font-medium text-gray-700">Sub Titles</h4>
                             
                             <div class="flex">
-                                <input type="text" id="sub-title-input" class="block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add a sub title">
+                                <input type="text" id="sub-title-input" class="p-2 block w-full rounded-l-md focus:outline-none border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add a sub title">
                                 <button type="button" id="add-sub-title" class="inline-flex items-center rounded-r-md border border-l-0 border-gray-300 bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                     <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -109,7 +109,7 @@
                             <h4 class="text-lg font-medium text-gray-700">Requirements</h4>
                             
                             <div class="flex">
-                                <input type="text" id="requirement-input" class="block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add a requirement">
+                                <input type="text" id="requirement-input" class=" p-2 block w-full rounded-l-md focus:outline-none border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add a requirement">
                                 <button type="button" id="add-requirement" class="inline-flex items-center rounded-r-md border border-l-0 border-gray-300 bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                     <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -133,7 +133,7 @@
                             <h4 class="text-lg font-medium text-gray-700">Includes</h4>
                             
                             <div class="flex">
-                                <input type="text" id="include-input" class="block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add what's included">
+                                <input type="text" id="include-input" class="p-2 block w-full rounded-l-md focus:outline-none border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add what's included">
                                 <button type="button" id="add-include" class="inline-flex items-center rounded-r-md border border-l-0 border-gray-300 bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                     <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -182,7 +182,7 @@
                             <h4 class="text-lg font-medium text-gray-700">Who Is This Formation For?</h4>
                             
                             <div class="flex">
-                                <input type="text" id="for-who-input" class="block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add target audience">
+                                <input type="text" id="for-who-input" class="p-2 block w-full rounded-l-md focus:outline-none border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add target audience">
                                 <button type="button" id="add-for-who" class="inline-flex items-center rounded-r-md border border-l-0 border-gray-300 bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                     <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>

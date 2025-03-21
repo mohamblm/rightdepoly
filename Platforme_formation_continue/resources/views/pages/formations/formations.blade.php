@@ -27,6 +27,7 @@
 <div class="container mx-auto px-10  py-8 mb-20">
     <div class="flex flex-col md:flex-row gap-6">
         <!-- Left sidebar filters -->
+        
         <div class="w-full md:w-64 shrink-0">
             <h2 class="text-xl font-semibold mb-4">Filter</h2>
             
@@ -37,9 +38,11 @@
                 <input type="hidden" id="search-term" name="search">
                 
                 <!-- Filter accordions -->
+                
                 <div class="space-y-4">
                     <!-- Domain filter -->
                     <div class="bg-white rounded-md shadow-sm">
+                        
                         <button type="button" class="w-full px-4 py-3 text-left flex justify-between items-center" onclick="toggleAccordion('domaine')">
                             <span>Domaine</span>
                             <i class="fas fa-chevron-down text-blue-500"></i>
@@ -108,9 +111,19 @@
 </div>
 @push('scripts')
 <script>
-    
+    function test() {
+        console.log('test')
+        fetch('/test')
+        .then(response => {
+            
+        }).catch((e)=>{
+            console.log(e)
+        })
+    }
     // Toggle accordion functionality
     function toggleAccordion(id) {
+        console.log('hna');
+        test();
         const content = document.getElementById(id);
         if (content.classList.contains('hidden')) {
             content.classList.remove('hidden');
@@ -216,6 +229,8 @@
     url.search = queryParams.toString();
     window.history.pushState({}, '', url);
     
+   
+   
     // Fetch with proper error handling and optimization
     fetch(filterForm.action + '?' + queryParams)
         .then(response => {

@@ -28,13 +28,13 @@
                             
                             <div>
                                 <label for="edit-nom" class="block text-sm font-medium text-gray-700">Name</label>
-                                <input type="text" name="nom" id="edit-nom" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                                <input type="text" name="nom" id="edit-nom" class="mt-1 p-2 focus:outline-none block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
                             </div>
                             
                             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
                                     <label for="edit-etablissement_id" class="block text-sm font-medium text-gray-700">Établissement</label>
-                                    <select name="etablissement_id" id="edit-etablissement_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                                    <select name="etablissement_id" id="edit-etablissement_id" class="mt-1 p-2 focus:outline-none block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
                                         <option value="">Select an établissement</option>
                                         @foreach($etablissements as $etablissement)
                                             <option value="{{ $etablissement->id }}">{{ $etablissement->nom }}</option>
@@ -44,7 +44,7 @@
                                 
                                 <div>
                                     <label for="edit-domaine_id" class="block text-sm font-medium text-gray-700">Domaine</label>
-                                    <select name="domaine_id" id="edit-domaine_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
+                                    <select name="domaine_id" id="edit-domaine_id" class="mt-1 p-2 focus:outline-none block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" required>
                                         <option value="">Select a domaine</option>
                                         @foreach($domaines as $domaine)
                                             <option value="{{ $domaine->id }}">{{ $domaine->nom }}</option>
@@ -55,7 +55,7 @@
                             
                             <div>
                                 <label for="edit-description" class="block text-sm font-medium text-gray-700">Description</label>
-                                <textarea name="description" id="edit-description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"></textarea>
+                                <textarea name="description" id="edit-description" rows="4" class="mt-1 p-2 focus:outline-none block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"></textarea>
                             </div>
                             
                             <div>
@@ -87,7 +87,7 @@
                             <h4 class="text-lg font-medium text-gray-700">Sub Titles</h4>
                             
                             <div class="flex">
-                                <input type="text" id="edit-sub-title-input" class="block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add a sub title">
+                                <input type="text" id="edit-sub-title-input" class="p-2 focus:outline-none block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add a sub title">
                                 <button type="button" id="edit-add-sub-title" class="inline-flex items-center rounded-r-md border border-l-0 border-gray-300 bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                     <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -111,7 +111,7 @@
                             <h4 class="text-lg font-medium text-gray-700">Requirements</h4>
                             
                             <div class="flex">
-                                <input type="text" id="edit-requirement-input" class="block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add a requirement">
+                                <input type="text" id="edit-requirement-input" class=" p-2 focus:outline-none block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add a requirement">
                                 <button type="button" id="edit-add-requirement" class="inline-flex items-center rounded-r-md border border-l-0 border-gray-300 bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                     <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -135,7 +135,7 @@
                             <h4 class="text-lg font-medium text-gray-700">Includes</h4>
                             
                             <div class="flex">
-                                <input type="text" id="edit-include-input" class="block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add what's included">
+                                <input type="text" id="edit-include-input" class="p-2 focus:outline-none block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add what's included">
                                 <button type="button" id="edit-add-include" class="inline-flex items-center rounded-r-md border border-l-0 border-gray-300 bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                     <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -184,7 +184,7 @@
                             <h4 class="text-lg font-medium text-gray-700">Who Is This Formation For?</h4>
                             
                             <div class="flex">
-                                <input type="text" id="edit-for-who-input" class="block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add target audience">
+                                <input type="text" id="edit-for-who-input" class="p-2 focus:outline-none block w-full rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" placeholder="Add target audience">
                                 <button type="button" id="edit-add-for-who" class="inline-flex items-center rounded-r-md border border-l-0 border-gray-300 bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                     <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -221,12 +221,11 @@
         </div>
     </div>
 </div>
-{{-- hidden form for refresh the index.balde.php --}}
-<form action="{{ route('admin.formations.index') }}" id="refresh_form" method="GET" class="hidden">
-</form>
-<!-- Success Alert (Alpine.js) -->
+
+
+
 <script>
-    // Edit Formation Modal Logic
+   
 
     // DOM Elements
     const editFormationModal = document.getElementById('edit-formation-modal');
@@ -578,30 +577,8 @@
         })
         .then(data => {
             if (data.success) {
-                // document.getElementById('refresh_form').submit()
-                // showSuccessNotification(data.message);  // ✅ Show notification
-                closeEditModal();  // ✅ Close modal
-                
-                    // Show success alert
-                    window.dispatchEvent(new CustomEvent('alert-show'));
-
-                    // Remove item from DOM after 500ms animation
-                    setTimeout(() => {
-                        item.remove();
-                        
-                        // Update wishlist count
-                        const countElement = document.querySelector('h2.text-xl');
-                        if (countElement) {
-                            const currentCount = parseInt(countElement.textContent.match(/\d+/)[0]);
-                            countElement.textContent = `Wishlist (${currentCount - 1})`;
-                        }
-                        
-                        // Reload if last item
-                        if (document.querySelectorAll('.wishlist-item').length === 0) {
-                            window.location.reload();
-                        }
-                    }, 500);
-                
+                handleUpdateSuccess(data.formation);
+                showSuccessNotification(data.message)
             } else {
                 alert(data.message || 'Failed to update formation');
             }
@@ -631,51 +608,109 @@
             closeEditModal();
         }
     });
-    function showSuccessNotification(message) {
-    // Remove existing notifications (if any)
-    document.querySelectorAll('.success-notification').forEach(el => el.remove());
 
-    // Create notification HTML
-    const notification = document.createElement('div');
-    notification.innerHTML = `
-        <div x-data="{ show: true }" 
-            x-show="show" 
-            x-init="setTimeout(() => show = false, 5000)"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 transform translate-y-4"
-            x-transition:enter-end="opacity-100 transform translate-y-0"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 transform translate-y-0"
-            x-transition:leave-end="opacity-0 transform translate-y-4"
-            class="fixed top-4 right-4 z-50 max-w-sm w-full success-notification">
-            
-            <div class="flex items-center p-5 bg-white rounded-lg shadow-xl border-l-4 border-l-green-500">
-                <div class="flex-shrink-0 relative">
-                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+
+
+    
+    // Function to handle successful form submission in the edit modal
+    function handleUpdateSuccess(updatedFormation) {
+        // Find the table row for this formation by ID
+        const tableRow = document.querySelector(`#formations-table-body tr[data-formation-id="${updatedFormation.id}"]`);
+        
+        if (tableRow) {
+            // Update formation name
+            const nameElement = tableRow.querySelector('.formation-name');
+            if (nameElement) nameElement.textContent = updatedFormation.nom;
+
+            // Update formation image
+            const imageElement = tableRow.querySelector('.formation-image');
+            if (imageElement && updatedFormation.image) {
+                imageElement.src = `/storage/${updatedFormation.image}`;
+            }
+
+            // Update établissement name
+            const etablissementElement = tableRow.querySelector('.formation-etablissement');
+            console.log(etablissementElement, updatedFormation.etablissement?.nom)
+            if (etablissementElement) {
+                etablissementElement.textContent = updatedFormation.etablissement?.nom || 'N/A';
+            }
+
+            // Update domaine name
+            const domaineElement = tableRow.querySelector('.formation-domaine');
+            if (domaineElement) {
+                domaineElement.textContent = updatedFormation.domaine?.nom || 'N/A';
+            }
+
+            // Update trending badge
+            const trendingContainer = tableRow.querySelector('.trend-container');
+            const existingBadge = tableRow.querySelector('.formation-trend');
+
+            if (updatedFormation.trend) {
+                if (!existingBadge) {
+                    const newBadge = document.createElement('span');
+                    newBadge.className = "formation-trend inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-blue-800";
+                    newBadge.textContent = "Trending";
+                    trendingContainer.appendChild(newBadge);
+                }
+            } else {
+                if (existingBadge) {
+                    existingBadge.remove();
+                }
+            }
+        }
+
+        // Close the modal
+        closeEditModal();
+
+    }
+
+
+    // show notification function
+    function showSuccessNotification(message) {
+        // Remove existing notifications (if any)
+        document.querySelectorAll('.success-notification').forEach(el => el.remove());
+
+        // Create notification HTML
+        const notification = document.createElement('div');
+        notification.innerHTML = `
+            <div x-data="{ show: true }" 
+                x-show="show" 
+                x-init="setTimeout(() => show = false, 5000)"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-4"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform translate-y-4"
+                class="fixed top-4 right-4 z-50 max-w-sm w-full success-notification">
+                
+                <div class="flex items-center p-5 bg-white rounded-lg shadow-xl border-l-4 border-l-green-500">
+                    <div class="flex-shrink-0 relative">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <svg class="w-8 h-8 absolute top-0 left-0 text-green-500 animate-[spin_4s_ease-in-out_infinite]" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" />
                         </svg>
                     </div>
-                    <svg class="w-8 h-8 absolute top-0 left-0 text-green-500 animate-[spin_4s_ease-in-out_infinite]" viewBox="0 0 24 24" fill="none">
-                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" />
-                    </svg>
-                </div>
-                
-                <div class="ml-4 flex-1">
-                    <h4 class="text-sm font-bold text-gray-800 mb-0.5">Success!</h4>
-                    <p class="text-sm text-gray-600">${message}</p>
+                    
+                    <div class="ml-4 flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 mb-0.5">Success!</h4>
+                        <p class="text-sm text-gray-600">${message}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
+        `;
 
-    // Append to the body
-    document.body.appendChild(notification);
+        // Append to the body
+        document.body.appendChild(notification);
 
-    // Remove notification after 5 seconds
-    setTimeout(() => {
-        notification.remove();
-    }, 5000);
-}
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+            notification.remove();
+        }, 5000);
+    }
 
 </script>
