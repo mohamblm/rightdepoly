@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<script >
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     const notificationBell = document.getElementById("notification-bell");
     const notificationPanel = document.getElementById("notification-panel");
@@ -36,11 +36,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const notificationCount = document.getElementById("notification-count");
     const markAllRead = document.getElementById("mark-all-read");
     let notifications = [];
-    let unreadCount = 1;
-
+    let unreadCount = 0;
+    // Real-time notification listener using Laravel Echo
+    Echo.private("admin-notifications")
+        .listen(".NewNotification", (data) => {
+            console.log('New notification received:', data.notification);
+            notifications.unshift(data.notification);
+            unreadCount++;
+            updateUI();
+        });
     // Fetch notifications
     function fetchNotifications() {
-        console.log('osl')
+        console.log('Fetching notifications');
         
         fetch("/notifications")
             .then(response => response.json())
@@ -48,10 +55,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 notifications = data.notifications;
                 unreadCount = data.unread_count;
                 updateUI();
-            }).catch((e)=>{
-                console.log(e)
-            })
-        
+            }).catch((e) => {
+                console.log('Error fetching notifications:', e);
+            });
+    }
+
+    // Parse notification data if it's a string
+    function parseNotificationData(notification) {
+        if (notification && notification.data && typeof notification.data === 'string') {
+            try {
+                return JSON.parse(notification.data);
+            } catch (e) {
+                console.error('Error parsing notification data:', e);
+                return { title: 'Notification', message: 'Unable to display this notification' };
+            }
+        }
+        return notification.data;
     }
 
     // Update UI with notifications
@@ -62,6 +81,8 @@ document.addEventListener("DOMContentLoaded", function () {
             notificationCount.classList.add("hidden");
         } else {
             notifications.forEach(notification => {
+                const notificationData = parseNotificationData(notification);
+                
                 const notificationItem = document.createElement("div");
                 notificationItem.className = `py-2 px-3 hover:bg-gray-100 border-b border-gray-100 cursor-pointer ${
                     notification.read_at ? "" : "bg-blue-50"
@@ -69,8 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 notificationItem.innerHTML = `
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-sm font-medium text-gray-900">${notification.data.title}</p>
-                            <p class="text-xs text-gray-600 mt-1">${notification.data.message}</p>
+                            <p class="text-sm font-medium text-gray-900">${notificationData.title}</p>
+                            <p class="text-xs text-gray-600 mt-1">${notificationData.message}</p>
                         </div>
                         <span class="text-xs text-gray-500">${formatDate(notification.created_at)}</span>
                     </div>
@@ -85,13 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Mark a single notification as read
     function markAsRead(id) {
-        fetch(`/notifications/${id}/mark-as-read`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": document.querySelector('meta[name=csrf-token]').content
-            }
-        }).then(() => {
+        fetch(`/notifications/${id}/mark-as-read`).then(() => {
             notifications = notifications.map(n => (n.id === id ? { ...n, read_at: new Date().toISOString() } : n));
             unreadCount = Math.max(0, unreadCount - 1);
             updateUI();
@@ -99,28 +114,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Mark all notifications as read
-    markAllRead.addEventListener("click", function () {
-        fetch("/notifications/mark-all-as-read", {
-            method: "POST",
-        }).then(() => {
+    markAllRead.addEventListener("click", function (e) {
+        e.stopPropagation(); // Prevent panel from closing
+        fetch("/notifications/mark-all-as-read").then(() => {
             notifications.forEach(n => (n.read_at = new Date().toISOString()));
             unreadCount = 0;
             updateUI();
         });
     });
 
-    // Real-time notification listener using Laravel Echo
-    
-        // console.log('lgah')
-        Echo.private("admin-notifications")
-            .listen(".NewNotification", (data) => {
-                console.log(data.notification)
-                notifications.unshift(data.notification);
-                console.log(data.notification)
-                unreadCount++;
-                
-                updateUI();
-            });
     
 
     // Format timestamps
@@ -158,5 +160,4 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initial fetch
     fetchNotifications();
 });
-
 </script>

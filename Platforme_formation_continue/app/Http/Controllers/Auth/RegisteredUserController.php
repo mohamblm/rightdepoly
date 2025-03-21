@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Notification;
 use App\Events\NewNotification;
 use App\Notifications\NewUserRegistered;
-use Illuminate\Support\Facades\Notification;
+// use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -49,14 +50,24 @@ class RegisteredUserController extends Controller
         // // Find all admins (assuming 'admin' is stored in the 'role' column)
         // Store notification in the database
 
+
+
+       
+        $notification = Notification::create([
+            
+            'data' => json_encode([
+                'title' => 'New User Registration',
+                'message' => 'User ' . $user->name . ' has registered',
+                'user_id' => $user->id,
+                'type' => 'user_registration'
+            ]),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         // Broadcast the event
-        event(new NewUserRegisteredEvent($notification));
+        event(new NewNotification($notification->toArray()));
 
-        $admins = User::where('role', 'admin')->get();
 
-        // // Notify all admins
-        Notification::send($admins, new NewUserRegistered($user));
-        // event(new NewNotification($user));
         event(new Registered($user));
 
         Auth::login($user);

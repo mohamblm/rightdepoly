@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Notification;
 
 class NotificationController extends Controller
 {
@@ -12,10 +13,9 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $notifications = $user->notifications()->latest()->get();
-        $unreadCount = $user->unreadNotifications->count();
         
+        $notifications = Notification::all();
+        $unreadCount=Notification::whereNull('read_at')->count();
         return response()->json([
             'notifications' => $notifications,
             'unread_count' => $unreadCount
@@ -27,10 +27,15 @@ class NotificationController extends Controller
      */
     public function markAsRead($id)
     {
-        $notification = Auth::user()->notifications()->findOrFail($id);
-        $notification->markAsRead();
+        $notification = Notification::findOrFail($id);
+        $notification->read_at=now();
+        $notifications = Notification::all();
+        $unreadCount=Notification::whereNull('read_at')->count();
         
-        return response()->json(['success' => true]);
+        return response()->json([
+            'notifications' => $notifications,
+            'unread_count' => $unreadCount
+        ],200);
     }
     
     /**
@@ -38,9 +43,14 @@ class NotificationController extends Controller
      */
     public function markAllAsRead()
     {
-        Auth::user()->unreadNotifications->markAsRead();
+        Notification::whereNull('read_at')->update(['read_at' => now()]);
+        $notifications = Notification::all();
+        $unreadCount=Notification::whereNull('read_at')->count();
         
-        return response()->json(['success' => true]);
+        return response()->json([
+            'notifications' => $notifications,
+            'unread_count' => $unreadCount
+        ],200);
     }
     
     /**
@@ -48,8 +58,24 @@ class NotificationController extends Controller
      */
     public function showAll()
     {
-        $notifications = Auth::user()->notifications()->paginate(20);
+        $notifications = Notification::all();
+        $unreadCount=Notification::whereNull('read_at')->count();
         
-        return view('admin.layouts.partials.all-notifications', compact('notifications'));
+        
+        return view('admin.layouts.partials.all-notifications', compact('notifications','unreadCount'));
     }
+
+
+    public function delete($id)
+    {
+        $notification = Notification::find($id);
+        $notification->delete();
+
+        $unreadCount=Notification::whereNull('read_at')->count();
+        $notifications = Notification::all();
+        
+        
+        return view('admin.layouts.partials.all-notifications', compact('notifications','unreadCount'));
+    }
+
 }
