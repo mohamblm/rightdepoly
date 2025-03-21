@@ -111,19 +111,9 @@
 </div>
 @push('scripts')
 <script>
-    function test() {
-        console.log('test')
-        fetch('/test')
-        .then(response => {
-            
-        }).catch((e)=>{
-            console.log(e)
-        })
-    }
     // Toggle accordion functionality
     function toggleAccordion(id) {
         console.log('hna');
-        test();
         const content = document.getElementById(id);
         if (content.classList.contains('hidden')) {
             content.classList.remove('hidden');

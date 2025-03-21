@@ -48,18 +48,6 @@ class RegisteredUserController extends Controller
         ]);
         // // Find all admins (assuming 'admin' is stored in the 'role' column)
         // Store notification in the database
-        $notification = Notification::create([
-            'notifiable_type' => 'App\Models\User',
-            'notifiable_id' => 1, // Assuming admin user has ID 1
-            'data' => json_encode([
-                'title' => 'New User Registration',
-                'message' => 'User ' . $user->name . ' has registered',
-                'user_id' => $user->id,
-                'type' => 'user_registration'
-            ]),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
 
         // Broadcast the event
         event(new NewUserRegisteredEvent($notification));
@@ -67,7 +55,7 @@ class RegisteredUserController extends Controller
         $admins = User::where('role', 'admin')->get();
 
         // // Notify all admins
-        // Notification::send($admins, new NewUserRegistered($user));
+        Notification::send($admins, new NewUserRegistered($user));
         // event(new NewNotification($user));
         event(new Registered($user));
 
