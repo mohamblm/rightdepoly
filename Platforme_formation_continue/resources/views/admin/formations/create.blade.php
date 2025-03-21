@@ -228,7 +228,6 @@ let requirements = [];
 let includes = [];
 let forWhos = [];
 
-document.addEventListener('DOMContentLoaded', function() {
     // Open & Close Modal
     const openModalButton = document.getElementById('open-add-modal');
     const closeModalButton = document.getElementById('close-modal');
@@ -438,6 +437,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('requirements-json').value = JSON.stringify([]);
     document.getElementById('includes-json').value = JSON.stringify([]);
     document.getElementById('for-whos-json').value = JSON.stringify([]);
-});
+
 
 </script>
