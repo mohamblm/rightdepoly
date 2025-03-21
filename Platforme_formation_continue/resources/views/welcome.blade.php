@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('content')  
     @include('pages.home.hero')
     @include('pages.home.whyUs')
     @include('pages.home.etablissements')

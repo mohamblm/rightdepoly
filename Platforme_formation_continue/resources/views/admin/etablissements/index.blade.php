@@ -208,11 +208,13 @@
                     <div class="mb-4">
                         <label for="create_logo" class="block text-sm font-medium text-gray-700">Logo</label>
                         <input type="file" name="logo" id="create_logo" class="mt-1 block w-full">
+                        <div id="create_logo_preview" class="mt-2"></div>
                     </div>
                     
                     <div class="mb-4">
                         <label for="create_image" class="block text-sm font-medium text-gray-700">Image</label>
                         <input type="file" name="image" id="create_image" class="mt-1 block w-full">
+                        <div id="create_image_preview" class="mt-2"></div>
                     </div>
                     
                     <div class="mb-4">
@@ -275,12 +277,14 @@
                         <label for="logo" class="block text-sm font-medium text-gray-700">Logo</label>
                         <input type="file" name="logo" id="logo" class="mt-1 block w-full">
                         <div id="currentLogo" class="mt-2"></div>
+                        <div id="newLogo" class="mt-2"></div>
                     </div>
                     
                     <div class="mb-4">
                         <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
                         <input type="file" name="image" id="image" class="mt-1 block w-full">
                         <div id="currentImage" class="mt-2"></div>
+                        <div id="newImage" class="mt-2"></div>
                     </div>
                     
                     <div class="mb-4">
@@ -330,6 +334,42 @@
     <script>
         function openCreateModal() {
             document.getElementById('createModal').classList.remove('hidden');
+            //logo preview
+            const createLogo = document.getElementById('create_logo_preview');
+            const createLogoInput = document.getElementById('create_logo');
+            createLogoInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        createLogo.innerHTML = `
+                            <div class="text-sm text-gray-500 mb-2">Aperçu du logo:</div>
+                            <img src="${e.target.result}" class="h-24 w-24 object-cover rounded-md" alt="Aperçu du logo">
+                        `;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    createLogo.innerHTML = '';
+                }
+            });
+            //image preview
+            const createImage = document.getElementById('create_image_preview');
+            const createImageInput = document.getElementById('create_image');
+            createImageInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        createImage.innerHTML = `
+                            <div class="text-sm text-gray-500 mb-2">Aperçu de l'image:</div>
+                            <img src="${e.target.result}" class="h-24 w-24 object-cover rounded-md" alt="Aperçu de l'image">
+                        `;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    createImage.innerHTML = '';
+                }
+            });
         }
         
         function closeCreateModal() {
@@ -363,6 +403,23 @@
                     } else {
                         currentLogoDiv.innerHTML = '';
                     }
+                    const newLogoInput = document.getElementById('logo');
+                    const newLogoDiv = document.getElementById('newLogo');
+                    newLogoInput.addEventListener('change', function(event) {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                newLogoDiv.innerHTML = `
+                                    <div class="text-sm text-gray-500 mb-2">Nouveau logo:</div>
+                                    <img src="${e.target.result}" class="h-24 w-24 object-cover rounded-md" alt="Nouveau logo">
+                                `;
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            newLogoDiv.innerHTML = '';
+                        }
+                    });
 
                     // Show current image if exists
                     const currentImageDiv = document.getElementById('currentImage');
@@ -374,6 +431,24 @@
                     } else {
                         currentImageDiv.innerHTML = '';
                     }
+
+                    const newImageInput = document.getElementById('image');
+                    const newImageDiv = document.getElementById('newImage');
+                    newImageInput.addEventListener('change', function(event) {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                newImageDiv.innerHTML = `
+                                    <div class="text-sm text-gray-500 mb-2">Nouvelle image:</div>
+                                    <img src="${e.target.result}" class="h-24 w-24 object-cover rounded-md" alt="Nouvelle image">
+                                `;
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            newImageDiv.innerHTML = '';
+                        }
+                    });
 
                     // Set form action
                     document.getElementById('updateForm').action = `/dashboardetablissements/${etablissementId}`;
