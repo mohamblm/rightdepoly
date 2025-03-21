@@ -117,8 +117,9 @@ Route::middleware(['auth','IsAdmin'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/notifications/showall', [App\Http\Controllers\NotificationController::class, 'showAll'])->name('notifications.index');
     Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index']);
-    Route::post('/notifications/{id}/mark-as-read', [App\Http\Controllers\NotificationController::class, 'markAsRead']);
-    Route::post('/notifications/mark-all-as-read', [App\Http\Controllers\NotificationController::class, 'markAllAsRead']);
+    Route::get('/notifications/{id}/mark-as-read', [App\Http\Controllers\NotificationController::class, 'markAsRead']);
+    Route::get('/notifications/mark-all-as-read', [App\Http\Controllers\NotificationController::class, 'markAllAsRead']);
+    Route::get('/notifications/{id}', [App\Http\Controllers\NotificationController::class, 'delete']);
 });
 Route::get('/test',[FormationController::class,'test']);
 

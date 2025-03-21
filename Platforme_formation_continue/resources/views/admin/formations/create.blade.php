@@ -228,26 +228,11 @@ let requirements = [];
 let includes = [];
 let forWhos = [];
 
-    // Open & Close Modal
-    const openModalButton = document.getElementById('open-add-modal');
+   
     const closeModalButton = document.getElementById('close-modal');
     const cancelButton = document.getElementById('cancel-add-formation');
     const modal = document.getElementById('add-formation-modal');
-
-    if (openModalButton) {
-        openModalButton.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-        });
-    }
-
-    if (closeModalButton) {
-        closeModalButton.addEventListener('click', closeModal);
-    }
-
-    if (cancelButton) {
-        cancelButton.addEventListener('click', closeModal);
-    }
+    
 
     document.getElementById('etablissement_id').addEventListener('change',(event)=>{
         event.preventDefault();

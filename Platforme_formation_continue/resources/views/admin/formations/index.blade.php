@@ -224,6 +224,22 @@
 @include('admin.formations.edit')
     <!-- Scripts pour le filtrage automatique -->
     <script>
+         // Open & Close Modal
+    const openModalButton = document.getElementById('open-add-modal');
+    if (openModalButton) {
+        openModalButton.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        });
+    }
+
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', closeModal);
+    }
+
+    if (cancelButton) {
+        cancelButton.addEventListener('click', closeModal);
+    }
         // Fonctions pour le modal de suppression
         function confirmDelete(formationId) {
             document.getElementById('deleteForm').action = `/dashboardformations/${formationId}`;
