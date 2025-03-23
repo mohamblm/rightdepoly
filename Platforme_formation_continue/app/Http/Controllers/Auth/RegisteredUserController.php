@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+         
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Events\NewNotification;
@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
         // Store notification in the database
 
         // Broadcast the event
-        event(new NewUserRegisteredEvent($notification));
+        event(new NewNotification($user));
 
         $admins = User::where('role', 'admin')->get();
 
