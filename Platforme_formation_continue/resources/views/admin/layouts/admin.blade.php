@@ -21,6 +21,7 @@
         <div x-show="sidebarOpen" 
              @click="sidebarOpen = false" 
              class="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden"></div>
+    
         
         <!-- Include the sidebar with access to sidebarOpen state -->
         @include('admin.layouts.sidebar')
@@ -36,6 +37,13 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('header', () => ({
+                dropdownOpen: false
+            }))
+        })
+    </script>
     <!-- jQuery and Icon Picker Scripts (better performance) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js"></script>
