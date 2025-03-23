@@ -122,5 +122,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/notifications/{id}', [App\Http\Controllers\NotificationController::class, 'delete']);
 });
 Route::get('/test',[FormationController::class,'test']);
+Route::view('/terms', 'terms')->name('terms');
+Route::view('/privacy', 'privacy')->name('privacy');
 
 require __DIR__.'/auth.php';

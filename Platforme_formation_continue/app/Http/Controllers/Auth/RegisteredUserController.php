@@ -41,6 +41,7 @@ class RegisteredUserController extends Controller
             'status' => ['required', 'in:individuel,entreprise'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'terms' => ['accepted'],
         ]);
 
         $user = User::create([
@@ -48,6 +49,7 @@ class RegisteredUserController extends Controller
             'status' =>$request->status,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'terms' => $request->has('terms'),
         ]);
         // // Find all admins (assuming 'admin' is stored in the 'role' column)
         // Store notification in the database
