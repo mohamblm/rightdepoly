@@ -1,53 +1,53 @@
 <div id="notification-container" class="relative">
-    <!-- Notification Bell Icon with Badge -->
+    <!-- Icône de cloche de notification avec badge -->
     <button id="notification-bell" class="relative p-2 text-gray-600 hover:text-blue-600 focus:outline-none">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
         </svg>
-        <!-- Notification Badge -->
+        <!-- Badge de notification -->
         <span id="notification-count" class="hidden absolute top-0 right-0 inline-flex items-center justify-center 
             px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 
             bg-red-600 rounded-full"></span>
     </button>
 
-    <!-- Notification Panel -->
+    <!-- Panneau de notifications -->
     <div id="notification-panel" class="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg overflow-hidden z-50 hidden">
         <div class="py-2 px-3 bg-blue-600 text-white flex justify-between items-center">
             <h3 class="text-sm font-medium">Notifications</h3>
-            <button id="mark-all-read" class="text-xs underline hover:text-blue-100">Mark all as read</button>
+            <button id="mark-all-read" class="text-xs underline hover:text-blue-100">Tout marquer comme lu</button>
         </div>
         
         <div id="notification-list" class="max-h-96 overflow-y-auto">
-            <p id="no-notifications" class="py-4 px-3 text-gray-500 text-center">Loading...</p>
+            <p id="no-notifications" class="py-4 px-3 text-gray-500 text-center">Chargement...</p>
         </div>
         
         <div class="py-2 px-3 bg-gray-100 text-right">
-            <a href="{{ route('notifications.index') }}" class="text-xs text-blue-600 hover:underline">View all notifications</a>
+            <a href="{{ route('notifications.index') }}" class="text-xs text-blue-600 hover:underline">Voir toutes les notifications</a>
         </div>
     </div>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const notificationBell = document.getElementById("notification-bell");
-    const notificationPanel = document.getElementById("notification-panel");
     const notificationList = document.getElementById("notification-list");
     const notificationCount = document.getElementById("notification-count");
     const markAllRead = document.getElementById("mark-all-read");
     let notifications = [];
     let unreadCount = 0;
-    // Real-time notification listener using Laravel Echo
+
+    // Écoute des notifications en temps réel avec Laravel Echo
     Echo.private("admin-notifications")
         .listen(".NewNotification", (data) => {
-            console.log('New notification received:', data.notification);
+            console.log('Nouvelle notification reçue :', data.notification);
             notifications.unshift(data.notification);
             unreadCount++;
             updateUI();
         });
-    // Fetch notifications
+
+    // Récupérer les notifications
     function fetchNotifications() {
-        console.log('Fetching notifications');
+        console.log('Récupération des notifications...');
         
         fetch("/notifications")
             .then(response => response.json())
@@ -56,28 +56,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 unreadCount = data.unread_count;
                 updateUI();
             }).catch((e) => {
-                console.log('Error fetching notifications:', e);
+                console.log('Erreur lors de la récupération des notifications :', e);
             });
     }
 
-    // Parse notification data if it's a string
+    // Analyser les données de notification si c'est une chaîne de caractères
     function parseNotificationData(notification) {
         if (notification && notification.data && typeof notification.data === 'string') {
             try {
                 return JSON.parse(notification.data);
             } catch (e) {
-                console.error('Error parsing notification data:', e);
-                return { title: 'Notification', message: 'Unable to display this notification' };
+                console.error('Erreur d’analyse des données de notification :', e);
+                return { title: 'Notification', message: 'Impossible d’afficher cette notification' };
             }
         }
         return notification.data;
     }
 
-    // Update UI with notifications
+    // Mettre à jour l’interface utilisateur avec les notifications
     function updateUI() {
         notificationList.innerHTML = "";
         if (notifications.length === 0) {
-            notificationList.innerHTML = '<p class="py-4 px-3 text-gray-500 text-center">No notifications yet</p>';
+            notificationList.innerHTML = '<p class="py-4 px-3 text-gray-500 text-center">Aucune notification pour le moment</p>';
             notificationCount.classList.add("hidden");
         } else {
             notifications.forEach(notification => {
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Mark a single notification as read
+    // Marquer une seule notification comme lue
     function markAsRead(id) {
         fetch(`/notifications/${id}/mark-as-read`).then(() => {
             notifications = notifications.map(n => (n.id === id ? { ...n, read_at: new Date().toISOString() } : n));
@@ -113,9 +113,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Mark all notifications as read
+    // Marquer toutes les notifications comme lues
     markAllRead.addEventListener("click", function (e) {
-        e.stopPropagation(); // Prevent panel from closing
+        e.stopPropagation(); // Empêcher la fermeture du panneau
         fetch("/notifications/mark-all-as-read").then(() => {
             notifications.forEach(n => (n.read_at = new Date().toISOString()));
             unreadCount = 0;
@@ -123,41 +123,39 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    
-
-    // Format timestamps
+    // Formater les dates
     function formatDate(dateString) {
         const date = new Date(dateString);
         const now = new Date();
         const diffInSecs = Math.floor((now - date) / 1000);
-        if (diffInSecs < 60) return "just now";
+        if (diffInSecs < 60) return "à l’instant";
         const diffInMins = Math.floor(diffInSecs / 60);
-        if (diffInMins < 60) return `${diffInMins}m ago`;
+        if (diffInMins < 60) return `il y a ${diffInMins} min`;
         const diffInHours = Math.floor(diffInMins / 60);
-        if (diffInHours < 24) return `${diffInHours}h ago`;
+        if (diffInHours < 24) return `il y a ${diffInHours} h`;
         return date.toLocaleDateString();
     }
 
-    // Toggle notification panel
-    notificationBell.addEventListener("click", function () {
-        notificationPanel.classList.toggle("hidden");
-    });
-
-    // Hide panel when clicking outside
+    // Cacher le panneau en cliquant à l’extérieur
     document.addEventListener("click", function (event) {
-        if (!notificationBell.contains(event.target) && !notificationPanel.contains(event.target)) {
-            notificationPanel.classList.add("hidden");
+        if (!document.getElementById("notification-bell").contains(event.target) && !document.getElementById("notification-panel").contains(event.target)) {
+            document.getElementById("notification-panel").classList.add("hidden");
         }
     });
 
-    // Escape key to close panel
+    // Fermer le panneau avec la touche Échap
     document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
-            notificationPanel.classList.add("hidden");
+            document.getElementById("notification-panel").classList.add("hidden");
         }
     });
 
-    // Initial fetch
+    // Récupération initiale des notifications
     fetchNotifications();
 });
+
+// Basculer l’affichage du panneau de notifications
+document.getElementById("notification-bell").addEventListener("click", function () {
+        document.getElementById("notification-panel").classList.toggle("hidden");
+    });
 </script>
