@@ -34,6 +34,10 @@ class NewNotification implements ShouldBroadcast
     /**
      * Rename the event for Echo.
      */
+    public function broadcastAs()
+    {
+        return '.NewNotification'; // Custom event name
+    }
 
 
     /**
@@ -41,7 +45,7 @@ class NewNotification implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        \Log::info('Broadcasting event:', ['notification' => $this->notificationData]);
+        // \Log::info('Broadcasting event:', ['notification' => $this->notificationData]);
         return ['notification' => $this->notificationData];
     }
 }

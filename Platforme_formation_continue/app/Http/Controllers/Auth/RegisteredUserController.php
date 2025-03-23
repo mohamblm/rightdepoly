@@ -58,10 +58,10 @@ class RegisteredUserController extends Controller
         $notification = Notification::create([
             
             'data' => json_encode([
-                'title' => 'New User Registration',
-                'message' => 'User ' . $user->name . ' has registered',
+                'title' => 'Nouvelle Inscription Utilisateur',
+                'message' => 'L\'utilisateur ' . $user->name . ' s\'est inscrit',
                 'user_id' => $user->id,
-                'type' => 'user_registration'
+                'type' => 'inscription_utilisateur'
             ]),
             'created_at' => now(),
             'updated_at' => now(),

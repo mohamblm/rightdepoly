@@ -23,6 +23,7 @@
         <!-- Right Side Icons -->
         <div class="flex items-center">
             <!-- Notification Icon -->
+            
             @include('admin.layouts.partials.notifications')
 
             <!-- Settings Icon -->
