@@ -488,21 +488,22 @@
         </div>
     @endif
 
-@push('scripts')
+
 <script>
-            const ratingFilter = document.getElementById('rating-filter');
-            const reviewsContainer = document.getElementById('reviews-container');
+   
+           
+            // const reviewsContainer = document.getElementById('reviews-container');
             const noReviewsMessage = document.getElementById('no-reviews-message');
-            const reviewItems = document.querySelectorAll('.review-item');
+            // const reviewItems = document.querySelectorAll('.review-item');
 
             
 
-            ratingFilter.addEventListener('change', function() {
+            document.getElementById('rating-filter').addEventListener('change', function() {
 
                 const selectedRating = this.value; // Value is a string
                 let visibleReviews = 0;
 
-                reviewItems.forEach(function(review) {
+                document.querySelectorAll('.review-item').forEach(function(review) {
                     const reviewRating = review.getAttribute('data-rating');
                     console.log(
                         `Review Rating: ${reviewRating}, Selected Rating: ${selectedRating}`);
@@ -602,7 +603,7 @@
                 closeModal();
             }
         });
- 
+
 </script>
-@endpush
+
 @endsection

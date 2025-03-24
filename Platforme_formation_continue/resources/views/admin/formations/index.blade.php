@@ -255,9 +255,30 @@
     @include('admin.formations.edit')
     <!-- Scripts pour le filtrage automatique -->
     <script>
-        // Open & Close Modal
+    
 
-
+         // Reset all lists
+    function resetLists() {
+        subTitles = [];
+        requirements = [];
+        includes = [];
+        forWhos = [];
+        
+        document.getElementById('sub-titles-list').innerHTML = '';
+        document.getElementById('requirements-list').innerHTML = '';
+        document.getElementById('includes-list').innerHTML = '';
+        document.getElementById('for-whos-list').innerHTML = '';
+        
+        document.getElementById('sub-titles-json').value = '[]';
+        document.getElementById('requirements-json').value = '[]';
+        document.getElementById('includes-json').value = '[]';
+        document.getElementById('for-whos-json').value = '[]';
+        
+        // Reset image preview
+        const preview = document.getElementById('preview-image');
+        preview.style.display = 'none';
+        preview.src = '';
+    }
 
 
         // Fonctions pour le modal de suppression
@@ -269,15 +290,7 @@
         function closeDeleteModal() {
             document.getElementById('deleteModal').classList.add('hidden');
         }
-        // Fonction de debounce pour le champ de recherche
-        let debounceTimer;
-        const searchInput = document.getElementById('search');
-        searchInput.addEventListener('input', function() {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(() => {
-                this.form.submit();
-            }, 500);
-        });
+       
 
         // Soumission automatique lors du changement des listes déroulantes
         document.querySelectorAll('.select').forEach(select => {
@@ -286,11 +299,511 @@
             });
         });
 
-
+        function closeModal() {
+            document.getElementById('add-formation-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            // Reset form
+            document.getElementById('add-formation-form').reset();
+            resetLists();
+        }
         document.getElementById('show-add-modal').addEventListener('click', function(e) {
             e.preventDefault();
             document.getElementById('add-formation-modal').classList.remove('hidden');
         });
+        document.getElementById('close-modal').addEventListener('click',closeModal);
+    document.getElementById('cancel-add-formation').addEventListener('click',closeModal);
+    // Show modal function
+    function openUpdateModal(formationId) {
+        // Show the modal
+        document.getElementById('edit-formation-modal').classList.remove('hidden');
         
+        // Fetch formation data by ID
+        fetch(`/dashboardformations/${formationId}`)
+            .then(response => response.json())
+            .then(formation => {
+                // Populate the form with formation data
+                populateEditForm(formation);
+            })
+            .catch(error => {
+                console.error('Error fetching formation:', error);
+                alert('Failed to load formation data');
+            });
+    };
+     
+    // Populate form with formation data
+    function populateEditForm(formation) {
+        // Set formation ID
+        document.getElementById('edit-formation-id').value = formation.id;
+        
+        // Basic information
+        document.getElementById('edit-nom').value = formation.nom;
+        document.getElementById('edit-etablissement_id').value = formation.etablissement_id;
+        document.getElementById('edit-domaine_id').value = formation.domaine_id;
+        document.getElementById('edit-description').value = formation.description;
+        document.getElementById('edit-trend').checked = formation.trend;
+        
+        // Preview image if exists
+        if (formation.image) {
+            const previewImage = document.getElementById('edit-preview-image');
+            previewImage.src = `/storage/${formation.image}`;
+            previewImage.style.display = 'block';
+        }
+        
+        // Reset and populate dynamic lists
+        resetEditLists();
+        
+        // Populate sub titles
+        if (formation.sub_titles) {
+            try {
+                editSubTitles = JSON.parse(formation.sub_titles);
+                refreshEditSubTitlesList();
+            } catch (e) {
+                console.error('Error parsing sub titles:', e);
+            }
+        }
+        
+        // Populate requirements
+        if (formation.requirements) {
+            try {
+                editRequirements = JSON.parse(formation.requirements);
+                refreshEditRequirementsList();
+            } catch (e) {
+                console.error('Error parsing requirements:', e);
+            }
+        }
+        
+        // Populate includes
+        if (formation.includes) {
+            try {
+                editIncludes = JSON.parse(formation.includes);
+                refreshEditIncludesList();
+            } catch (e) {
+                console.error('Error parsing includes:', e);
+            }
+        }
+        
+        // Populate for whos
+        if (formation.for_whos) {
+            try {
+                editForWhos = JSON.parse(formation.for_whos);
+                refreshEditForWhosList();
+            } catch (e) {
+                console.error('Error parsing for_whos:', e);
+            }
+        }
+        
+        // Populate languages
+        if (formation.languages) {
+            try {
+                let languages = [];
+                if (Array.isArray(formation.languages)) {
+                    languages = formation.languages;
+                } else if (typeof formation.languages === "string") {
+                    languages = JSON.parse(formation.languages || '[]');
+                }
+
+                // Clear all checkboxes first
+                document.querySelectorAll('input[name="languages[]"]').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+
+                // Check the appropriate language checkboxes
+                languages.forEach(lang => {
+                    const checkbox = document.getElementById(`edit-lang-${lang.toLowerCase()}`);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                    }
+                });
+            } catch (e) {
+                console.error("Error parsing languages:", e);
+            }
+        }
+    }
+
+    function refreshEditForWhosList() {
+        const list = document.getElementById('edit-for-whos-list');
+        list.innerHTML = '';
+        
+        editForWhos.forEach((forWho, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                ${forWho}
+                <button type="button" class="ml-2 text-red-500 hover:text-red-700" data-index="${index}">
+                    <svg class="h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+            `;
+            list.appendChild(li);
+            
+            // Add delete button event listener
+            li.querySelector('button').addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                editForWhos.splice(index, 1);
+                refreshEditForWhosList();
+            });
+        });
+        
+        // Update the hidden input
+        document.getElementById('edit-for-whos-json').value = JSON.stringify(editForWhos);
+    }
+
+    // Reset all edit lists
+    function resetEditLists() {
+        editSubTitles = [];
+        editRequirements = [];
+        editIncludes = [];
+        editForWhos = [];
+        
+        document.getElementById('edit-sub-titles-list').innerHTML = '';
+        document.getElementById('edit-requirements-list').innerHTML = '';
+        document.getElementById('edit-includes-list').innerHTML = '';
+        document.getElementById('edit-for-whos-list').innerHTML = '';
+    }
+    // DOM Elements
+    // const document.getElementById('edit-formation-modal') = document.getElementById('edit-formation-modal');
+    // const document.getElementById('edit-formation-form') = document.getElementById('edit-formation-form');
+    // const document.getElementById('close-edit-modal') = document.getElementById('close-edit-modal');
+    // const document.getElementById('cancel-edit-formation') = document.getElementById('cancel-edit-formation');
+    
+    // // List management variables
+    // let editSubTitles = [];
+    // let editRequirements = [];
+    // let editIncludes = [];
+    // let editForWhos = [];
+    
+
+    
+
+    
+   
+    
+    
+    
+    
+    
+    // Sub Titles List Management
+    document.getElementById('edit-add-sub-title').addEventListener('click', function() {
+        const input = document.getElementById('edit-sub-title-input');
+        const value = input.value.trim();
+        
+        if (value) {
+            editSubTitles.push(value);
+            input.value = '';
+            refreshEditSubTitlesList();
+            document.getElementById('edit-sub-titles-json').value = JSON.stringify(editSubTitles);
+        }
+    });
+    
+    function refreshEditSubTitlesList() {
+        const list = document.getElementById('edit-sub-titles-list');
+        list.innerHTML = '';
+        
+        editSubTitles.forEach((title, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                ${title}
+                <button type="button" class="ml-2 text-red-500 hover:text-red-700" data-index="${index}">
+                    <svg class="h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+            `;
+            list.appendChild(li);
+            
+            // Add delete button event listener
+            li.querySelector('button').addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                editSubTitles.splice(index, 1);
+                refreshEditSubTitlesList();
+                document.getElementById('edit-sub-titles-json').value = JSON.stringify(editSubTitles);
+            });
+        });
+        
+        // Update the hidden input
+        document.getElementById('edit-sub-titles-json').value = JSON.stringify(editSubTitles);
+    }
+    
+    // Requirements List Management
+    document.getElementById('edit-add-requirement').addEventListener('click', function() {
+        const input = document.getElementById('edit-requirement-input');
+        const value = input.value.trim();
+        
+        if (value) {
+            editRequirements.push(value);
+            input.value = '';
+            refreshEditRequirementsList();
+        }
+    });
+    
+    function refreshEditRequirementsList() {
+        const list = document.getElementById('edit-requirements-list');
+        list.innerHTML = '';
+        
+        editRequirements.forEach((requirement, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                ${requirement}
+                <button type="button" class="ml-2 text-red-500 hover:text-red-700" data-index="${index}">
+                    <svg class="h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+            `;
+            list.appendChild(li);
+            
+            // Add delete button event listener
+            li.querySelector('button').addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                editRequirements.splice(index, 1);
+                refreshEditRequirementsList();
+            });
+        });
+        
+        // Update the hidden input
+        document.getElementById('edit-requirements-json').value = JSON.stringify(editRequirements);
+    }
+    
+    // Includes List Management
+    document.getElementById('edit-add-include').addEventListener('click', function() {
+        const input = document.getElementById('edit-include-input');
+        const value = input.value.trim();
+        
+        if (value) {
+            editIncludes.push(value);
+            input.value = '';
+            refreshEditIncludesList();
+        }
+    });
+    
+    function refreshEditIncludesList() {
+        const list = document.getElementById('edit-includes-list');
+        list.innerHTML = '';
+        
+        editIncludes.forEach((include, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                ${include}
+                <button type="button" class="ml-2 text-red-500 hover:text-red-700" data-index="${index}">
+                    <svg class="h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+            `;
+            list.appendChild(li);
+            
+            // Add delete button event listener
+            li.querySelector('button').addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                editIncludes.splice(index, 1);
+                refreshEditIncludesList();
+            });
+        });
+        
+        // Update the hidden input
+        document.getElementById('edit-includes-json').value = JSON.stringify(editIncludes);
+    }
+    
+    // For Who List Management
+    document.getElementById('edit-add-for-who').addEventListener('click', function() {
+        const input = document.getElementById('edit-for-who-input');
+        const value = input.value.trim();
+        
+        if (value) {
+            editForWhos.push(value);
+            input.value = '';
+            refreshEditForWhosList();
+        }
+    });
+    
+    
+    
+    // Image preview functionality
+    window.previewEditImage = function(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const previewImage = document.getElementById('edit-preview-image');
+                previewImage.src = e.target.result;
+                previewImage.style.display = 'block';
+            };
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    };
+    
+    // Close modal events
+    document.getElementById('close-edit-modal').addEventListener('click', closeEditModal);
+    document.getElementById('cancel-edit-formation').addEventListener('click', closeEditModal);
+    
+    function closeEditModal() {
+        document.getElementById('edit-formation-modal').classList.add('hidden');
+        document.getElementById('edit-formation-form').reset();
+        resetEditLists();
+        document.getElementById('edit-preview-image').style.display = 'none';
+    }
+    
+    // Form submission
+    document.getElementById('edit-formation-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formationId = document.getElementById('edit-formation-id').value;
+        const formData = new FormData(this);
+        
+        // Make AJAX request to update formation
+        fetch(`/dashboardformations/${formationId}`, {
+            method: 'POST', // Laravel uses POST with _method=PUT
+            body: formData,
+            // headers: {
+            //     'Content-Type': 'application/json'
+            //     // 'X-Requested-With': 'XMLHttpRequest'
+            // }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                handleUpdateSuccess(data.formation);
+                showSuccessNotification(data.message)
+            } else {
+                alert(data.message || 'Failed to update formation');
+            }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating the formation');
+            });
+    });
+    
+    // Add keyboard event listener to close modal on Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && !document.getElementById('edit-formation-modal').classList.contains('hidden')) {
+            closeEditModal();
+        }
+    });
+    
+    // Prevent clicks inside the modal from closing it
+    // const modalContent = document.getElementById('edit-formation-modal').querySelector('.bg-white');
+    document.getElementById('edit-formation-modal').querySelector('.bg-white').addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    
+    // Close modal when clicking outside of it
+    document.getElementById('edit-formation-modal').addEventListener('click', function(e) {
+        if (e.target === document.getElementById('edit-formation-modal') || e.target === document.getElementById('edit-formation-modal').querySelector('.fixed.inset-0.bg-gray-900')) {
+            closeEditModal();
+        }
+    });
+
+
+
+    
+    // Function to handle successful form submission in the edit modal
+    function handleUpdateSuccess(updatedFormation) {
+        // Find the table row for this formation by ID
+        const tableRow = document.querySelector(`#formations-table-body tr[data-formation-id="${updatedFormation.id}"]`);
+        
+        if (tableRow) {
+            // Update formation name
+            const nameElement = tableRow.querySelector('.formation-name');
+            if (nameElement) nameElement.textContent = updatedFormation.nom;
+
+            // Update formation image
+            const imageElement = tableRow.querySelector('.formation-image');
+            if (imageElement && updatedFormation.image) {
+                imageElement.src = `/storage/${updatedFormation.image}`;
+            }
+
+            // Update établissement name
+            const etablissementElement = tableRow.querySelector('.formation-etablissement');
+            console.log(etablissementElement, updatedFormation.etablissement?.nom)
+            if (etablissementElement) {
+                etablissementElement.textContent = updatedFormation.etablissement?.nom || 'N/A';
+            }
+
+            // Update domaine name
+            const domaineElement = tableRow.querySelector('.formation-domaine');
+            if (domaineElement) {
+                domaineElement.textContent = updatedFormation.domaine?.nom || 'N/A';
+            }
+
+            // Update trending badge
+            const trendingContainer = tableRow.querySelector('.trend-container');
+            const existingBadge = tableRow.querySelector('.formation-trend');
+
+            if (updatedFormation.trend) {
+                if (!existingBadge) {
+                    const newBadge = document.createElement('span');
+                    newBadge.className = "formation-trend inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-blue-800";
+                    newBadge.textContent = "Trending";
+                    trendingContainer.appendChild(newBadge);
+                }
+            } else {
+                if (existingBadge) {
+                    existingBadge.remove();
+                }
+            }
+        }
+
+        // Close the modal
+        closeEditModal();
+
+    }
+
+
+    // show notification function
+    function showSuccessNotification(message) {
+        // Remove existing notifications (if any)
+        document.querySelectorAll('.success-notification').forEach(el => el.remove());
+
+        // Create notification HTML
+        const notification = document.createElement('div');
+        notification.innerHTML = `
+            <div x-data="{ show: true }" 
+                x-show="show" 
+                x-init="setTimeout(() => show = false, 5000)"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-4"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform translate-y-4"
+                class="fixed top-4 right-4 z-50 max-w-sm w-full success-notification">
+                
+                <div class="flex items-center p-5 bg-white rounded-lg shadow-xl border-l-4 border-l-green-500">
+                    <div class="flex-shrink-0 relative">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <svg class="w-8 h-8 absolute top-0 left-0 text-green-500 animate-[spin_4s_ease-in-out_infinite]" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" />
+                        </svg>
+                    </div>
+                    
+                    <div class="ml-4 flex-1">
+                        <h4 class="text-sm font-bold text-gray-800 mb-0.5">Success!</h4>
+                        <p class="text-sm text-gray-600">${message}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Append to the body
+        document.body.appendChild(notification);
+
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+            notification.remove();
+        }, 5000);
+    }
+
+
     </script>
 @endsection

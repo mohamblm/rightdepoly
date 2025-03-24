@@ -113,7 +113,6 @@
 <script>
     // Toggle accordion functionality
     function toggleAccordion(id) {
-        console.log('hna');
         const content = document.getElementById(id);
         if (content.classList.contains('hidden')) {
             content.classList.remove('hidden');
