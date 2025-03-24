@@ -1,7 +1,7 @@
 <footer class="relative mt-[-1px]" aria-labelledby="footer-heading">
-    <h2 id="footer-heading" class="sr-only">Footer</h2>
+    <h2 id="footer-heading" class="sr-only">Pied de page</h2>
     
-    {{-- Curved top using SVG --}}
+    {{-- Courbe supérieure avec SVG --}}
     <div
         class="absolute top-0 left-0 w-full overflow-hidden"
         style="height: 80px; transform: translateY(-99.5%);"
@@ -19,9 +19,9 @@
     <div class="bg-[#54E0FC] py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-gray-800">
-                {{-- Address Section --}}
+                {{-- Section Adresse --}}
                 <div class="space-y-4">
-                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <h3 class="text-lg font-bold mb-4">Contactez-nous</h3>
                     <address class="not-italic space-y-3">
                         <p class="flex items-start text-gray-800">
                             <i class="fa-solid fa-location-dot mr-2 mt-1 flex-shrink-0"></i>
@@ -29,11 +29,11 @@
                         </p>
                         <p class="flex items-center text-gray-800">
                             <i class="fa-solid fa-phone mr-2 flex-shrink-0"></i>
-                            <span>Tel: 
+                            <span>Tél : 
                                 <a
                                     href="tel:+9239341037"
                                     class="hover:text-blue-800 transition-colors underline"
-                                    aria-label="Call us at +92 393 410 37"
+                                    aria-label="Appelez-nous au +92 393 410 37"
                                 >
                                     +92 393 410 37
                                 </a>
@@ -41,11 +41,11 @@
                         </p>
                         <p class="flex items-center text-gray-800">
                             <i class="fa-solid fa-envelope mr-2 flex-shrink-0"></i>
-                            <span>Email: 
+                            <span>Email : 
                                 <a
                                     href="mailto:info@onlearn.com"
                                     class="hover:text-blue-800 transition-colors underline"
-                                    aria-label="Email us at info@onlearn.com"
+                                    aria-label="Envoyez-nous un email à info@onlearn.com"
                                 >
                                     info@onlearn.com
                                 </a>
@@ -54,9 +54,9 @@
                     </address>
                 </div>
 
-                {{-- Social Networks --}}
+                {{-- Réseaux sociaux --}}
                 <div class="space-y-4">
-                    <h3 class="text-lg font-bold mb-4">Connect With Us</h3>
+                    <h3 class="text-lg font-bold mb-4">Suivez-nous</h3>
                     <ul class="flex flex-col space-y-3 list-none p-0">
                         <li>
                             <a
@@ -64,7 +64,7 @@
                                 class="flex items-center text-gray-800 hover:text-blue-800 transition-colors group"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="Follow us on Facebook"
+                                aria-label="Suivez-nous sur Facebook"
                             >
                                 <i class="fa-brands fa-facebook-f mr-2 text-gray-800 group-hover:text-blue-800 transition-colors"></i>
                                 Facebook
@@ -76,7 +76,7 @@
                                 class="flex items-center text-gray-800 hover:text-blue-800 transition-colors group"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="Follow us on Instagram"
+                                aria-label="Suivez-nous sur Instagram"
                             >
                                 <i class="fa-brands fa-instagram mr-2 text-gray-800 group-hover:text-blue-800 transition-colors"></i>
                                 Instagram
@@ -88,7 +88,7 @@
                                 class="flex items-center text-gray-800 hover:text-blue-800 transition-colors group"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="Follow us on LinkedIn"
+                                aria-label="Suivez-nous sur LinkedIn"
                             >
                                 <i class="fa-brands fa-linkedin-in mr-2 text-gray-800 group-hover:text-blue-800 transition-colors"></i>
                                 LinkedIn
@@ -97,17 +97,17 @@
                     </ul>
                 </div>
 
-                {{-- Quick Links --}}
+                {{-- Liens rapides --}}
                 <div class="space-y-4">
-                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-                    <nav aria-label="Footer Navigation">
+                    <h3 class="text-lg font-bold mb-4">Liens rapides</h3>
+                    <nav aria-label="Navigation du pied de page"></nav></nav>
                         <ul class="flex flex-col space-y-3 list-none p-0">
                             <li>
                                 <a
                                     href="{{ route('formations') }}"
                                     class="text-gray-800 hover:text-blue-800 transition-colors"
                                 >
-                                    Courses
+                                    Formations
                                 </a>
                             </li>
                             <li>
@@ -115,7 +115,7 @@
                                     href="{{ route('plans') }}"
                                     class="text-gray-800 hover:text-blue-800 transition-colors"
                                 >
-                                    Learning Packs
+                                    Plans
                                 </a>
                             </li>
                             <li>
@@ -123,25 +123,10 @@
                                     href="{{ route('about') }}"
                                     class="text-gray-800 hover:text-blue-800 transition-colors"
                                 >
-                                    About Us
+                                    À propos de nous
                                 </a>
                             </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-gray-800 hover:text-blue-800 transition-colors"
-                                >
-                                    Contact
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    class="text-gray-800 hover:text-blue-800 transition-colors"
-                                >
-                                    Privacy Policy
-                                </a>
-                            </li>
+
                         </ul>
                     </nav>
                 </div>
@@ -149,45 +134,42 @@
                 {{-- Newsletter --}}
                 <div class="space-y-4">
                     <h3 class="text-lg font-bold mb-4">
-                        Stay Updated
+                        Restez informé
                     </h3>
-                    <p class="text-gray-800 mb-4">Subscribe to receive updates about new courses and learning opportunities.</p>
-                    <form class="space-y-2" action="#" method="POST">
+                    <p class="text-gray-800 mb-4">Abonnez-vous pour recevoir des mises à jour sur les nouveaux cours et opportunités d'apprentissage.</p>
+                    <form class="space-y-2" action="#" method="">
                         @csrf
                         <div class="bg-white rounded-full overflow-hidden shadow-md flex items-center p-1 max-w-full">
                             <input
                                 type="email"
                                 name="email"
-                                placeholder="Your email address"
+                                placeholder="Votre adresse email"
                                 class="flex-1 min-w-0 px-4 py-2 bg-transparent border-none focus:outline-none text-gray-700"
-                                aria-label="Email address for newsletter"
+                                aria-label="Adresse email pour la newsletter"
                                 required
                             />
                             <button
                                 type="submit"
                                 class="px-4 sm:px-6 py-2 bg-teal-700 hover:bg-teal-800 text-white rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-600 flex-shrink-0 whitespace-nowrap"
-                                aria-label="Subscribe to newsletter"
+                                aria-label="S'abonner à la newsletter"
                             >
-                                Subscribe
+                                S'abonner
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
 
-            {{-- Copyright and Additional Links --}}
+            {{-- Copyright et liens supplémentaires --}}
             <div class="mt-12 pt-6 border-t border-gray-200/30">
                 <div class="flex flex-col md:flex-row justify-between items-center text-gray-800">
-                    <p>&copy; {{ date('Y') }} OnLearn. All rights reserved.</p>
+                    <p>&copy; {{ date('Y') }} OnLearn. Tous droits réservés.</p>
                     <div class="flex space-x-4 mt-4 md:mt-0">
-                        <a href="#" class="text-gray-800 hover:text-blue-800 transition-colors text-sm">
-                            Terms of Service
+                        <a href="{{ route('terms') }}" class="text-gray-800 hover:text-blue-800 transition-colors text-sm">
+                            Conditions d'utilisation
                         </a>
-                        <a href="#" class="text-gray-800 hover:text-blue-800 transition-colors text-sm">
-                            Privacy Policy
-                        </a>
-                        <a href="#" class="text-gray-800 hover:text-blue-800 transition-colors text-sm">
-                            Cookie Policy
+                        <a href="{{ route('privacy') }}" class="text-gray-800 hover:text-blue-800 transition-colors text-sm">
+                            Politique de confidentialité
                         </a>
                     </div>
                 </div>

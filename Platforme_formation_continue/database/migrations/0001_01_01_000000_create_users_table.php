@@ -24,6 +24,7 @@ return new class extends Migration
             $table->enum('role', ['admin', 'client'])->default('client');
             $table->enum('status', ['individuel', 'entreprise']);
             $table->string('image')->nullable();
+            $table->boolean('terms')->default(false);
             $table->timestamps();
         });
 
