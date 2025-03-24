@@ -9,9 +9,8 @@
         </div>
 
         <div class="flex flex-col lg:flex-row rounded-lg overflow-hidden shadow-xl">
-            <!-- Map Section -->
+            <!-- Section Carte -->
             <div class="lg:w-1/2 h-96 lg:h-auto relative">
-                <!-- Replace YOUR_GOOGLE_MAPS_API_KEY with your actual API key -->
                 <iframe
                     class="absolute inset-0 w-full h-full"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3370.449360339618!2d-6.341341924930311!3d32.353488973843454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda38748814f4add%3A0xf5145d3b984026e!2sBeni%20Mellal%20IFMSAS!5e0!3m2!1sen!2sma!4v1741895507722!5m2!1sen!2sma"
@@ -20,7 +19,7 @@
                     allowfullscreen=""
                     loading="lazy">
                 </iframe>
-                <!-- Map Controls Overlay -->
+                <!-- Contrôles de la carte -->
                 <div class="absolute bottom-4 left-4 z-10">
                     <button class="bg-white p-2 rounded-full shadow-md text-gray-700 hover:bg-gray-100">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -35,39 +34,106 @@
                 </div>
             </div>
 
-            <!-- Contact Form Section -->
+            <!-- Formulaire de Contact -->
             <div class="lg:w-1/2 bg-white p-6 md:p-8">
                 <div class="mb-6">
-                    <h3 class="text-2xl font-semibold text-gray-800">Get in touch</h3>
-                    <p class="text-gray-600 mt-2">We are here for you! How can we help?</p>
+                    <h3 class="text-2xl font-semibold text-gray-800">Contactez-nous</h3>
+                    <p class="text-gray-600 mt-2">Nous sommes là pour vous aider !</p>
                 </div>
 
-                <form action="#" method="POST" class="space-y-4">
+                <form action="{{ route('contact.store') }}" method="POST" class="space-y-4">
                     @csrf
+                    
+                    <!-- Message de Succès -->
+                    @if(session('success'))
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <!-- Champ Nom -->
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nom Complet</label>
-                        <input type="text" id="name" name="name" required 
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                        <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom Complet</label>
+                        <input type="text" id="nom" name="nom" required 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                            value="{{ old('nom') }}">
+                        @error('nom')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
+                    <!-- Champ Email -->
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Adresse Email</label>
                         <input type="email" id="email" name="email" required 
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                            value="{{ old('email') }}">
+                        @error('email')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
+                    <!-- Champ Téléphone -->
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Numéro de Téléphone</label>
+                        <input type="tel" id="phone" name="phone" required 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                            value="{{ old('phone') }}">
+                        @error('phone')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Champ Message -->
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Votre Message</label>
                         <textarea id="message" name="message" rows="4" required 
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"></textarea>
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">{{ old('message') }}</textarea>
+                        @error('message')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div>
                         <button type="submit" 
                             class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 ease-in-out">
-                            Submit
+                            Envoyer
                         </button>
                     </div>
+                    @if (session('success'))
+                    <div x-data="{ show: true }" 
+                        x-show="show" 
+                        x-init="setTimeout(() => show = false, 5000)"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 transform translate-y-4"
+                        x-transition:enter-end="opacity-100 transform translate-y-0"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 transform translate-y-0"
+                        x-transition:leave-end="opacity-0 transform translate-y-4"
+                        class="fixed top-4 right-4 z-50 max-w-sm w-full">
+                        <div class="flex items-center p-5 bg-white rounded-lg shadow-xl border-l-4 border-l-green-500">
+                            <!-- Checkmark icon with animated circle -->
+                            <div class="flex-shrink-0 relative">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <svg class="w-8 h-8 absolute top-0 left-0 text-green-500 animate-[spin_4s_ease-in-out_infinite]" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" />
+                                </svg>
+                            </div>
+                            
+                            <!-- Message with title and content -->
+                            <div class="ml-4 flex-1">
+                                <h4 class="text-sm font-bold text-gray-800 mb-0.5">Success!</h4>
+                                <p class="text-sm text-gray-600">
+                                    {{ session('success') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </form>
             </div>
         </div>

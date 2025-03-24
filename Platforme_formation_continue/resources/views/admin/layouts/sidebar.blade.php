@@ -74,6 +74,13 @@
                     <span>Utilisateurs</span>
                 </a>
             </div>
+
+            <div class="mt-4">
+                <a href="{{ route('admin.contacts.index') }}" class="flex items-center px-4 py-3 text-blue-100 rounded-lg hover:bg-blue-800 transition-colors duration-200 {{ request()->routeIs('admin.utilisateurs.*') ? 'bg-blue-800 text-white' : '' }}">
+                     <i class="fa-regular fa-message w-5 h-5 mr-3"></i>
+                    <span>Contacts</span>
+                </a>
+            </div>
         </div>
     </nav>
 </aside>

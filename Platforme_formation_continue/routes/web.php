@@ -11,6 +11,7 @@ use App\Http\Controllers\EtablissementController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UtilisateurController;
 use App\Http\Controllers\Admin\DomaineadminController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\FormationadminController;
 use App\Http\Controllers\Admin\InscriptionadminController;
 use App\Http\Controllers\Admin\EtablissementadminController;
@@ -97,6 +98,10 @@ Route::middleware(['auth','IsAdmin'])->group(function () {
     Route::resource('dashboardinscriptions', InscriptionadminController::class)->names([
         'index' => 'admin.inscriptions.index'
     ]);
+    // contacts
+    Route::resource('dashboarcontact', ContactController::class)->names([
+        'index' => 'admin.contacts.index'
+    ]);
     
     // Utilisateurs
     Route::resource('dashboardutilisateurs', UtilisateurController::class)->names([
@@ -124,5 +129,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/test',[FormationController::class,'test']);
 Route::view('/terms', 'terms')->name('terms');
 Route::view('/privacy', 'privacy')->name('privacy');
+
+// contact route : 
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 require __DIR__.'/auth.php';

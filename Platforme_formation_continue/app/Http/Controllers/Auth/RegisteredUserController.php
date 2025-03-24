@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+         
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Notification;
@@ -69,7 +69,9 @@ class RegisteredUserController extends Controller
             'updated_at' => now(),
         ]);
         // Broadcast the event
+
         event(new NewNotification($notification->toArray()));
+
 
 
         event(new Registered($user));
