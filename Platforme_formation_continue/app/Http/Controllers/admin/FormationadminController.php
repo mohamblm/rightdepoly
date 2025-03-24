@@ -43,13 +43,13 @@ class FormationadminController extends Controller
     {
         $formation = Formation::with(['domaine', 'etablissement'])->find($id);
         
-        $formation->sub_titles = json_decode($formation->sub_titles);
-        $formation->requirements = json_decode($formation->requirements);
-        $formation->includes = json_decode($formation->includes);
-        $formation->for_whos = json_decode($formation->for_whos);
-        $formation->languages = json_decode($formation->languages);
+        // $formation->sub_titles = json_decode($formation->sub_titles);
+        // $formation->requirements = json_decode($formation->requirements);
+        // $formation->includes = json_decode($formation->includes);
+        // $formation->for_whos = json_decode($formation->for_whos);
+        // $formation->languages = json_decode($formation->languages);
         
-
+        
         return response()->json($formation, 200,);
     }
 

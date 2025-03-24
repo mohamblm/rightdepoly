@@ -233,19 +233,12 @@
     // const document.getElementById('cancel-add-formation') = document.getElementById('cancel-add-formation');
     // const modal = document.getElementById('add-formation-modal');
     
-    document.getElementById('close-modal').addEventListener('click',closeModal);
-    document.getElementById('cancel-add-formation').addEventListener('click',closeModal);
+    
     document.getElementById('etablissement_id').addEventListener('change',(event)=>{
         event.preventDefault();
     });
     
-    function closeModal() {
-        document.getElementById('add-formation-modal').classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-        // Reset form
-        document.getElementById('add-formation-form').reset();
-        resetLists();
-    }
+    
 
     // Handle image preview
     window.previewImage = function(input) {
@@ -395,28 +388,7 @@
         field.value = JSON.stringify(array);
     }
 
-    // Reset all lists
-    function resetLists() {
-        subTitles = [];
-        requirements = [];
-        includes = [];
-        forWhos = [];
-        
-        document.getElementById('sub-titles-list').innerHTML = '';
-        document.getElementById('requirements-list').innerHTML = '';
-        document.getElementById('includes-list').innerHTML = '';
-        document.getElementById('for-whos-list').innerHTML = '';
-        
-        document.getElementById('sub-titles-json').value = '[]';
-        document.getElementById('requirements-json').value = '[]';
-        document.getElementById('includes-json').value = '[]';
-        document.getElementById('for-whos-json').value = '[]';
-        
-        // Reset image preview
-        const preview = document.getElementById('preview-image');
-        preview.style.display = 'none';
-        preview.src = '';
-    }
+   
     
     // Initialize JSON fields with empty arrays
     document.getElementById('sub-titles-json').value = JSON.stringify([]);
