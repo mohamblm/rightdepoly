@@ -221,7 +221,7 @@
 </div>
 
 <script >
-    document.addEventListener("DOMContentLoaded", function () {
+  
     // Array storage for dynamic lists
 
     let subTitles = [];
@@ -396,5 +396,5 @@
     document.getElementById('includes-json').value = JSON.stringify([]);
     document.getElementById('for-whos-json').value = JSON.stringify([]);
 
-})
+
 </script>
