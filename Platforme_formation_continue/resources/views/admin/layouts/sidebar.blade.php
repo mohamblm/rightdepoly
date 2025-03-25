@@ -10,13 +10,13 @@
         </button>
     </div>
     
-    <!-- Logo -->
-    <div class="px-6 py-4 flex items-center border-b border-blue-800">
-        <div class="rounded-full bg-blue-500 p-2 mr-3">
-            <span class="text-white font-bold">Pr</span>
-        </div>
-        <span class="text-lg font-semibold">Pro-Skills</span>
-    </div>
+      {{-- Logo --}}
+      <div class="p-5 flex items-center space-x-2">
+         <a href="{{ route('welcome') }}" class="flex items-center space-x-2">
+            <i class="fas fa-graduation-cap text-cyan-500 text-2xl"></i>
+            <span class="text-xl font-bold">FormationPro BM</span>
+         </a>
+      </div>
 
     <!-- Navigation -->
     <nav class="mt-8">
