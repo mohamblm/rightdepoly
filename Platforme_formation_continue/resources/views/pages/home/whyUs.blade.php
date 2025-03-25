@@ -12,8 +12,8 @@
             <!-- Image Section - Restructured for better mobile display -->
             <div class="md:w-1/3 relative mb-16 md:mb-0">
                 <div class="bg-blue-900 rounded-lg p-6 h-full flex flex-col justify-center">
-                    <h3 class="text-white text-xl md:text-2xl font-bold mb-4">SEVEN CHOISIR</h3>
-                    <h3 class="text-yellow-400 text-xl md:text-2xl font-bold mb-12 md:mb-0">SEVEN FORMATION</h3>
+                    <h3 class="text-white text-xl md:text-2xl font-bold mb-4">POURQUOI CHOISIR</h3>
+                    <h3 class="text-yellow-400 text-xl md:text-2xl font-bold mb-12 md:mb-0">FormationPro BM ?</h3>
                     <div class="absolute -right-4 bottom-0 hidden md:block">
                         <div class="flex flex-col gap-1">
                             <div class="w-8 h-3 bg-blue-500"></div>
@@ -86,11 +86,7 @@
                     </div>
                 </div>
                 
-                <div class="text-center mt-8">
-                    <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full inline-block transition duration-300">
-                        NOUS CONTACTER
-                    </a>
-                </div>
+
             </div>
         </div>
     </div>

@@ -4,15 +4,13 @@
     :class="{ 'shadow-md': isScrolled }"
     class="w-full bg-white py-4 px-6 transition-all duration-300 border-b border-gray-100 fixed top-0 left-0 right-0 z-50">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
-       {{-- Logo --}}
-       <div class="flex items-center space-x-2">
-          <a href="{{ route('welcome') }}" class="flex items-center space-x-2">
-             <div class="relative h-8 w-8">
-                <x-application-logo class="h-8 w-8 text-cyan-500" />
-             </div>
-             <span class="text-xl font-bold">E-tutor</span>
-          </a>
-       </div>
+      {{-- Logo --}}
+      <div class="" flex items-center space-x-2">
+         <a href="{{ route('welcome') }}" class="flex items-center space-x-2">
+            <i class="fas fa-graduation-cap text-cyan-500 text-2xl"></i>
+            <span class="text-xl font-bold">FormationPro BM</span>
+         </a>
+      </div>
 
        {{-- Desktop Navigation Links --}}
        <div class="hidden md:flex items-center space-x-8 pointer-events-auto">
