@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->string('adresse');
             $table->string('telephone');
-            $table->string('localisation')->nullable();
+            $table->text('localisation')->nullable();
             $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();

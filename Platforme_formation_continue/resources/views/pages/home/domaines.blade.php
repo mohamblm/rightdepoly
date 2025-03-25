@@ -52,7 +52,7 @@
 @push('scripts')
 <script>
     // Initialize Swiper for the domaines section with unique selectors
-    document.addEventListener('DOMContentLoaded', function() {
+
         var swiperDomaines = new Swiper(".mySwiper-domaines", {
             slidesPerView: 1,
             spaceBetween: 20,
@@ -76,6 +76,6 @@
                 disableOnInteraction: false,
             },
         });
-    });
+    
 </script>
 @endpush

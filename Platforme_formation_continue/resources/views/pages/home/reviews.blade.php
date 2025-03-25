@@ -163,7 +163,7 @@
 
     @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+
             const slider = document.getElementById('testimonials-slider');
             const container = document.getElementById('testimonials-container');
             const prevBtn = document.getElementById('prev-testimonial');
@@ -228,7 +228,7 @@
                     goToSlide(slideIndex >= slider.children.length - slidesToShow ? 0 : slideIndex + 1);
                 }, 5000);
             });
-        });
+
     </script>
     @endpush
 </section>

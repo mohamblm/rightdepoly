@@ -28,7 +28,7 @@
                             <div class="p-6">
                                 <div class="flex flex-wrap gap-2 mb-4">
                                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                                        {{ $etablissement->localisation }}
+                                        {{ $etablissement->adresse }}
                                     </span>
                                 </div>
                                 <p class="text-gray-600 text-sm mb-4">
@@ -40,7 +40,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
-                                        <span class="text-xs text-gray-500 ml-1"> {{ $etablissement->adresse }}</span>
+                                        <span class="text-xs text-gray-500 ml-1"><a href="{{ $etablissement->localisation }}" target="_blank">Localisation</a></span>
                                     </div>
                                     
                                 </div>
@@ -73,7 +73,7 @@
 @push('scripts')
 <script>
     // Initialize Swiper for the etablissements section with unique selectors
-    document.addEventListener('DOMContentLoaded', function() {
+ 
         var swiperEtablissements = new Swiper(".mySwiper-etablissements", {
             slidesPerView: 1,
             spaceBetween: 30,
@@ -96,6 +96,6 @@
                 disableOnInteraction: false,
             },
         });
-    });
+    
 </script>
 @endpush

@@ -16,7 +16,7 @@
                 <div class="swiper-slide p-2">
                     <div class="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col transition-transform hover:shadow-lg hover:-translate-y-1">
                         <div class="relative bg-cyan-500 h-48">
-                            <img src="{{ asset('storage/formations/'.$formation->image) }}" alt="{{ $formation->nom }}" class="w-full h-full object-cover" onerror="this.src='https://placehold.jp/150x150.png'">
+                            <img src="{{ asset('storage/'.$formation->image) }}" alt="{{ $formation->nom }}" class="w-full h-full object-cover" onerror="this.src='https://placehold.jp/150x150.png'">
                         </div>
                         <div class="flex items-center gap-1 px-4 py-2 bg-gray-100">
                             <div class="flex -space-x-2">
@@ -58,7 +58,7 @@
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+
         // Initialize Swiper for Popular Courses with unique selectors
         const swiperPopular = new Swiper('.mySwiper-popular-courses', {
             slidesPerView: 1,
@@ -81,6 +81,6 @@
                 delay: 5000,
             },
         });
-    });
+    
 </script>
 @endpush
