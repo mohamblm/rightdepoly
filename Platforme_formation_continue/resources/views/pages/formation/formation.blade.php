@@ -52,11 +52,11 @@
                     <ul class="flex flex-wrap -mb-px">
                         <li class="mr-2">
                             <a href="#"
-                                class="inline-block py-4 px-4 text-sm font-medium text-center border-b-2 border-blue-500 text-blue-600">Overview</a>
+                                class="inline-block py-4 px-4 text-sm font-medium text-center border-b-2 border-blue-500 text-blue-600">Aperçu</a>
                         </li>
                         <li class="mr-2">
                             <a href="#Curriculum"
-                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Curriculum</a>
+                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Programme</a>
                         </li>
                         <li class="mr-2">
                             <a href="#Aqui"
@@ -64,11 +64,11 @@
                         </li>
                         <li class="mr-2">
                             <a href="#Requirements"
-                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Requirements</a>
+                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Prérequis</a>
                         </li>
                         <li class="mr-2">
                             <a href="#Reviews"
-                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Reviews</a>
+                                class="inline-block py-4 px-4 text-sm font-medium text-center text-gray-500 hover:text-gray-700">Avis</a>
                         </li>
                     </ul>
                 </div>
@@ -79,7 +79,7 @@
                     <div class="text-gray-700 space-y-4">
                         <p>{{ $formation->description }}</p>
                         @if ($formation->description == null)
-                            <p>there is no description for this formation</p>
+                            <p>Il n'y a pas de description pour cette formation</p>
                         @endif
                     </div>
 
@@ -118,7 +118,7 @@
 
                     <!-- Formation requirements Section -->
                     <div id="Requirements" class="mt-8">
-                        <h2 class="text-xl font-semibold mb-4">Formation requirements</h2>
+                        <h2 class="text-xl font-semibold mb-4">Prérequis de la formation</h2>
 
                         <ul class="list-disc pl-5 space-y-3 text-gray-700">
                             @foreach(json_decode($formation->requirements)?? [] as $requirement)
@@ -134,33 +134,13 @@
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden sticky top-4">
                     <!-- Discount Banner -->
                     <div class="bg-blue-500 text-white py-2 px-4 flex justify-between">
-                        <span class="font-semibold">56% Off</span>
-                        <span class="text-sm">2 days left at this offer!</span>
+                        <span class="font-semibold">56% de réduction</span>
+                        <span class="text-sm">2 jours restants pour cette offre !</span>
                     </div>
 
                     <!-- Formation Details -->
                     <div class="p-6">
-                        <!-- Formation Duration -->
-                        <div class="flex justify-between mb-4">
-                            <div class="flex items-center">
-                                <span class="text-gray-500 mr-2">
-                                    <i class="far fa-clock"></i>
-                                </span>
-                                <span class="text-sm text-gray-600">Formation Duration</span>
-                            </div>
-                            <span class="text-sm text-gray-800">6 Month</span>
-                        </div>
 
-                        <!-- Formation Level -->
-                        <div class="flex justify-between mb-4">
-                            <div class="flex items-center">
-                                <span class="text-gray-500 mr-2">
-                                    <i class="fas fa-signal"></i>
-                                </span>
-                                <span class="text-sm text-gray-600">Formation Level</span>
-                            </div>
-                            <span class="text-sm text-gray-800">Beginner and Intermediate</span>
-                        </div>
 
                         <!-- Students Enrolled -->
                         <div class="flex justify-between mb-4">
@@ -168,7 +148,7 @@
                                 <span class="text-gray-500 mr-2">
                                     <i class="fas fa-users"></i>
                                 </span>
-                                <span class="text-sm text-gray-600">Students Enrolled</span>
+                                <span class="text-sm text-gray-600">Étudiants inscrits</span>
                             </div>
                             <span class="text-sm text-gray-800">69,219,618</span>
                         </div>
@@ -179,7 +159,7 @@
                                 <span class="text-gray-500 mr-2">
                                     <i class="fas fa-globe"></i>
                                 </span>
-                                <span class="text-sm text-gray-600">Language</span>
+                                <span class="text-sm text-gray-600">Langues</span>
                             </div>
                             <span class="text-sm text-gray-800">
                                 @foreach(json_decode($formation->languages)?? [] as $language)
@@ -193,7 +173,7 @@
                         <form action="{{ route('cart.add', $formation->id) }}" method="POST">
                             @csrf
                             <button type="submit"  class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded mb-3">
-                                Add To Cart
+                                Ajouter au panier
                             </button>
                             {{-- <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button> --}}
                         </form>
@@ -219,12 +199,12 @@
 
                         <!-- Guarantee Notice -->
                         <div class="text-center text-xs text-gray-500 mb-6">
-                            <p>Note: All Formations have 30-days money-back guarantee</p>
+                            <p>Remarque : Toutes les formations bénéficient d'une garantie de remboursement de 30 jours</p>
                         </div>
 
                         <!-- What's Included -->
                         <div>
-                            <h3 class="font-medium text-gray-800 mb-4">This Formation includes:</h3>
+                            <h3 class="font-medium text-gray-800 mb-4">Cette formation inclut :</h3>
                             <ul class="space-y-3">
                                 @foreach(json_decode($formation->includes)?? [] as $include)
                                     <li class="flex items-center text-sm text-gray-600">
@@ -237,23 +217,23 @@
 
                         <!-- Share Formation -->
                         <div class="mt-6">
-                            <h3 class="text-sm font-medium text-gray-800 mb-3">Share this Formation:</h3>
+                            <h3 class="text-sm font-medium text-gray-800 mb-3">Partager cette formation :</h3>
                             <div class="flex space-x-3">
-                                <button class="text-gray-600 hover:text-blue-500">
+                                <a href="#" onclick="navigator.clipboard.writeText('{{ url()->current() }}'); alert('Link copied to clipboard!');" class="text-gray-600 hover:text-blue-500">
                                     <i class="fas fa-link"></i>
-                                </button>
-                                <button class="text-gray-600 hover:text-blue-700">
+                                </a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" class="text-gray-600 hover:text-blue-700" target="_blank">
                                     <i class="fab fa-facebook-f"></i>
-                                </button>
-                                <button class="text-gray-600 hover:text-blue-400">
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}" class="text-gray-600 hover:text-blue-400" target="_blank">
                                     <i class="fab fa-twitter"></i>
-                                </button>
-                                <button class="text-gray-600 hover:text-blue-500">
+                                </a>
+                                <a href="mailto:?subject=Check out this formation&body={{ urlencode(url()->current()) }}" class="text-gray-600 hover:text-blue-500">
                                     <i class="fas fa-envelope"></i>
-                                </button>
-                                <button class="text-gray-600 hover:text-green-600">
+                                </a>
+                                <a href="https://wa.me/?text={{ urlencode(url()->current()) }}" class="text-gray-600 hover:text-green-600" target="_blank">
                                     <i class="fab fa-whatsapp"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

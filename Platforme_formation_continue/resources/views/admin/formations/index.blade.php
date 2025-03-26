@@ -10,9 +10,8 @@
     <div class="">
         <div class="">
             <div class="flex justify-between items-center mb-2">
-                <h1 class="font-bold text-2xl"> Formations</h1>
                 <button
-                    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
                     id="show-add-modal">
                     Ajouter un Formation
                 </button>
