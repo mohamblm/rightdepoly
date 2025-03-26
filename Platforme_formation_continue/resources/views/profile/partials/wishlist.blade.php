@@ -142,7 +142,7 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+
     // Initialize selected formations and participants
     const selectedFormations = new Map();
     const participantCounts = new Map();
@@ -321,5 +321,5 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(form);
         form.submit();
     });
-});
+
 </script>
