@@ -163,71 +163,72 @@
 
     @push('scripts')
     <script>
+    document.addEventListener('turbo:load', () => {
+        const slider = document.getElementById('testimonials-slider');
+        const container = document.getElementById('testimonials-container');
+        const prevBtn = document.getElementById('prev-testimonial');
+        const nextBtn = document.getElementById('next-testimonial');
+        
+        let slideIndex = 0;
+        let slideWidth = 0;
+        let slidesToShow = 1;
+        let isAnimating = false;
 
-            const slider = document.getElementById('testimonials-slider');
-            const container = document.getElementById('testimonials-container');
-            const prevBtn = document.getElementById('prev-testimonial');
-            const nextBtn = document.getElementById('next-testimonial');
+        function updateSlideWidth() {
+            const containerWidth = container.clientWidth;
+            slidesToShow = containerWidth >= 1024 ? 3 : containerWidth >= 640 ? 2 : 1;
+            slideWidth = containerWidth / slidesToShow;
+
+            Array.from(slider.children).forEach(slide => {
+                slide.style.width = `${slideWidth}px`;
+            });
             
-            let slideIndex = 0;
-            let slideWidth = 0;
-            let slidesToShow = 1;
-            let isAnimating = false;
+            goToSlide(slideIndex, false);
+        }
 
-            function updateSlideWidth() {
-                const containerWidth = container.clientWidth;
-                slidesToShow = containerWidth >= 1024 ? 3 : containerWidth >= 640 ? 2 : 1;
-                slideWidth = containerWidth / slidesToShow;
+        function goToSlide(index, animate = true) {
+            if(isAnimating) return;
+            
+            const maxIndex = slider.children.length - slidesToShow;
+            index = Math.max(0, Math.min(index, maxIndex));
+            slideIndex = index;
 
-                Array.from(slider.children).forEach(slide => {
-                    slide.style.width = `${slideWidth}px`;
-                });
-                
-                goToSlide(slideIndex, false);
-            }
+            slider.style.transition = animate ? 'transform 0.3s ease-in-out' : 'none';
+            slider.style.transform = `translateX(${-slideIndex * slideWidth}px)`;
 
-            function goToSlide(index, animate = true) {
-                if(isAnimating) return;
-                
-                const maxIndex = slider.children.length - slidesToShow;
-                index = Math.max(0, Math.min(index, maxIndex));
-                slideIndex = index;
-
-                slider.style.transition = animate ? 'transform 0.3s ease-in-out' : 'none';
-                slider.style.transform = `translateX(${-slideIndex * slideWidth}px)`;
-
-                document.querySelectorAll('.mobile-dot').forEach((dot, i) => {
-                    dot.classList.toggle('bg-blue-500', i === slideIndex);
-                    dot.classList.toggle('bg-gray-300', i !== slideIndex);
-                });
-
-                if(animate) {
-                    isAnimating = true;
-                    setTimeout(() => isAnimating = false, 300);
-                }
-            }
-
-            // Event Listeners
-            prevBtn.addEventListener('click', () => goToSlide(slideIndex - 1));
-            nextBtn.addEventListener('click', () => goToSlide(slideIndex + 1));
             document.querySelectorAll('.mobile-dot').forEach((dot, i) => {
-                dot.addEventListener('click', () => goToSlide(i));
+                dot.classList.toggle('bg-blue-500', i === slideIndex);
+                dot.classList.toggle('bg-gray-300', i !== slideIndex);
             });
 
-            window.addEventListener('resize', updateSlideWidth);
-            updateSlideWidth();
+            if(animate) {
+                isAnimating = true;
+                setTimeout(() => isAnimating = false, 300);
+            }
+        }
 
-            // Autoplay
-            let autoplay = setInterval(() => {
+        // Event Listeners
+        prevBtn.addEventListener('click', () => goToSlide(slideIndex - 1));
+        nextBtn.addEventListener('click', () => goToSlide(slideIndex + 1));
+        document.querySelectorAll('.mobile-dot').forEach((dot, i) => {
+            dot.addEventListener('click', () => goToSlide(i));
+        });
+
+        window.addEventListener('resize', updateSlideWidth);
+        updateSlideWidth();
+
+        // Autoplay
+        let autoplay = setInterval(() => {
+            goToSlide(slideIndex >= slider.children.length - slidesToShow ? 0 : slideIndex + 1);
+        }, 5000);
+
+        container.addEventListener('mouseenter', () => clearInterval(autoplay));
+        container.addEventListener('mouseleave', () => {
+            autoplay = setInterval(() => {
                 goToSlide(slideIndex >= slider.children.length - slidesToShow ? 0 : slideIndex + 1);
             }, 5000);
-
-            container.addEventListener('mouseenter', () => clearInterval(autoplay));
-            container.addEventListener('mouseleave', () => {
-                autoplay = setInterval(() => {
-                    goToSlide(slideIndex >= slider.children.length - slidesToShow ? 0 : slideIndex + 1);
-                }, 5000);
-            });
+        });
+    });
 
     </script>
     @endpush
