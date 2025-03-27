@@ -8,9 +8,13 @@ use App\Models\Domaine;
 use App\Models\Etablissement;
 use App\Models\Avis;
 use App\Models\User;
+use App\Models\Insrciption;
 use App\Events\NewNotification;
 use App\Notifications\NewUserRegistered;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\DB;
+
+
 
 
 class FormationController extends Controller
@@ -67,6 +71,7 @@ class FormationController extends Controller
                 : 0;
         }
         
+            
         return view('pages.formation.formation', compact('formation', 'reviews', 'averageRating', 'totalReviews', 'ratingPercentages'));
     }
     /**

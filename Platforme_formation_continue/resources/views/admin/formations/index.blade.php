@@ -255,7 +255,7 @@
     <!-- Scripts pour le filtrage automatique -->
     <script>
     
-
+    // document.addEventListener("turbo:load", () => {
          // Reset all lists
     function resetLists() {
         subTitles = [];
@@ -802,7 +802,7 @@
             notification.remove();
         }, 5000);
     }
-
+    // })
 
     </script>
 @endsection
