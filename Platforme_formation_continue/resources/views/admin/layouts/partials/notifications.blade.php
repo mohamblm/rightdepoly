@@ -36,14 +36,14 @@ document.addEventListener("DOMContentLoaded", function () {
     let notifications = [];
     let unreadCount = 0;
 
-    // Écoute des notifications en temps réel avec Laravel Echo
-    Echo.private("admin-notifications")
-        .listen(".NewNotification", (data) => {
-            console.log('Nouvelle notification reçue :', data.notification);
-            notifications.unshift(data.notification);
-            unreadCount++;
-            updateUI();
-        });
+    // // Écoute des notifications en temps réel avec Laravel Echo
+    // Echo.private("admin-notifications")
+    //     .listen(".NewNotification", (data) => {
+    //         console.log('Nouvelle notification reçue :', data.notification);
+    //         notifications.unshift(data.notification);
+    //         unreadCount++;
+    //         updateUI();
+    //     });
 
     // Récupérer les notifications
     function fetchNotifications() {

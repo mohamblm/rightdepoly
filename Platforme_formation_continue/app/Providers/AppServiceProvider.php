@@ -30,16 +30,15 @@ class EventServiceProvider extends ServiceProvider
     // /**
     //  * Register any events for your application.
     //  */
-    public function boot(): void
-    {
-        // Notify admins when a new user registers
-        // Event::listen(Registered::class, function (Registered $event) {
-        //     $admins = User::where('role','admin')->get();
+    // public function boot(): void
+    // {
+    //     // Notify admins when a new user registers
+    //     // Event::listen(Registered::class, function (Registered $event) {
+    //     //     $admins = User::where('role','admin')->get();
             
-        //     foreach ($admins as $admin) {
-        //         $admin->notify(new NewUserRegistered($event->user));
-        //     }
-        // });
-        Telescope::startRecording();
-    }
+    //     //     foreach ($admins as $admin) {
+    //     //         $admin->notify(new NewUserRegistered($event->user));
+    //     //     }
+    //     // });
+    // }
 }
